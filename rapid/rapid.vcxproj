@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0CBB9638-6A95-40B7-8E71-F3C03FD31F04}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
+    <QtInstall>5.15.2_msvc2019_64</QtInstall>
+    <QtModules>core;gui;widgets;</QtModules>
+    <QtBuildConfig>debug</QtBuildConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
+    <QtInstall>5.15.2_msvc2019_64</QtInstall>
+    <QtModules>core;gui;widgets;</QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)rapid;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)rapid</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="activationrecord.cpp" />
+    <ClCompile Include="actunitnode.cpp" />
+    <ClCompile Include="arccnode.cpp" />
+    <ClCompile Include="arcendnode.cpp" />
+    <ClCompile Include="arclnode.cpp" />
+    <ClCompile Include="arclstartnode.cpp" />
+    <ClCompile Include="arraydatanode.cpp" />
+    <ClCompile Include="assignmentnode.cpp" />
+    <ClCompile Include="astnode.cpp" />
+    <ClCompile Include="buildin.cpp" />
+    <ClCompile Include="casenode.cpp" />
+    <ClCompile Include="deactunitnode.cpp" />
+    <ClCompile Include="declaration_list.cpp" />
+    <ClCompile Include="dimnumnode.cpp" />
+    <ClCompile Include="elseifnode.cpp" />
+    <ClCompile Include="fornode.cpp" />
+    <ClCompile Include="functioncallnode.cpp" />
+    <ClCompile Include="functionnode.cpp" />
+    <ClCompile Include="goto.cpp" />
+    <ClCompile Include="IAction.cpp" />
+    <ClCompile Include="identifiernode.cpp" />
+    <ClCompile Include="ifnode.cpp" />
+    <ClCompile Include="jointtargetnode.cpp" />
+    <ClCompile Include="labelnode.cpp" />
+    <ClCompile Include="lexer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="modulenode.cpp" />
+    <ClCompile Include="moveabsjnode.cpp" />
+    <ClCompile Include="movejnode.cpp" />
+    <ClCompile Include="movelnode.cpp" />
+    <ClCompile Include="nullnode.cpp" />
+    <ClCompile Include="numberliteralnode.cpp" />
+    <ClCompile Include="operatornode.cpp" />
+    <ClCompile Include="parameternode.cpp" />
+    <ClCompile Include="paramnode.cpp" />
+    <ClCompile Include="parser.tab.cpp" />
+    <ClCompile Include="printnode.cpp" />
+    <ClCompile Include="returnnode.cpp" />
+    <ClCompile Include="robtargetnode.cpp" />
+    <ClCompile Include="speeddata.cpp" />
+    <ClCompile Include="statementlistnode.cpp" />
+    <ClCompile Include="stopnode.cpp" />
+    <ClCompile Include="stringliteralnode.cpp" />
+    <ClCompile Include="switch.cpp" />
+    <ClCompile Include="switch_case_list.cpp" />
+    <ClCompile Include="symboltable.cpp" />
+    <ClCompile Include="tooldatanode.cpp" />
+    <ClCompile Include="tpwritenode.cpp" />
+    <ClCompile Include="translator.cpp" />
+    <ClCompile Include="twait.cpp" />
+    <ClCompile Include="type.cpp" />
+    <ClCompile Include="variable.cpp" />
+    <ClCompile Include="whilenode.cpp" />
+    <ClCompile Include="wobjdatanode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="activationrecord.h" />
+    <ClInclude Include="actunitnode.h" />
+    <ClInclude Include="arccnode.h" />
+    <ClInclude Include="arcendnode.h" />
+    <ClInclude Include="arclnode.h" />
+    <ClInclude Include="arclstartnode.h" />
+    <ClInclude Include="arraydatanode.h" />
+    <ClInclude Include="assignmentnode.h" />
+    <ClInclude Include="ast.h" />
+    <ClInclude Include="astnode.h" />
+    <ClInclude Include="buildin.h" />
+    <ClInclude Include="casenode.h" />
+    <ClInclude Include="deactunitnode.h" />
+    <ClInclude Include="declaration_list.h" />
+    <ClInclude Include="dimnumnode.h" />
+    <ClInclude Include="elseifnode.h" />
+    <ClInclude Include="errors.h" />
+    <ClInclude Include="FlexLexer.h" />
+    <ClInclude Include="fornode.h" />
+    <ClInclude Include="functioncallnode.h" />
+    <ClInclude Include="functionnode.h" />
+    <ClInclude Include="goto.h" />
+    <ClInclude Include="IAction.h" />
+    <ClInclude Include="identifiernode.h" />
+    <ClInclude Include="ifnode.h" />
+    <ClInclude Include="jointtargetnode.h" />
+    <ClInclude Include="labelnode.h" />
+    <ClInclude Include="lexer.hpp" />
+    <ClInclude Include="modulenode.h" />
+    <ClInclude Include="moveabsjnode.h" />
+    <ClInclude Include="movejnode.h" />
+    <ClInclude Include="movelnode.h" />
+    <ClInclude Include="nullnode.h" />
+    <ClInclude Include="numberliteralnode.h" />
+    <ClInclude Include="operatornode.h" />
+    <ClInclude Include="parameternode.h" />
+    <ClInclude Include="paramnode.h" />
+    <ClInclude Include="parser.tab.hpp" />
+    <ClInclude Include="printnode.h" />
+    <ClInclude Include="returnnode.h" />
+    <ClInclude Include="robtargetnode.h" />
+    <ClInclude Include="speeddata.h" />
+    <ClInclude Include="stack.hh" />
+    <ClInclude Include="statementlistnode.h" />
+    <ClInclude Include="stopnode.h" />
+    <ClInclude Include="stringliteralnode.h" />
+    <ClInclude Include="switch.h" />
+    <ClInclude Include="switch_case_list.h" />
+    <ClInclude Include="symboltable.h" />
+    <ClInclude Include="tooldatanode.h" />
+    <ClInclude Include="tpwritenode.h" />
+    <ClInclude Include="translator.hpp" />
+    <ClInclude Include="twait.h" />
+    <ClInclude Include="type.h" />
+    <ClInclude Include="variable.h" />
+    <ClInclude Include="variablerecord.h" />
+    <ClInclude Include="whilenode.h" />
+    <ClInclude Include="wobjdatanode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="lexer.l">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\win_flex --wincompat -o $(SolutionDir)\rapid\%(Filename).cpp %(Identity)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).cpp %(Filename).hpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">parser.y</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="parser.y">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\win_bison -o $(SolutionDir)\rapid\%(Filename).tab.cpp %(Identity)</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).tab.cpp ; %(Filename).tab.h</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
