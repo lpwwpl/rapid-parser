@@ -5,7 +5,7 @@
 
 namespace Language
 {
-    class NullNode : public ASTNode
+    class RobotAbbExport NullNode : public ASTNode
     {
     public:
         NullNode();

@@ -5,12 +5,13 @@
 #include "dimnumnode.h"
 namespace Language
 {
-    class DeActUnitNode: public ASTNode
+    class RobotAbbExport DeActUnitNode: public ASTNode
     {
     public:
         DeActUnitNode(/*QString* name, */ListNode<ASTNode>* expression);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
         ListNode<ASTNode>* Arguments() const
         {
             return _arguments;

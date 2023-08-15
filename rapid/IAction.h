@@ -5,9 +5,9 @@
 #include <QMutex>
 #include <QWaitCondition>
 #include <QVariant>
-
+#include "PreCompiled.h"
 //-------------------------------------------------------------------------------------------------
-class IAction
+class RobotAbbExport IAction
 {
 friend class ActionWaiter;
 

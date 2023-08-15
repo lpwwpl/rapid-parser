@@ -7,7 +7,7 @@
 namespace Language
 {
     GotoNode::GotoNode(ASTNode* expression)
-        : _expression(expression)
+        : ASTNode("GOTO"), _expression(expression)
     {
         this->_topParent = NULL;
 
@@ -69,6 +69,12 @@ namespace Language
         }
         goto_statementList->Execute();
         return ASTNode::Execute();
+    }
+
+    QString GotoNode::toRaw(uint level)
+    {
+        QString str = "";
+        return str;
     }
     QString GotoNode::toString(uint level)
     {

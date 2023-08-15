@@ -18,7 +18,12 @@ namespace Language
         else 
             return  ASTNode::Execute();
     }
-
+    QString CaseNode::toRaw(uint level)
+    {
+        QString str = "";
+        str.append(_body->toRaw(level));
+        return str;
+    }
     QString CaseNode::toString(uint level)
     {
         QString str = "";

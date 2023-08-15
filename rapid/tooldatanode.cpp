@@ -18,7 +18,11 @@ namespace Language
 
         return ASTNode::Execute();
     }
-
+    QString ToolDataNode::toRaw(uint level)
+    {
+        QString str = "";
+        return str;
+    }
     QString ToolDataNode::toString(uint level)
     {
         QString str = "";

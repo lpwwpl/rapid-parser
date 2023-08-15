@@ -6,10 +6,10 @@
 
 namespace Language
 {
-    ArrayDataNode::ArrayDataNode(ASTNode* caseexpr)
+    ArrayDataNode::ArrayDataNode(ASTNode* caseexpr): _child(caseexpr)
     {
 
-        tempDimRawList.push_back(caseexpr);
+        //tempDimRawList.push_back(caseexpr);
     }
 
     QVariant ArrayDataNode::Execute()
@@ -23,12 +23,16 @@ namespace Language
 
         return ASTNode::Execute();
     }
-
+    QString ArrayDataNode::toRaw(uint level)
+    {
+        QString str = "";
+        str.append(_child->toRaw());
+        return str;
+    }
     QString ArrayDataNode::toString(uint level)
     {
         QString str = "";
-        for(auto it:tempDimRawList)
-            str.append(it->toString());
+        str.append(_child->toString());
         return str;
     }
 }

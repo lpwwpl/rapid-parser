@@ -3,14 +3,17 @@
 
 #include "astnode.h"
 #include "dimnumnode.h"
+#include "PreCompiled.h"
 namespace Language
 {
-    class ModuleNode: public ASTNode
+    class RobotAbbExport ModuleNode: public ASTNode
     {
     public:
         ModuleNode(QString* name, ListNode<ASTNode>* body);
         QVariant Execute() override;
+        QString toRaw(uint level = 0) override;
         QString toString(uint level = 0) override;
+        void compute() override;
         ListNode<ASTNode>* Arguments() const
         {
             return _body;

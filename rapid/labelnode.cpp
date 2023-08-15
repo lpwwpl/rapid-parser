@@ -33,7 +33,11 @@ namespace Language
         //std::cout << str.toStdString() << std::endl;
         return ASTNode::Execute();
     }
-
+    QString LabelNode::toRaw(uint level)
+    {
+        QString str = "";
+        return str;
+    }
     QString LabelNode::toString(uint level)
     {
         QString str = "";

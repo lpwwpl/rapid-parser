@@ -83,9 +83,6 @@
     <ClCompile Include="whilenode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lexer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="stopnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -110,9 +107,6 @@
     <ClCompile Include="goto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dimnumnode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="arccnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -135,9 +129,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="wobjdatanode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parser.tab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="arcendnode.cpp">
@@ -179,10 +170,70 @@
     <ClCompile Include="declaration_list.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="arraydatanode.cpp">
+    <ClCompile Include="functioncallnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="functioncallnode.cpp">
+    <ClCompile Include="accset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="offsnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pulsedo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="recordnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reltool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="set.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="setdo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="velset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waitdinode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waittime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waitutilnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="structdesc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="structindexnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="variabledeclare.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="modifiernode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="simplecrypt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="arrayindex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parser.tab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lexer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dimnumnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -200,9 +251,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="casenode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FlexLexer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IAction.h">
@@ -280,9 +328,6 @@
     <ClInclude Include="stopnode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dimnumnode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="arccnode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -307,9 +352,6 @@
     <ClInclude Include="wobjdatanode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="parser.tab.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stack.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -317,9 +359,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="robtargetnode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lexer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="activationrecord.h">
@@ -355,10 +394,79 @@
     <ClInclude Include="declaration_list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="arraydatanode.h">
+    <ClInclude Include="functioncallnode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="functioncallnode.h">
+    <ClInclude Include="accset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="offsnode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pulsedo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="recordnode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reltool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setdo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="velset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waitdinode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waittime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waitutilnode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="structdesc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="structindexnode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="variabledeclare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="modifiernode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="simplecrypt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="arrayindex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lexer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FlexLexer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parser.tab.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="position.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dimnumnode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="location.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

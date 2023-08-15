@@ -19,7 +19,11 @@ namespace Language
 
         return ASTNode::Execute();
     }
-
+    QString WobjDataNode::toRaw(uint level)
+    {
+        QString str = "";
+        return str;
+    }
     QString WobjDataNode::toString(uint level)
     {
         QString str = "";
@@ -27,9 +31,6 @@ namespace Language
         {
             str.append("    ");
         }
-
-
-
         return "";
     }
 }

@@ -5,14 +5,14 @@
 #include "dimnumnode.h"
 namespace Language
 {
-    class WobjDataNode: public ASTNode
+    class RobotAbbExport WobjDataNode: public ASTNode
     {
     public:
         WobjDataNode(QString* name);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
-
-    private:
+        QString toRaw(uint level = 0) override;
+    public:
         QString _name;
         bool wobj_install_style;
         bool wobj_style;

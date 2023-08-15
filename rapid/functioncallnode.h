@@ -5,12 +5,14 @@
 
 namespace Language
 {
-    class FunctionCallNode: public ASTNode
+    class RobotAbbExport FunctionCallNode: public ASTNode
     {
     public:
         FunctionCallNode(QString * name, ListNode<ASTNode> * expressionList=NULL);
         QVariant Execute() override;
+
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
     private:
             QString * _name;
             ListNode<ASTNode> * _expressionList;

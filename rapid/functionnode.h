@@ -5,20 +5,23 @@
 
 namespace Language
 {
-    class FunctionNode: public ASTNode
+    class RobotAbbExport FunctionNode: public ASTNode
     {
     public:
-        FunctionNode(int type, QString * name, ListNode<ParameterNode> * arguments, StatementListNode * body);
+        FunctionNode(ASTNode* type, QString * name, ListNode<ParameterNode> * arguments, StatementListNode * body);
         QVariant Execute() override;
         ListNode<ParameterNode> * Arguments() const ;
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
         StatementListNode* GetBody() { return _body; }
         ListNode<ParameterNode>* GetArguments() { return _arguments; }
         QString GetName() { return _name; }
-    private:
+        void compute() override;
+    public:
         ListNode<ParameterNode> * _arguments;
         StatementListNode * _body;
         QString _name;
+        ASTNode* _type;
     };
 }
 

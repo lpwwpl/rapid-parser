@@ -5,14 +5,17 @@
 
 namespace Language
 {
-    class StringLiteralNode : public ASTNode
+    class RobotAbbExport StringLiteralNode : public ASTNode
     {
     public:
         StringLiteralNode(QString * value);
+        StringLiteralNode(bool,QString* value);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
-    private:
+        QString toRaw(uint level = 0) override;
+    public:
         QString _value;
+        bool bIsType;
     };
 }
 

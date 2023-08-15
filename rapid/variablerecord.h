@@ -1,10 +1,10 @@
 #ifndef VARIABLERECORD_H
 #define VARIABLERECORD_H
-
-typedef struct VR
+#include "PreCompiled.h"
+typedef RobotAbbExport struct VR
 {
     QVariant value;
-    int type = -1;
+    QString type;
 
 } VariableRecord;
 

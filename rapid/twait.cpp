@@ -22,7 +22,7 @@ namespace Language
         {
             str.append("    ");
         }
-        str.append("self.");
+        //str.append("self.");
         str.append("twait");
         str.append("(");
         str.append(_expression->toString());

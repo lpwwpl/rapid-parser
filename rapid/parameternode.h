@@ -5,17 +5,19 @@
 
 namespace Language
 {
-    class ParameterNode: public ASTNode
+    class RobotAbbExport ParameterNode: public ASTNode
     {
     public:
-        ParameterNode(int type, QString * name, ASTNode * initializer = nullptr);
-        ParameterNode(QString* name, ASTNode* initializer = nullptr);
+        ParameterNode(ASTNode* type, QString * name, ASTNode * initializer = nullptr);
+        ParameterNode(ASTNode* inout,ASTNode* type,QString* name, ASTNode* initializer = nullptr);
         QVariant Execute() override;
         QString Name();
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
     private:
         QString  _name;
-
+        ASTNode* _type;
+        ASTNode* _INOUT;
         ASTNode * _initializer;
     };
 }

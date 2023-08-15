@@ -12,44 +12,25 @@ ActivationRecord::ActivationRecord()
     _curFunc = NULL;
 }
 
-QString ActivationRecord::CalcRealVarName(QString name, dimListType* tempDimList)
-{
-    QString realVar = name;
 
-    int ndim;
-    if (tempDimList != NULL)
-        ndim = tempDimList->size();
-    else
-        ndim = 0;
-
-    for (int i = 0; i < ndim; i++)
-    {
-        QString dimVar = QString("_%1").arg(tempDimList->at(i));
-        realVar = realVar.append(dimVar);
-    }
-    return realVar;
-}
-void ActivationRecord::AssignVariable(QString name, QVariant value, dimListType* tempDimList)
+void ActivationRecord::AssignVariable(QString name, QVariant value)
 {
-    QString realVar = CalcRealVarName(name,tempDimList);
-    std::cout << QString("%1 = %2").arg(realVar).arg(value.toString()).toStdString() << std::endl;
-    _variables[realVar] = value;
-        if (!realVar.startsWith("."))
+    _variables[name] = value;
+        if (!name.startsWith("."))
         {
-            GlobalRecord::Instance().AssignVariable(name, value, tempDimList);
+            GlobalRecord::Instance().AssignVariable(name, value);
         }
         //SymbolTable::Instance().AssignVariable(_name, typeActual,_expression->Execute(), dimList);
  }
     
 
 
-void ActivationRecord::DeclareVariable(QString name, dimListType* tempDimList)
+void ActivationRecord::DeclareVariable(QString name)
 {
-    QString realVar = CalcRealVarName(name, tempDimList);
-    bool isDefinedVar = isDefined(realVar);
+    bool isDefinedVar = isDefined(name);
     if (!isDefinedVar)
     {
-        _variables[realVar] = QVariant(0);
+        _variables[name] = QVariant(0);
     }
  }
 
@@ -90,43 +71,24 @@ GlobalRecord& GlobalRecord::Instance()
         });
     return *_instance.get();
 }
-void GlobalRecord::AssignVariable(QString name, QVariant value, dimListType* tempDimList)
+void GlobalRecord::AssignVariable(QString name, QVariant value)
 {
-    QString realVar = CalcRealVarName(name, tempDimList);
-    _variables[realVar] = value;
+    _variables[name] = value;
 }
 QVariant GlobalRecord::GetVariableValue(QString name)
 {
     return _variables[name];
 }
 
-void GlobalRecord::DeclareVariable(QString name, dimListType* tempDimList)
+void GlobalRecord::DeclareVariable(QString name)
 {
-    QString realVar = CalcRealVarName(name, tempDimList);
-    bool isDefinedVar = isDefined(realVar);
+    bool isDefinedVar = isDefined(name);
     if (!isDefinedVar)
     {
-        _variables[realVar] = QVariant();
+        _variables[name] = QVariant();
     }
 }
 bool GlobalRecord::isDefined(QString varName) {
     if (_variables.find(varName) == _variables.end()) return false;
     else return true;//return _variables[varName];
-}
-QString GlobalRecord::CalcRealVarName(QString name, dimListType* tempDimList)
-{
-    QString realVar = name;
-
-    int ndim;
-    if (tempDimList != NULL)
-        ndim = tempDimList->size();
-    else
-        ndim = 0;
-
-    for (int i = 0; i < ndim; i++)
-    {
-        QString dimVar = QString("_%1").arg(tempDimList->at(i));
-        realVar = realVar.append(dimVar);
-    }
-    return realVar;
 }

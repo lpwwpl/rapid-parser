@@ -6,47 +6,35 @@
 
 enum enum_v_scope
 {
-    PERS = 1,
-    TASK_PERS = 2,
+    PERS = 0,
+    TASK_PERS = 1,
 
-    eCONST =3,
-    VAR=4,
+    eCONST =2,
+    VAR=3,
 
 };
 
-enum enum_v_type
-{
-    NUM =1,
-    eBOOL =2,
-    eSTRING=3,
-    ROBTARGET=4,
-    JOINTTARGET=5,
-    WOBJDATA=6,
-    ZONEDATA=7,
-    SPEEDDATA=8,
-    TOOLDATA=9,
-    SEAMDATA = 10,
-    WELDDATA = 11
-};
+
 namespace Language
 {
-    class VariableNode: public ASTNode
+    class RobotAbbExport VariableNode: public ASTNode
     {
     public:
         //QString* name
-        VariableNode(int e_scope,int e_type, ASTNode* expression);
+        VariableNode(int e_scope, ASTNode* e_type, ASTNode* expression);
+        VariableNode(int e_scope, ASTNode* e_type, ASTNode* src, ASTNode* expression);
         //VariableNode(int e_scope, int e_type, QString* name, ASTNode*);
-        VariableNode(int e_scope, int e_type, ASTNode*,ASTNode*);
+        //VariableNode(int e_scope, ASTNode* e_type, ASTNode*,ASTNode*);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
-
-    private:
+        QString toRaw(uint level = 0) override;
+    public:
         int _e_scope;
-        int _e_type;
-        QString _realVar;
-        ASTNode* _dim_num_stm;
+        ASTNode* _e_type;
+        ASTNode* _src;
+        //ASTNode* _dim_num_stm;
         ASTNode* _expression;
-        QString* _name;
+        QString _name;
         
     };
 }

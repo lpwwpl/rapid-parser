@@ -12,7 +12,8 @@
 #include <QFileInfo>
 #include <QDir>
 int lineNumber = 1;
-
+extern std::stack<std::string> fileNames;
+extern std::vector<std::string> libPaths;
 namespace Language
 {
 
@@ -38,13 +39,15 @@ int Translator::parse(const QString& codestr)
     QFileInfo fileInfo(codestr);
     if (!fileInfo.exists())
         return -1;
-    std::cout << codestr.toStdString() << endl;
+    libPaths.push_back("./"); // current path
     std::ifstream in_file(codestr.toStdString().c_str());
     if (!in_file.good())
     {
         std::cerr << BAD_SCRIPT_FILE << std::endl;
         exit(EXIT_FAILURE);
     }
+    //fileNames.push("");       // Add the empty file name after last EOF.
+    fileNames.push(codestr.toStdString()); // Add the top level file name.
     Lexer lexer(&in_file);
     Parser parser(lexer);
 
@@ -57,24 +60,40 @@ int Translator::parse(const QString& codestr)
     //std::cout << "------compile Info:------" << std::endl;
     //QString str = SymbolTable::Instance().EntryPoint()->toString();
     //std::cout << str.toStdString() << std::endl;
-    std::cout << "------RunTime Info:------" << std::endl;
+   //std::cout << "------RunTime Info:------" << std::endl;
     //return SymbolTable::Instance().EntryPoint()->Execute().toInt();
-    QString str = SymbolTable::Instance().toString();
-    QString baseName = fileInfo.baseName();
-    QDir dir=fileInfo.absoluteDir();
-    QString dst = QString("%1/%2.py").arg(dir.absolutePath()).arg(baseName);
-    QFile file(dst);
-    bool isOK = file.open(QIODevice::WriteOnly);
-    file.write(str.toStdString().data());
-    file.flush();
-    file.close();
+    //std::map<QString, Language::ModuleNode*> modules = SymbolTable::Instance().Modules();
+    std::map<QString, Language::ModuleNode*> modules = SymbolTable::Instance().Modules();
+    int count = modules.size();
+    QString str = "";
+    for (auto elem : modules)
+    {
+        Language::ModuleNode* module = elem.second;
+        str.append(module->toRaw(0));
+    }
+    str.append("\n");
+    std::cout << str.toStdString() << std::endl;
+    std::cout << "------RunTime Info:------" << std::endl;
+    //QFile file("D:/_testlpw.txt");
+    //bool isOK = file.open(QIODevice::WriteOnly);
+    //file.write(str.toStdString().data());
+    //file.flush();
+    //file.close();
+    //QString baseName = fileInfo.baseName();
+    //QDir dir=fileInfo.absoluteDir();
+    //QString dst = QString("%1/%2.py").arg(dir.absolutePath()).arg(baseName);
+    //QFile file(dst);
+    // bool isOK = file.open(QIODevice::WriteOnly);
+    //file.write(str.toStdString().data());
+    //file.flush();
+    //file.close();
     return 1;
 }
 int Translator::parse(int argc, char **argv)
 {
 
-   const char* filename = "D:/code.txt";// argv[1];
-
+   const char* filename = "D:/MainModule1-a.txt";// argv[1];
+   libPaths.push_back("./"); // current path
    assert( filename != nullptr );
    std::ifstream in_file( filename );
    if( ! in_file.good() )
@@ -82,7 +101,8 @@ int Translator::parse(int argc, char **argv)
        std::cerr << BAD_SCRIPT_FILE << std::endl;
        exit( EXIT_FAILURE );
    }
-
+   //fileNames.push("");       // Add the empty file name after last EOF.
+   fileNames.push(filename); // Add the top level file name.
    Lexer lexer(&in_file);
    Parser parser(lexer);
 
@@ -92,12 +112,19 @@ int Translator::parse(int argc, char **argv)
    }
 
    PrepareCommandLineArguments(argc, argv);
-   //std::cout << "------compile Info:------" << std::endl;
-   //QString str = SymbolTable::Instance().EntryPoint()->toString();
-   //std::cout << str.toStdString() << std::endl;
+   std::cout << "------compile Info:------" << std::endl;
+   std::map<QString, Language::ModuleNode*> modules = SymbolTable::Instance().Modules();
+   int count = modules.size();
+   QString str = "";
+   for (auto elem:modules)
+   {
+       Language::ModuleNode*  module = elem.second;
+       str.append(module->toRaw(0));
+   } 
+   str.append("\n");
+   std::cout << str.toStdString() << std::endl;
    std::cout << "------RunTime Info:------" << std::endl;
-   QString str = SymbolTable::Instance().toString();
-   QFile file("D:/testlpw.txt");
+   QFile file("D:/_testlpw.txt");
    bool isOK = file.open(QIODevice::WriteOnly);
    file.write(str.toStdString().data());
    file.flush();

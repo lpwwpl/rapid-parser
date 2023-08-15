@@ -16,7 +16,16 @@ namespace Language
         //std::cout << QString("%1").arg(_expression->Execute().toString()).toStdString() << std::endl;
         return ASTNode::Execute();
     }
-
+    QString StopNode::toRaw(uint level)
+    {
+        QString str = "";
+        for (int i = 0; i < level; i++)
+        {
+            str.append("    ");
+        }
+        str.append("stop;");
+        return str;
+    }
     QString StopNode::toString(uint level)
     {
         QString str = "";
@@ -24,7 +33,7 @@ namespace Language
         {
             str.append("    ");
         }
-        str.append("self.");
+        //str.append("self.");
         str.append("stop");
         str.append("(");
         str.append(")");

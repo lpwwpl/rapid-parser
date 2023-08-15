@@ -11,15 +11,16 @@ namespace Language
         _op2(op2),
         _operator(type)
     {
-        _type = token::NumberType;
+        _type = "NUM";// token::NumberType;
 
         if (nullptr == op2)
             return;
-        if ((_op1->Type() == token::TextType) || (_op2->Type() == token::TextType))
+        //token::TextType
+        if ((_op1->Type() == "STRING") || (_op2->Type() == "STRING"))
         {
            if (_operator == token::ADD)
             {
-                 _type = token::TextType;
+                 _type = "STRING";
             }
            else if ((_operator != token::EQ) && (_operator != token::NE))
             {
@@ -35,6 +36,9 @@ namespace Language
     {
         switch(_operator)
         {
+            case token::ASS: return _op1->Execute() = _op2->Execute(); break;
+            case token::NOT: return !(_op1->Execute().toBool()); break;
+            case token::LC:return _op1->Execute().toDouble(); break;
             case token::UMINUS: return -_op1->Execute().toDouble(); break;
             case token::ADD: 
             {
@@ -59,10 +63,11 @@ namespace Language
             case token::LE: return _op1->Execute().toDouble() <= _op2->Execute().toDouble();break;
             case token::NE: return _op1->Execute() != _op2->Execute();break;
             case token::EQ: return _op1->Execute() == _op2->Execute(); break;
-            case token::AND:  break;
-            case token::OR:  break;
-            case token::MOD: break;
-            default: std::cerr << "Damn ! Looks like we forgot to implement something..." << std::endl;
+            case token::AND:  return _op1->Execute().toBool() && _op2->Execute().toBool();break;
+            case token::OR:  return _op1->Execute().toBool()|| _op2->Execute().toBool(); break;
+            case token::MOD: return _op1->Execute().toInt(); break;
+            default: 
+                std::cerr << "Damn ! Looks like we forgot to implement something..." << std::endl;
                 exit(EXIT_FAILURE);
         }
 
@@ -75,6 +80,24 @@ namespace Language
         QString str = "";
         switch (_operator)
         {
+        case token::ASS:
+        {
+            QString temp = QString("%1 := %2").arg(_op1->toRaw()).arg(_op2->toRaw());
+            str = temp;
+        }
+            break;
+        case token::NOT:
+        {
+            QString temp = QString("NOT %1").arg(_op1->toRaw());
+            str = temp;
+        }
+            break;
+        case token::LC:
+        {
+            QString temp = QString("(%1)").arg(_op1->toRaw());
+            str = temp;
+        }
+        break;
         case token::UMINUS:
         {
             QString temp = QString("%1%2").arg("-").arg(_op1->toRaw());
@@ -174,6 +197,12 @@ namespace Language
         QString str = "";
         switch (_operator)
         {
+        case token::ASS:
+        {
+            QString temp = QString("%1 = %2").arg(_op1->toRaw()).arg(_op2->toRaw());
+            str = temp;
+        }
+        break;
         case token::UMINUS: 
         {
             QString temp = QString("%1%2").arg("-").arg(_op1->toString());         

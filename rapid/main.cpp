@@ -38,9 +38,87 @@
 #include <QGraphicsEllipseItem>
 #include <QGraphicsView>
 #include <QCommandLineParser>
+
+#include "qfile.h"
+#include "simplecrypt.h"
+#include <qprocess.h>
+
+#include <QDateTime>
+QString GetWMICInfo(QString cmd)
+{
+    // cmd指令
+    QProcess Cmd;
+    Cmd.start(cmd);
+    Cmd.waitForFinished();
+
+    // 获取输出结果
+    QString result = QString::fromLocal8Bit(Cmd.readAllStandardOutput());
+
+    // 拆分指令字符串
+    QStringList list = cmd.split(QString::fromLocal8Bit(" "));
+
+    // 指令字符串的最后一个单词提取出来作匹配，匹配成功则在result中删除
+    // 如：wmic cpu get processorid，那么list.last()就是processorid
+    // Qt::CaseInsensitive表示无视大小写，Qt::CaseSensitive表示对大小写敏感
+    result = result.remove(list.last(), Qt::CaseInsensitive);
+
+    // 删除输出结果中的回车和换行
+    result = result.replace(QString::fromLocal8Bit("\r"), QString::fromLocal8Bit(""));
+    result = result.replace(QString::fromLocal8Bit("\n"), QString::fromLocal8Bit(""));
+
+    // 去除空格操作
+    result = result.simplified();
+
+    return result;
+}
+
 int main(int argc, /*const*/ char** argv)
 {
+    //QApplication a(argc, argv);
+    //bool ret = true;
+    //QString Filepath = QCoreApplication::applicationDirPath();
 
+    //QString licenseFile = QString::fromLatin1("%1/license.bat").arg(Filepath);
+
+    //QFile f(licenseFile);
+    ////if (!f.exists())
+    ////{
+    ////    ret = false;
+    ////}
+    //SimpleCrypt crypto(Q_UINT64_C(0x0c2ad4a4acb9f023)); //some random number
+    //QString license = GetWMICInfo(QString::fromLatin1("wmic baseboard get serialnumber"));
+    ////QString remain = 100;
+    ////bool ok = false;
+    //int remain_dates = 100;// remain.toInt(&ok);
+
+    //QString Last_datetime = QDateTime::currentDateTime().toString(QString::fromLatin1("yyyy-MM-dd"));
+
+    //if (license == GetWMICInfo(QString::fromLatin1("wmic baseboard get serialnumber")) &&  remain_dates > 0)
+    //{
+    //    QString datetime_str = QDateTime::currentDateTime().toString(QString::fromLatin1("yyyy-MM-dd"));
+    //    if (true/*datetime_str != Last_datetime*/)
+    //    {
+    //        //write
+    //        remain_dates = remain_dates - 1;
+
+    //        QString lines;
+    //        lines.append(license);
+    //        lines.append(QString::fromLatin1("\r\n"));
+    //        lines.append(QString::number(remain_dates));
+    //        lines.append(QString::fromLatin1("\r\n"));
+    //        lines.append(datetime_str);
+    //        f.open(QIODevice::WriteOnly);
+    //        QByteArray myCypherText = crypto.encryptToByteArray(lines);
+    //        f.write(myCypherText.data(), myCypherText.size());
+    //        f.close();
+    //    }
+    //    else
+    //    {
+    //        ret = false;
+    //    }
+    //}
+
+    //return a.exec();
     //QCommandLineParser parser;
     //parser.setApplicationDescription(QGuiApplication::translate("main", "Qt"));  // 设置应用程序描述信息
     //parser.addHelpOption();  // 添加帮助选项 （"-h" 或 "--help"）
@@ -54,12 +132,12 @@ int main(int argc, /*const*/ char** argv)
 
     //QApplication app(argc, argv);
     //parser.process(app);
-    QString src = "D:/code.txt";//parser.value(srcOption);
+    QString src = "D:/txt.txt";//parser.value(srcOption);
      Language::Translator translator;
      return(translator.parse(src));
 
-     ////Language::Translator translator;
-     ////return(translator.parse(argc, argv));
+     //Language::Translator translator;
+     //return(translator.parse(argc, argv));
      /*
     try
     {

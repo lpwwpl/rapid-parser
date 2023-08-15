@@ -20,9 +20,20 @@ namespace Language
         return ASTNode::Execute();
     }
 
-    QString ModuleNode::toString(uint level)
+    void ModuleNode::compute()
     {
-        QString str = "";
+        for (auto statement : *_body)
+        {
+            if (!statement)continue;
+            //statement->Execute();
+            statement->compute();
+        }
+    }
+    QString ModuleNode::toRaw(uint level )
+    {
+        QString str = "MODULE ";
+        str += _name;
+        str += "\n";
         for (int i = 0; i < level; i++)
         {
             str.append("    ");
@@ -32,10 +43,24 @@ namespace Language
 
             if (!statement)continue;
             //statement->Execute();
-            str.append(statement->toString(level));          
+            str.append(statement->toRaw(level+1));
         }
-
-
+        str += "ENDMODULE";
+        str += "\n";
         return str;
+    }
+    QString ModuleNode::toString(uint level)
+    {
+
+        QString str = "";
+        for (auto statement : *_body)
+        {
+
+            if (!statement)continue;
+            //statement->Execute();
+            str.append(statement->toString(level+1));
+        }
+        return str;
+       
     }
 }

@@ -2,10 +2,10 @@
 #define IDENTIFIERNODE_H
 
 #include "astnode.h"
-
+#include "listnode.h"
 namespace Language
 {
-    class IdentifierNode : public ASTNode
+    class RobotAbbExport IdentifierNode : public ASTNode
     {
     public:
         IdentifierNode(QString * name);
@@ -14,6 +14,7 @@ namespace Language
         QString toRaw(uint level = 0);
     public:
         QString _name;
+        //bool isType = false;
     };
 }
 

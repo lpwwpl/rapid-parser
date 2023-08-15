@@ -5,10 +5,11 @@
 #include "lexer.hpp"
 #include "parser.tab.hpp"
 
+#include "PreCompiled.h"
 namespace Language
 {
 
-class Translator
+class RobotAbbExport Translator
 {
 public:
    Translator();

@@ -11,13 +11,14 @@ enum eType
 };
 namespace Language
 {
-    class SpeedDataNode : public ASTNode
+    class RobotAbbExport SpeedDataNode : public ASTNode
     {
     public:
         SpeedDataNode(ASTNode* expression);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
-    private:
+        QString toRaw(uint level = 0) override;
+    public:
         ASTNode* _expression;
  
     };

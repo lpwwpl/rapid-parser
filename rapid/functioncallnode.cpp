@@ -7,7 +7,7 @@
 namespace Language
 {
     FunctionCallNode::FunctionCallNode(QString * name, ListNode<ASTNode> * expressionList)
-            :  _name(name),
+            :  ASTNode("FUNC_CALL"), _name(name),
              _expressionList(expressionList)
     {
         auto function = SymbolTable::Instance().Function(name);
@@ -49,7 +49,29 @@ namespace Language
         SymbolTable::Instance().PushArgument((int)_expressionList->size());
         return SymbolTable::Instance().Function(_name)->Execute();
     }
-
+    QString FunctionCallNode::toRaw(uint level)
+    {
+        QString str = "";
+        for (int i = 0; i < level; i++)
+        {
+            str.append("    ");
+        }
+        //str.append("self.");
+        str.append(_name);
+        str.append("(");
+        for (size_t i = 0; i < _expressionList->size(); i++)
+        {
+            ASTNode* arg = _expressionList->at(i);
+            str.append(arg->toRaw());
+            str.append(",");
+        }
+        if (str.endsWith(","))
+        {
+            str = str.mid(0, str.size() - 1);
+        }
+        str.append(");");
+        return str;
+    }
     QString FunctionCallNode::toString(uint level)
     {
         QString str = "";
@@ -57,9 +79,9 @@ namespace Language
         {
             str.append("    ");
         }
-        str.append("self.");
+        //str.append("self.");
         str.append(_name);
-        str.append("(");
+        str.append(" ");
         for (size_t i = 0; i < _expressionList->size(); i++)
         {
             ASTNode* arg = _expressionList->at(i);
@@ -70,7 +92,7 @@ namespace Language
         {
             str = str.mid(0, str.size() - 1);
         }
-        str.append(")");
+        str.append(";");
         return str;
     }
 }

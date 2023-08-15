@@ -5,7 +5,7 @@
 
 namespace Language
 {
-    class BuildInNode : public ASTNode
+    class RobotAbbExport BuildInNode : public ASTNode
     {
     public:
         BuildInNode(QString*, ASTNode*);

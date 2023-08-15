@@ -5,12 +5,13 @@
 
 namespace Language
 {
-    class WhileNode: public ASTNode
+    class RobotAbbExport WhileNode: public ASTNode
     {
     public:
         WhileNode(ASTNode * expression, ASTNode * body);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
     private:
             ASTNode * _body;
             ASTNode * _expression;

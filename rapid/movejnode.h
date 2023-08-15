@@ -5,16 +5,18 @@
 #include "dimnumnode.h"
 namespace Language
 {
-    class MoveJNode: public ASTNode
+    class RobotAbbExport MoveJNode: public ASTNode
     {
     public:
         MoveJNode(/*QString* name,*/ ListNode<ASTNode>* expression);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
         ListNode<ASTNode>* Arguments() const
         {
             return _arguments;
         }
+        void compute() override;
         ListNode<ASTNode>* GetArguments() { return _arguments; }
     private:
         //QString _name;

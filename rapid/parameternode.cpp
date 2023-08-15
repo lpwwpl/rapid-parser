@@ -4,30 +4,39 @@
 
 namespace Language
 {
-    ParameterNode::ParameterNode(QString* name, ASTNode* initializer):
+    ParameterNode::ParameterNode(ASTNode* inout,ASTNode* type, QString* name, ASTNode* initializer):
+        _INOUT(inout),
+        _type(type),
         _name(*name),
         _initializer(initializer)
     {
+        StringLiteralNode* s_type = (StringLiteralNode*)(_type);
         if (nullptr == initializer)
         {
-            _initializer = new StringLiteralNode(new QString());
+
+            if ("NUM" == s_type->_value)
+                _initializer = new NumberLiteralNode(0);
+            if ("STRING" == s_type->_value)
+                _initializer = new StringLiteralNode(new QString());
         }
-        SymbolTable::Instance().DefineVariable(name, token::TextType);
+        SymbolTable::Instance().DefineVariable(&_name, s_type->_value);
     }
 
-    ParameterNode::ParameterNode(int type, QString * name, ASTNode * initializer)
-            :   ASTNode(type),
+    ParameterNode::ParameterNode(ASTNode* type, QString * name, ASTNode * initializer)
+            : _INOUT(nullptr),_type(type),
                 _name(*name),
             _initializer(initializer)
     {
+        StringLiteralNode* s_type = (StringLiteralNode*)(_type);
         if (nullptr == initializer)
         {
-            if (token::NumberType == type)
+
+            if ("NUM" == s_type->_value)
                 _initializer = new NumberLiteralNode(0);
-            if (token::TextType == type)
+            if ("STRING" == s_type->_value)
                 _initializer = new StringLiteralNode(new QString());
         }
-        SymbolTable::Instance().DefineVariable(name, type);
+        SymbolTable::Instance().DefineVariable(&_name, s_type->_value);
     }
 
     QVariant ParameterNode::Execute()
@@ -45,7 +54,32 @@ namespace Language
 
     QString ParameterNode::toString(uint level)
     {
-        return QString("");
+        QString ret;
+        if (_INOUT)
+        {
+            ret += "INOUT";
+        }
+        ret += " ";
+        StringLiteralNode* s_type = (StringLiteralNode*)(_type);
+        ret += s_type->_value;
+        ret += " ";
+        ret += _name;
+        return ret;
     }
+    QString ParameterNode::toRaw(uint level)
+    {
+        QString ret;
+        if (_INOUT)
+        {
+            ret += "INOUT";
+        }
+        ret += " ";
+        StringLiteralNode* s_type = (StringLiteralNode*)(_type);
+        ret += s_type->_value;
+        ret += " ";
+        ret += _name;
+        return ret;
+    }
+
 }
 

@@ -29,4 +29,10 @@ namespace Language
 
         return QString("");
     }
+    QString SWitchCaseListNode::toRaw(uint level)
+    {
+        QString str = "";
+        return str;
+    }
+
 }

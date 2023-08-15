@@ -5,14 +5,15 @@
 #include "dimnumnode.h"
 namespace Language
 {
-    class RobTargetNode: public ASTNode
+    class RobotAbbExport RobTargetNode: public ASTNode
     {
     public:
         RobTargetNode(QString* name);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
 
-    private:
+    public:
         QString _name;
         float trans[3];
         float rot[4];

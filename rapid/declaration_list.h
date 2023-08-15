@@ -5,12 +5,13 @@
 #include "listnode.h"
 namespace Language
 {
-    class DeclareListNode : public ListNode<ASTNode>
+    class RobotAbbExport DeclareListNode : public ListNode<ASTNode>
     {
     public:
         DeclareListNode(ASTNode* caseexpr);
         QVariant Execute() override;
         QString toString(uint level = 0) ;
+        QString toRaw(uint level = 0) override;
     private:
 
     };

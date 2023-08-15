@@ -3,14 +3,16 @@
 
 #include "astnode.h"
 #include "dimnumnode.h"
+
 namespace Language
 {
-    class ActUnitNode: public ASTNode
+    class RobotAbbExport ActUnitNode: public ASTNode
     {
     public:
         ActUnitNode(/*QString * name,*/ ListNode<ASTNode>* expression);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
         ListNode<ASTNode>* Arguments() const
         {
             return _arguments;

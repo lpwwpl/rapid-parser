@@ -5,12 +5,13 @@
 #include "listnode.h"
 namespace Language
 {
-    class SWitchCaseListNode : public ListNode<ASTNode>
+    class RobotAbbExport SWitchCaseListNode : public ListNode<ASTNode>
     {
     public:
         SWitchCaseListNode(ASTNode* caseexpr);
         QVariant Execute() override;
         QString toString(uint level = 0) ;
+        QString toRaw(uint level);
     private:
 
     };

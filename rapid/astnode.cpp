@@ -3,11 +3,11 @@
 
 namespace Language
 {
-    ASTNode::ASTNode(int type)
+    ASTNode::ASTNode(QString type)
         :_type(type), _prefix(true)
     {
     }
-
+    
     QVariant ASTNode::Execute()
     {
         return QVariant();
@@ -20,11 +20,12 @@ namespace Language
     {
         return toString(level);
     }
+
     ASTNode::~ASTNode()
     {
     }
 
-    int ASTNode::Type()
+    QString ASTNode::Type()
     {
         return _type;
     }

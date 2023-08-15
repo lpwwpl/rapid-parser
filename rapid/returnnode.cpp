@@ -22,6 +22,11 @@ namespace Language
         SymbolTable::Instance().GetActivationRecord()->SetReturnValue(returnValue);
         return ASTNode::Execute();
     }
+    QString ReturnNode::toRaw(uint level)
+    {
+        QString str = "";
+        return str;
+    }
     QString ReturnNode::toString(uint level)
     {
         QString str = "";

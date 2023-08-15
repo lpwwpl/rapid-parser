@@ -5,7 +5,7 @@
 
 namespace Language
 {
-    class TWaitNode : public ASTNode
+    class RobotAbbExport TWaitNode : public ASTNode
     {
     public:
         TWaitNode(ASTNode* expression);

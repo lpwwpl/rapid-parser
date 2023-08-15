@@ -6,7 +6,7 @@ extern int lineNumber;
 extern int eState;
 namespace Language
 {
-    MoveABSJNode::MoveABSJNode(/*QString* name, */ListNode<ASTNode>* arguments) :/* _name(*name),*/
+    MoveABSJNode::MoveABSJNode(/*QString* name, */ListNode<ASTNode>* arguments) : ASTNode("MOVEABSJ"),/* _name(*name),*/
         _arguments(arguments)
     {
 
@@ -15,11 +15,38 @@ namespace Language
 
     QVariant MoveABSJNode::Execute()
     {
-
+        signalRunInst();
 
         return ASTNode::Execute();
     }
+    void MoveABSJNode::compute()
+    {
+        signalParseInst(_arguments);
+    }
+    QString MoveABSJNode::toRaw(uint level)
+    {
+        QString str = "";
+        for (int i = 0; i < level; i++)
+        {
+            str.append("    ");
+        }
+        str.append("MoveAbsJ");
+        str.append(" ");
+        for (auto statement : *_arguments)
+        {
 
+            if (!statement)continue;
+            //statement->Execute();
+            str.append(statement->toRaw(level));
+            str.append(",");
+        }
+        if (str.endsWith(","))
+        {
+            str = str.mid(0, str.size() - 1);
+        }
+        str.append(";");
+        return str;
+    }
     QString MoveABSJNode::toString(uint level)
     {
         QString str = "";
@@ -27,7 +54,7 @@ namespace Language
         {
             str.append("    ");
         }
-        str.append("self.moveabsj");
+        str.append("moveabsj");
         str.append("(");
         for (auto statement : *_arguments)
         {

@@ -17,7 +17,11 @@ namespace Language
 
         return ASTNode::Execute();
     }
-    
+    QString RobTargetNode::toRaw(uint level)
+    {
+        QString str = "";
+        return str;
+    }
     QString RobTargetNode::toString(uint level )
     {
         QString str = "";

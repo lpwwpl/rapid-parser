@@ -17,7 +17,28 @@ namespace Language
     QVariant IdentifierNode::Execute()
     {
         //std::cout << toString().toStdString() << std::endl;
-        return SymbolTable::Instance().GetActivationRecord()->GetVariableValue(_name);
+        //QVariant v = SymbolTable::Instance().GetVariableValue(_name).value;
+        //if (v.isValid())
+        //    return v;
+        //return SymbolTable::Instance().GetActivationRecord()->GetVariableValue(_name);
+        try
+        {
+            if (SymbolTable::Instance().GetActivationRecord())
+            {
+                QVariant v = SymbolTable::Instance().GetActivationRecord()->GetVariableValue(_name);
+                return v;
+            }
+            else
+            {
+                return toString();
+            }
+
+        }
+        catch (...)
+        {
+            return toString();
+        }
+        
     }
     QString IdentifierNode::toRaw(uint level)
     {

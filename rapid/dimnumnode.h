@@ -6,7 +6,7 @@
 
 
 
-namespace Language
+namespace  Language
 {
     //varDeclarationNodeType varDeclaration;
     //class DimNumNode : public ListNode<ASTNode>
@@ -20,7 +20,7 @@ namespace Language
     //};
     typedef std::vector<int> dimListType;
     typedef std::vector<ASTNode*> dimRawType;
-    class DimNumsNode : public ASTNode {
+    class RobotAbbExport DimNumsNode : public ASTNode {
     public:
         //QString varName;                  /* var Name */
         dimListType tempDimList;
@@ -30,6 +30,7 @@ namespace Language
         QVariant Execute() override;
         void push_back(ASTNode* expression);
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
        /* void execute()
         {
             int ndim;

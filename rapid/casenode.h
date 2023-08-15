@@ -5,12 +5,13 @@
 
 namespace Language
 {
-    class CaseNode: public ASTNode
+    class RobotAbbExport CaseNode: public ASTNode
     {
     public:
         CaseNode(ASTNode * expression, ASTNode * body);
         QVariant Execute() override;
         //void SetVar(ASTNode* var) { _var = var; }
+        QString toRaw(uint level = 0) override;
         QString toString(uint level = 0) override;
     public:
         ASTNode* _expression;

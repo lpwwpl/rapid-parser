@@ -6,6 +6,7 @@
 #include <iostream>
 #include <thread>
 #include <mutex>
+using namespace Language;
 
 extern int lineNumber;
 
@@ -16,7 +17,17 @@ std::once_flag SymbolTable::_onceFlag;
 SymbolTable::SymbolTable()
     : _entrypoint(nullptr)
 {
-   
+    DefineTypes("NUM");
+    DefineTypes("BOOL");
+    DefineTypes("STRING");
+    DefineTypes("ROBTARGET");
+    DefineTypes("JOINTTARGET");
+    DefineTypes("WOBJDATA");
+    DefineTypes("ZONEDATA");
+    DefineTypes("SPEEDDATA");
+    DefineTypes("TOOLDATA");
+    DefineTypes("SEAMDATA");
+    DefineTypes("WELDDATA");
 }
 
 SymbolTable & SymbolTable::Instance()
@@ -78,6 +89,41 @@ bool SymbolTable::DefineModules(QString* name, Language::ModuleNode* node)
      return true;
  }
 
+ //bool SymbolTable::DefineStructTypes(QString* name, Language::StructDescNode* node)
+ //{
+ //    if (_structTypes.count(*name) != 0)
+ //    {
+ //        //std::cerr << FUNCTION_REDECLARATION << "(" << name->toStdString() << ", line: " << lineNumber << ")\n";
+ //        //exit(EXIT_FAILURE);
+ //    }
+
+ //    _structTypes[*name] = node;
+
+ //    return true;
+ //}
+
+ bool SymbolTable::DefineTypes(std::string name)
+ {
+    if (_types.count(name) != 0)
+    {
+        //std::cerr << FUNCTION_REDECLARATION << "(" << name->toStdString() << ", line: " << lineNumber << ")\n";
+        //exit(EXIT_FAILURE);
+    }
+
+    _types.insert(name);
+
+    return true;
+ }
+ void SymbolTable::calcTargetPoint()
+ {
+     for (auto it : _modules)
+     {
+         QString funName = it.first;
+         Language::ModuleNode* module = it.second;
+        
+
+     }
+ }
  QString SymbolTable::toString()
  {
      //std::map<QString, Language::FunctionNode*>
@@ -112,6 +158,8 @@ Language::FunctionNode * SymbolTable::EntryPoint()
 
 ActivationRecord * SymbolTable::GetActivationRecord()
 {
+    if (_activationRecordStack.size() == 0)
+        return NULL;
     return _activationRecordStack.top();
 }
 
@@ -160,8 +208,14 @@ QString SymbolTable::TypeName(int type) const
 
 
 
-
-void SymbolTable::AssignVariable(QString name, int type,QVariant value, dimListType* tempDimList)
+void SymbolTable::AssignVariable(QString realVar, QString type, QVariant value)
+{
+    VariableRecord v;
+    v.value = value;
+    v.type = type;
+    _variables[realVar] = v;
+}
+void SymbolTable::AssignVariable(QString name, QString type,QVariant value, dimRawType* tempDimList)
 {
     QString realVar = CalcRealVarName(name, tempDimList);
     VariableRecord v;
@@ -171,7 +225,7 @@ void SymbolTable::AssignVariable(QString name, int type,QVariant value, dimListT
 }
 
 
-void SymbolTable::DeclareVariable(QString name, dimListType* tempDimList)
+void SymbolTable::DeclareVariable(QString name, dimRawType* tempDimList)
 {
     QString realVar = CalcRealVarName(name, tempDimList);
     bool isDefinedVar = isDefined(realVar);
@@ -187,16 +241,16 @@ VariableRecord SymbolTable::GetVariableValue(QString name)
     return _variables[name];
 }
 
-int SymbolTable::VariableType(QString name)
+QString SymbolTable::VariableType(QString name)
 {
     if (_variables.count(name) == 0)
     {
-        return -1;
+        return "";
     }
     return _variables[name].type;
 }
 
-bool SymbolTable::DefineVariable(QString * name, int type)
+bool SymbolTable::DefineVariable(QString * name, QString type)
 {
     if (_variables.count(*name) != 0)
     {
@@ -217,7 +271,7 @@ void SymbolTable::ClearVariables()
     _variables.clear();
 }
 
-QString SymbolTable::CalcRealVarName(QString name, Language::dimListType* tempDimList)
+QString SymbolTable::CalcRealVarName(QString name, Language::dimRawType* tempDimList)
 {
     QString realVar = name;
 
@@ -229,7 +283,7 @@ QString SymbolTable::CalcRealVarName(QString name, Language::dimListType* tempDi
 
     for (int i = 0; i < ndim; i++)
     {
-        int index = tempDimList->at(i);
+        QString index = tempDimList->at(i)->toRaw();
         QString dimVar = QString("_%1").arg(index);
         realVar = realVar.append(dimVar);
     }

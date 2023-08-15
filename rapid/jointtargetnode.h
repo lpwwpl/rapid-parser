@@ -5,14 +5,14 @@
 #include "dimnumnode.h"
 namespace Language
 {
-    class JointTargetNode: public ASTNode
+    class RobotAbbExport JointTargetNode: public ASTNode
     {
     public:
         JointTargetNode(QString* name);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
-
-    private:
+        QString toRaw(uint level = 0) override;
+    public:
         QString _name;
         float joints[6];
         float extra_joints[6];

@@ -21,6 +21,11 @@ namespace Language
         std::cout << str.toStdString() << std::endl;
         return ASTNode::Execute();
     }
+    QString SpeedDataNode::toRaw(uint level)
+    {
+        QString str = "";
+        return str;
+    }
 
     QString SpeedDataNode::toString(uint level)
     {
@@ -29,7 +34,7 @@ namespace Language
         {
             str.append("    ");
         }
-        str.append("self.");
+        //str.append("self.");
         str.append("speed");
 
         str.append("(");

@@ -18,7 +18,11 @@ namespace Language
 
         return ASTNode::Execute();
     }
-
+    QString JointTargetNode::toRaw(uint level)
+    {
+        QString str = "";
+        return str;
+    }
     QString JointTargetNode::toString(uint level)
     {
         QString str = "";

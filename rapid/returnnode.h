@@ -5,12 +5,13 @@
 
 namespace Language
 {
-    class ReturnNode: public ASTNode
+    class RobotAbbExport ReturnNode: public ASTNode
     {
     public:
         ReturnNode(ASTNode * expression);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
     private:
             ASTNode * _expression;
     };

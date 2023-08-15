@@ -5,16 +5,18 @@
 #include "dimnumnode.h"
 namespace Language
 {
-    class ArcEndNode: public ASTNode
+    class RobotAbbExport ArcEndNode: public ASTNode
     {
     public:
         ArcEndNode(/*QString* name, */ListNode</*ParamNode*/ASTNode>* expression);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
         ListNode<ASTNode>* Arguments() const
         {
             return _arguments;
         }
+        void compute() override;
         ListNode<ASTNode>* GetArguments() { return _arguments; }
     private:
         //QString _name;

@@ -5,16 +5,20 @@
 
 namespace Language
 {
+
     class ForNode: public ASTNode
     {
     public:
-        ForNode(QString * identify, ASTNode * to_expression,ASTNode* step= nullptr,ASTNode * function_body = nullptr);
+
+        ForNode(ASTNode* identify, ASTNode* from_expression,ASTNode * to_expression,ASTNode* step= nullptr,ASTNode * function_body = nullptr);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
+        QString toRaw(uint level = 0) override;
     private:
             ASTNode * _function_body;
             ASTNode * _to_expression;
-            QString* _assignment;
+            ASTNode* _from_expression;
+            ASTNode* _assignment;
             ASTNode* _step;
     };
 }

@@ -5,13 +5,14 @@
 
 namespace Language
 {
-    class NumberLiteralNode : public ASTNode
+    class RobotAbbExport NumberLiteralNode : public ASTNode
     {
     public:
         NumberLiteralNode(double value);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
-    private:
+        QString toRaw(uint level = 0) override;
+    public:
         double _value;
     };
 }

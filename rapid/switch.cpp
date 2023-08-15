@@ -40,7 +40,11 @@ namespace Language
     
         return ASTNode::Execute();
     }
-
+    QString SWitchNode::toRaw(uint level)
+    {
+        QString str = "";
+        return str;
+    }
     QString SWitchNode::toString(uint level)
     {
         QString str = "";

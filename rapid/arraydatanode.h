@@ -5,17 +5,18 @@
 #include "listnode.h"
 namespace Language
 {
-    typedef std::vector<ASTNode*> dimRawType;
-    class ArrayDataNode : public ASTNode
+   // typedef std::vector<ASTNode*> dimRawType;
+    class RobotAbbExport ArrayDataNode : public ASTNode
     {
     public:
    
         ArrayDataNode(ASTNode* caseexpr);
-        dimRawType tempDimRawList;
+       // dimRawType tempDimRawList;
+        QString toRaw(uint level = 0);
         QVariant Execute() override;
         QString toString(uint level = 0) ;
-    private:
-
+    public:
+        ASTNode* _child;
     };
 }
 

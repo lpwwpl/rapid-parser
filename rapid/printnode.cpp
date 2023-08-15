@@ -15,6 +15,11 @@ namespace Language
         //std::cout << QString("%1").arg(_expression->Execute().toString()).toStdString() << std::endl;
         return ASTNode::Execute();
     }
+    QString PrintNode::toRaw(uint level)
+    {
+        QString str = "";
+        return str;
+    }
     QString PrintNode::toString(uint level)
     {
         QString str = "";

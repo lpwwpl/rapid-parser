@@ -6,8 +6,9 @@ extern int lineNumber;
 
 namespace Language
 {
-    FunctionNode::FunctionNode(int type, QString * name, ListNode<ParameterNode> * arguments, StatementListNode * body)
-            : ASTNode(type),
+    FunctionNode::FunctionNode(ASTNode* type, QString * name, ListNode<ParameterNode> * arguments, StatementListNode * body)
+            : ASTNode("FUNC"),
+              _type(type),
               _name(*name),
               _arguments(arguments),
               _body(body)
@@ -26,10 +27,13 @@ namespace Language
                  //}
              }
          }
-         SymbolTable::Instance().ClearVariables();
+         //SymbolTable::Instance().ClearVariables();
 
     }
-
+    void FunctionNode::compute()
+    {
+        _body->compute();
+    }
     QVariant FunctionNode::Execute()
     {
         SymbolTable::Instance().PushAR();
@@ -62,26 +66,61 @@ namespace Language
     {
         return _arguments;
     }
-
+    QString FunctionNode::toRaw(uint level)
+    {
+        QString str = QString::fromLatin1("");
+        for (int i = 0; i < level; i++)
+        {
+            str.append(QString::fromLatin1("    "));
+        }
+        str += QString::fromLatin1("PROC");
+        str += QString::fromLatin1(SPACE);
+        str += _name;
+        str += QString::fromLatin1("(");
+        int count = _arguments->size();
+        for (int i = 0; i < count; i++)
+        {
+            ParameterNode* node = _arguments->at(i);
+            str += node->toRaw();
+            if (i < (count -1))
+            {
+                str += ",";
+            }
+        }
+        str += QString::fromLatin1(")");
+        str += QString::fromLatin1("\n");
+        //str += INTENT;
+        //str += _arguments->toString();
+        str.append(_body->toRaw(level + 1));
+        for (int i = 0; i < level; i++)
+        {
+            str.append(QString::fromLatin1("    "));
+        }
+        str += QString::fromLatin1("ENDPROC");
+        str += QString::fromLatin1("\n");
+        return str;
+    }
     QString FunctionNode::toString(uint level)
     {
-        QString str = "";
+        QString str = QString::fromLatin1("");
         for (int i = 0; i < level; i++)
         {
-            str.append("    ");
+            str.append(QString::fromLatin1("    "));
         }
-        str += "@allow_goto";
-        str += "\n";
+        str += QString::fromLatin1("@allow_goto");
+        str += QString::fromLatin1("\n");
         for (int i = 0; i < level; i++)
         {
-            str.append("    ");
+            str.append(QString::fromLatin1("    "));
         }
-        str += "def";
-        str += SPACE;
+        str += QString::fromLatin1("def");
+        str += QString::fromLatin1(SPACE);
         str += _name;
-        str += "(self)";
-        str += ":";
-        str += "\n";
+        str += QString::fromLatin1("(");
+        str += _arguments->toString();
+        str += QString::fromLatin1(")");
+        str += QString::fromLatin1(":");
+        str += QString::fromLatin1("\n");
         //str += INTENT;
         //str += _arguments->toString();
         str.append(_body->toString(level+1));

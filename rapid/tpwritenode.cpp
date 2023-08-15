@@ -16,6 +16,21 @@ namespace Language
         std::cout << toString().toStdString() << std::endl;
         return ASTNode::Execute();
     }
+    QString TpWriteNode::toRaw(uint level)
+    {
+        QString str = "";
+        for (int i = 0; i < level; i++)
+        {
+            str.append("    ");
+        }
+        //str.append("self.");
+        str.append("TPWrite");
+        str.append(" ");
+        str.append(_expression->toString());
+        str.append(";");
+        return str;
+    }
+    
     QString TpWriteNode::toString(uint level)
     {
         QString str = "";
@@ -23,8 +38,8 @@ namespace Language
         {
             str.append("    ");
         }
-        str.append("self.");
-        str.append("twait");
+        //str.append("self.");
+        str.append("TPWrite");
         str.append("(");
         str.append(_expression->toString());
         str.append(")");

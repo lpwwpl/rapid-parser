@@ -8,34 +8,50 @@ namespace Language
     {
     }
     ElseIfNode::ElseIfNode( ASTNode* bodyTrue)
-        : _body(bodyTrue)
+        : _body(bodyTrue), _expression(NULL)
     {
     }
 
 
     QVariant ElseIfNode::Execute()
     {
-       /* if (nullptr == _bodyFalse)
-        {
-            if ( _expression->Execute().toBool())
-            {     
-                _bodyTrue->Execute();
-            }
-        }
-        else
-        {
-            if (_expression->Execute().toBool())
+            if (!_expression || _expression->Execute().toBool())
             {
-                _bodyTrue->Execute();
+                _body->Execute();
             }
             else
             {
-                _bodyFalse->Execute();
-            }*/
-        //}
+               
+            }
+
         return ASTNode::Execute();
     }
+    QString ElseIfNode::toRaw(uint level)
+    {
+        QString str = "";
+        for (int i = 0; i < level; i++)
+        {
+            str.append("    ");
+        }
+       
+        if (!_expression)
+        {
+            str.append("ELSE");
+            str.append("\n");
+        }
+        else if (_expression)
+        {
+            str.append("ELSEIF");
+            str.append(" ");
+            str.append(_expression->toRaw());
+            str.append(" ");
+            str.append("THEN");
+            str.append("\n");
+        }
+        str.append(_body->toRaw(level+1));
 
+        return str;
+    }
     QString ElseIfNode::toString(uint level)
     {
         QString str = "";
@@ -43,37 +59,19 @@ namespace Language
         {
             str.append("    ");
         }
-        str.append("if");
-        str.append(" ");
-        str.append(_expression->toString());
-        str.append(":");
-        str.append("\n");
-       /* if (!_bodyTrue)
+
+        if (!_expression)
         {
-            for (int i = 0; i < level + 1; i++)
-            {
-                str.append("    ");
-            }
-            str.append("pass");
-            str.append("\n");
+            str.append("ELSE");
         }
-        else
+        else if (_expression)
         {
-            str.append(_bodyTrue->toString(level + 1));
+            str.append("ELSEIF");
+            str.append(_expression->toString());
+            str.append("THEN");
         }
-       
-        if (_bodyFalse)
-        {
-          
-            for (int i = 0; i < level; i++)
-            {
-                str.append("    ");
-            }
-            str.append("else:");
-            
-            str.append("\n");    
-            str.append(_bodyFalse->toString(level + 1));            
-        }*/
+        str.append(_body->toString());
+        str.append("ENDIF");
         return str; 
     }
 }

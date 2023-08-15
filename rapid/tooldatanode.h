@@ -11,14 +11,14 @@ namespace Language
         float mass;
         float gravity[3];
     };
-    class ToolDataNode: public ASTNode
+    class RobotAbbExport ToolDataNode: public ASTNode
     {
     public:
         ToolDataNode(QString* name);
         QVariant Execute() override;
         QString toString(uint level = 0) override;
-
-    private:
+        QString toRaw(uint level = 0) override;
+    public:
         QString _name;
         bool bTool;
         float trans[3];

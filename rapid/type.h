@@ -5,7 +5,7 @@
 
 namespace Language
 {
-    class TypeNode : public ASTNode
+    class RobotAbbExport TypeNode : public ASTNode
     {
     public:
         TypeNode(ASTNode* expression);

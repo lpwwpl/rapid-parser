@@ -8,7 +8,18 @@ namespace Language
         if(parameter)
           push_back(parameter);
     }
+    void StatementListNode::compute()
+    {
+        for (auto statement : *this)
+        {
+            if (!statement)continue;
+            //statement->Execute();
+            statement->compute();
 
+            if (dynamic_cast<ReturnNode*>(statement))
+                break;
+        }
+    }
     QVariant StatementListNode::Execute()
     {
         QString str = "";
@@ -26,7 +37,27 @@ namespace Language
         std::cout << str.toStdString() << std::endl;
         return ASTNode::Execute();
     }
+    QString StatementListNode::toRaw(uint level)
+    {
+        QString str = "";
 
+        for (auto statement : *this)
+        {
+
+            if (!statement)continue;
+            //statement->Execute();
+            str.append(statement->toRaw(level));
+
+            IfNode* ifNode = dynamic_cast<IfNode*>(statement);
+            ForNode* forNode = dynamic_cast<ForNode*>(statement);
+            if (!ifNode && !forNode)
+                str.append("\n");
+            //if (dynamic_cast<ReturnNode*>(statement))
+            //    break;
+        }
+
+        return str;
+    }
     QString StatementListNode::toString(uint level)
     {
         QString str = "";
