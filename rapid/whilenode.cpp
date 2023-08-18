@@ -16,11 +16,6 @@ namespace Language
         }
         return ASTNode::Execute();
     }
-    QString WhileNode::toString(uint level)
-    {
-
-        return QString("");
-    }
     QString WhileNode::toRaw(uint level)
     {
         QString str = "";

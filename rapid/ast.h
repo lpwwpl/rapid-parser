@@ -68,10 +68,8 @@
 #include "pulsedo.h"
 #include "structdesc.h"
 #include "structindexnode.h"
-#include "variabledeclare.h"
 #include "modifiernode.h"
 #include "offsnode.h"
-#include "structassign.h"
 #include "arrayindex.h"
 #include "dimnumnode.h"
 #endif // AST_H

@@ -48,13 +48,4 @@ namespace Language
 
         return str;
     }
-
-    QString ArrayIndexNode::toString(uint level)
-    {
-       
-        QString str = "";
-    
-
-        return str;
-    }
 }

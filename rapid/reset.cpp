@@ -25,7 +25,7 @@ namespace Language
         {
             str.append(INTENT);
         }
-        str.append("ReSet ");
+        str.append("ReSet");
         //str.append(_name);
         str.append(" ");
         str.append(_expression->toRaw());
@@ -33,18 +33,4 @@ namespace Language
         return str;
     }
 
-    QString ReSetNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-        str.append("ReSet ");
-        //str.append(_name);
-        str.append(" ");
-        str.append(_expression->toRaw());
-        str.append(";");
-        return str;
-    }
 }

@@ -12,29 +12,12 @@ namespace Language
     }
     QVariant PrintNode::Execute()
     {
-        //std::cout << QString("%1").arg(_expression->Execute().toString()).toStdString() << std::endl;
+        std::cout << QString("%1").arg(_expression->Execute().toString()).toStdString() << std::endl;
         return ASTNode::Execute();
     }
     QString PrintNode::toRaw(uint level)
     {
         QString str = "";
-        return str;
-    }
-    QString PrintNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-        str.append("print");
-        str.append("(");
-        if (_target)
-        {
-
-        }        
-        str.append(_expression->toString());
-        str.append(")");
         return str;
     }
 }

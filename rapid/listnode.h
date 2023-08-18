@@ -5,6 +5,7 @@
 
 namespace Language
 {
+
     template <class T >
     class ListNode: public ASTNode, public std::vector<T *>
     {

@@ -9,10 +9,10 @@ namespace Language
     {
     public:
         TpWriteNode(ASTNode* expression);
-        QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
-    private:
+        QVariant Execute() override;
+        void Accept(Visitor& v) override { v.VisitTpwrite(this); }
+    public:
         ASTNode* _expression;
     };
 }

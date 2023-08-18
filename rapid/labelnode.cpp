@@ -38,30 +38,30 @@ namespace Language
         QString str = "";
         return str;
     }
-    QString LabelNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-        str.append("label");
-        str.append(" ");     
-        
-        NumberLiteralNode* nNode = dynamic_cast<NumberLiteralNode*>(_id);
-        if (nNode)
-        {
-            
-            QString labelName = ".x";
-            labelName.append(nNode->toString());
-            str.append(labelName);
-        }
-        else
-        {
-            str.append(".");
-            str.append(_id->toString());
-        }
+    //QString LabelNode::toString(uint level)
+    //{
+    //    QString str = "";
+    //    for (int i = 0; i < level; i++)
+    //    {
+    //        str.append("    ");
+    //    }
+    //    str.append("label");
+    //    str.append(" ");     
+    //    
+    //    NumberLiteralNode* nNode = dynamic_cast<NumberLiteralNode*>(_id);
+    //    if (nNode)
+    //    {
+    //        
+    //        QString labelName = ".x";
+    //        labelName.append(nNode->toString());
+    //        str.append(labelName);
+    //    }
+    //    else
+    //    {
+    //        str.append(".");
+    //        str.append(_id->toString());
+    //    }
 
-        return str;
-    }
+    //    return str;
+    //}
 }

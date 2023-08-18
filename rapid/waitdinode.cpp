@@ -13,7 +13,7 @@ namespace Language
 
     QVariant WaitDiNode::Execute()
     {
-
+        signalRunInst();
         return QVariant();
         //return ASTNode::Execute();
     }
@@ -24,21 +24,6 @@ namespace Language
         for (int i = 0; i < level; i++)
         {
             str.append(INTENT);
-        }
-        str.append("WaitDI ");
-        str.append(_name);
-        str.append(" ");
-        str.append(_expression->toRaw());
-        str.append(";");
-        return str;
-    }
-
-    QString WaitDiNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
         }
         str.append("WaitDI ");
         str.append(_name);

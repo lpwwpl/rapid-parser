@@ -4,7 +4,7 @@
 namespace Language
 {
     IfNode::IfNode(ASTNode * expression, ASTNode * bodyTrue, ASTNode * bodyFalse)
-        : ASTNode("IF"),_bodyTrue(bodyTrue),
+        : ASTNode(),_bodyTrue(bodyTrue),
           _bodyFalse(bodyFalse),
           _expression(expression)
     {
@@ -81,45 +81,5 @@ namespace Language
         str.append("endif");
         str.append("\n");
         return str;
-    }
-    QString IfNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-        str.append("if");
-        str.append(" ");
-        str.append(_expression->toString());
-        str.append(":");
-        str.append("\n");
-        if (!_bodyTrue)
-        {
-            for (int i = 0; i < level + 1; i++)
-            {
-                str.append("    ");
-            }
-            str.append("pass");
-            str.append("\n");
-        }
-        else
-        {
-            str.append(_bodyTrue->toString(level + 1));
-        }
-       
-        if (_bodyFalse)
-        {
-          
-            for (int i = 0; i < level; i++)
-            {
-                str.append("    ");
-            }
-            str.append("else:");
-            
-            str.append("\n");    
-            str.append(_bodyFalse->toString(level + 1));            
-        }
-        return str; 
     }
 }

@@ -6,7 +6,7 @@
 namespace Language
 {
 
-    DimNumsNode::DimNumsNode(ASTNode* expression):ASTNode("ARRAYDATA")
+    DimNumsNode::DimNumsNode(ASTNode* expression):ASTNode()
     {
         tempDimRawList.push_back(expression);
         //NumberLiteralNode* node = dynamic_cast<NumberLiteralNode*>(expression);
@@ -32,7 +32,7 @@ namespace Language
 
     QVariant DimNumsNode::Execute()
     {
-        QString str = toString();
+        QString str;// = toString();
         //std::cout << QString("%1").arg(_expression->Execute().toString()).toStdString() << std::endl;
         return str;
     }
@@ -72,23 +72,6 @@ namespace Language
         for (int i = 0; i < count; i++)
         {
             str.append(tempDimRawList[i]->toRaw());
-            str.append(",");
-        }
-        if (str.endsWith(","))
-        {
-            str = str.mid(0, str.size() - 1);
-        }
-        str.append("]");
-        return str;
-    }
-    QString DimNumsNode::toString(uint level)
-    {
-        QString str = "";
-        str.append("[");
-        int count = tempDimRawList.size();
-        for(int i = 0;i<count;i++)
-        {
-            str.append(tempDimRawList[i]->toString());
             str.append(",");
         }
         if (str.endsWith(","))

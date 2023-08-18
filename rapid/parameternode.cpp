@@ -4,39 +4,37 @@
 
 namespace Language
 {
-    ParameterNode::ParameterNode(ASTNode* inout,ASTNode* type, QString* name, ASTNode* initializer):
+    ParameterNode::ParameterNode(ASTNode* inout, IdentifierNode* type, IdentifierNode* param, ASTNode* initializer):
         _INOUT(inout),
         _type(type),
-        _name(*name),
+        _param(param),
         _initializer(initializer)
     {
-        StringLiteralNode* s_type = (StringLiteralNode*)(_type);
         if (nullptr == initializer)
         {
 
-            if ("NUM" == s_type->_value)
+            if ("NUM" == type->getVariablenTypeName())
                 _initializer = new NumberLiteralNode(0);
-            if ("STRING" == s_type->_value)
+            if ("STRING" == type->getVariablenTypeName())
                 _initializer = new StringLiteralNode(new QString());
         }
-        SymbolTable::Instance().DefineVariable(&_name, s_type->_value);
+        SymbolTable::Instance().DefineVariable(&param->_name, type->getType(),type->getVariablenTypeName());
     }
 
-    ParameterNode::ParameterNode(ASTNode* type, QString * name, ASTNode * initializer)
+    ParameterNode::ParameterNode(IdentifierNode* type, IdentifierNode* param, ASTNode * initializer)
             : _INOUT(nullptr),_type(type),
-                _name(*name),
+                _param(param),
             _initializer(initializer)
     {
-        StringLiteralNode* s_type = (StringLiteralNode*)(_type);
         if (nullptr == initializer)
         {
 
-            if ("NUM" == s_type->_value)
+            if ("NUM" == type->getTypeName())
                 _initializer = new NumberLiteralNode(0);
-            if ("STRING" == s_type->_value)
+            if ("STRING" == type->getTypeName())
                 _initializer = new StringLiteralNode(new QString());
         }
-        SymbolTable::Instance().DefineVariable(&_name, s_type->_value);
+        SymbolTable::Instance().DefineVariable(&param->_name, type->getType(), type->getVariablenTypeName());
     }
 
     QVariant ParameterNode::Execute()
@@ -49,23 +47,9 @@ namespace Language
 
     QString ParameterNode::Name()
     {
-        return _name;
+        return _param->_name;
     }
 
-    QString ParameterNode::toString(uint level)
-    {
-        QString ret;
-        if (_INOUT)
-        {
-            ret += "INOUT";
-        }
-        ret += " ";
-        StringLiteralNode* s_type = (StringLiteralNode*)(_type);
-        ret += s_type->_value;
-        ret += " ";
-        ret += _name;
-        return ret;
-    }
     QString ParameterNode::toRaw(uint level)
     {
         QString ret;
@@ -74,10 +58,18 @@ namespace Language
             ret += "INOUT";
         }
         ret += " ";
-        StringLiteralNode* s_type = (StringLiteralNode*)(_type);
-        ret += s_type->_value;
+
+        //IdentifierNode* s_type = (IdentifierNode*)(expr->_type);
+        //str += s_type->getTypeName();
+        //str += " ";
+        //IdentifierNode* s_param = (IdentifierNode*)(expr->_param);
+        //str += s_param->getTypeName();
+
+        IdentifierNode* s_type = (IdentifierNode*)(_type);
+        ret += s_type->getName();
         ret += " ";
-        ret += _name;
+        IdentifierNode* s_param = (IdentifierNode*)(_param);
+        ret += s_param->getName();
         return ret;
     }
 

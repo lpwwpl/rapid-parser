@@ -9,9 +9,10 @@ namespace Language
     {
     public:
         NumberLiteralNode(double value);
-        QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
+        QVariant Execute() override;
+        enum_v_type getType() override { return enum_v_type::decimal; }
+        void Accept(Visitor& v) override { v.VisitDouble(this); }
     public:
         double _value;
     };

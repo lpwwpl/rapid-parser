@@ -8,14 +8,13 @@ namespace Language
     class StructIndexNode: public ASTNode
     {
     public:
-        StructIndexNode(ASTNode* left, ASTNode* right);
-        
-        QVariant Execute() override;
-        QString toString(uint level = 0) override;
+        StructIndexNode(ASTNode* left, IdentifierNode* right);
         QString toRaw(uint level = 0) override;
+        QVariant Execute() override;
+        void Accept(Visitor& v) override { v.VisitStructindex(this); }
     public:
         ASTNode* _left;
-        ASTNode* _right;
+        IdentifierNode* _right;
         QString _name;
     };
 }

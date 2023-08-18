@@ -40,22 +40,4 @@ namespace Language
 
         return str;
     }
-    QString DeclareListNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-        for (auto statement : *this)
-        {
-
-            if (!statement)continue;
-            //statement->Execute();
-            str.append(statement->toString(level));
-        }
-
-
-        return str;
-    }
 }

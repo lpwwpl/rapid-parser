@@ -12,9 +12,9 @@ namespace Language
 
         ForNode(ASTNode* identify, ASTNode* from_expression,ASTNode * to_expression,ASTNode* step= nullptr,ASTNode * function_body = nullptr);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
-    private:
+        void Accept(Visitor& v) override { v.VisitFor(this); }
+    public:
             ASTNode * _function_body;
             ASTNode * _to_expression;
             ASTNode* _from_expression;

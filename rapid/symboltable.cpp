@@ -89,63 +89,53 @@ bool SymbolTable::DefineModules(QString* name, Language::ModuleNode* node)
      return true;
  }
 
- //bool SymbolTable::DefineStructTypes(QString* name, Language::StructDescNode* node)
- //{
- //    if (_structTypes.count(*name) != 0)
- //    {
- //        //std::cerr << FUNCTION_REDECLARATION << "(" << name->toStdString() << ", line: " << lineNumber << ")\n";
- //        //exit(EXIT_FAILURE);
- //    }
-
- //    _structTypes[*name] = node;
-
- //    return true;
- //}
-
- bool SymbolTable::DefineTypes(std::string name)
+ bool SymbolTable::DefineStructTypes(QString* name, Language::StructDescNode* node)
  {
-    if (_types.count(name) != 0)
+     if (_structTypes.count(*name) != 0)
+     {
+         //std::cerr << FUNCTION_REDECLARATION << "(" << name->toStdString() << ", line: " << lineNumber << ")\n";
+         //exit(EXIT_FAILURE);
+     }
+
+     _structTypes[*name] = node;
+
+     return true;
+ }
+
+ bool SymbolTable::DefineTypes(QString name)
+ {
+    if (TypeNames.count(name.toStdString()) != 0)
     {
         //std::cerr << FUNCTION_REDECLARATION << "(" << name->toStdString() << ", line: " << lineNumber << ")\n";
         //exit(EXIT_FAILURE);
     }
 
-    _types.insert(name);
+    TypeNames.insert(name.toStdString());
 
     return true;
  }
- void SymbolTable::calcTargetPoint()
- {
-     for (auto it : _modules)
-     {
-         QString funName = it.first;
-         Language::ModuleNode* module = it.second;
-        
-
-     }
- }
- QString SymbolTable::toString()
- {
-     //std::map<QString, Language::FunctionNode*>
-     QString str = "";
-     for (auto it : _modules)
-     {
-         QString funName = it.first;
-         Language::ModuleNode* module = it.second;
-         if (!module)continue;
-         str += module->toString(1);
-         str += "\n";
-     }
-     //for (auto it: _functions)
-     //{
-     //    QString funName = it.first;
-     //    Language::FunctionNode* func = it.second;
-     //    if (!func)continue;
-     //    str += func->toString(1);
-     //    str += "\n";
-     //}
-     return str;
- }
+ //QString SymbolTable::toString()
+ //{
+ //    //std::map<QString, Language::FunctionNode*>
+ //    QString str = "";
+ //    for (auto it : _modules)
+ //    {
+ //        QString funName = it.first;
+ //        Language::ModuleNode* module = it.second;
+ //        if (!module)continue;
+ //        str += module->toString(1);
+ //        str += "\n";
+ //    }
+ //    //for (auto it: _functions)
+ //    //{
+ //    //    QString funName = it.first;
+ //    //    Language::FunctionNode* func = it.second;
+ //    //    if (!func)continue;
+ //    //    str += func->toString(1);
+ //    //    str += "\n";
+ //    //}
+ //    return str;
+ //}
 Language::FunctionNode * SymbolTable::EntryPoint()
 {
     if (nullptr == _entrypoint)
@@ -194,44 +184,25 @@ void SymbolTable::PushCommandLineArguments(const int argc, char **argv)
     _argumentStack.push(argc);
 }
 
-QString SymbolTable::TypeName(int type) const
-{
-    switch(type)
-    {
-        case token::NumberType: return "Number";
-        case token::TextType: return "Text";
-        case token::VoidType: return "Void";
-        default: std::cerr << "Woops, forgot to map type name...\n";
-                              exit(EXIT_FAILURE);
-    }
-}
 
 
 
-void SymbolTable::AssignVariable(QString realVar, QString type, QVariant value)
+void SymbolTable::AssignVariable(QString realVar, enum_v_type type, QString var_type, QVariant value)
 {
     VariableRecord v;
     v.value = value;
     v.type = type;
-    _variables[realVar] = v;
-}
-void SymbolTable::AssignVariable(QString name, QString type,QVariant value, dimRawType* tempDimList)
-{
-    QString realVar = CalcRealVarName(name, tempDimList);
-    VariableRecord v;
-    v.value = value;
-    v.type = type;
+    v.var_type = var_type;
     _variables[realVar] = v;
 }
 
 
-void SymbolTable::DeclareVariable(QString name, dimRawType* tempDimList)
+void SymbolTable::DeclareVariable(QString name)
 {
-    QString realVar = CalcRealVarName(name, tempDimList);
-    bool isDefinedVar = isDefined(realVar);
+    bool isDefinedVar = isDefined(name);
     if (!isDefinedVar)
     {
-        _variables[realVar] = VariableRecord();
+        _variables[name] = VariableRecord();
     }
 }
 
@@ -247,20 +218,20 @@ QString SymbolTable::VariableType(QString name)
     {
         return "";
     }
-    return _variables[name].type;
+    VariableRecord vr = _variables[name];
+    return getVarType(vr);
 }
 
-bool SymbolTable::DefineVariable(QString * name, QString type)
+bool SymbolTable::DefineVariable(QString * name, enum_v_type type, QString var_type)
 {
     if (_variables.count(*name) != 0)
     {
         return true;
-        //std::cerr << VARIABLE_REDECLARATION << "(" << name->toStdString() << ", line: " << lineNumber << ")\n";
-        //exit(EXIT_FAILURE);
     }
 
     VariableRecord r;
     r.type = type;
+    r.var_type = var_type;
     _variables[*name] = r;
 
     return true;
@@ -271,24 +242,60 @@ void SymbolTable::ClearVariables()
     _variables.clear();
 }
 
-QString SymbolTable::CalcRealVarName(QString name, Language::dimRawType* tempDimList)
-{
-    QString realVar = name;
-
-    int ndim;
-    if (tempDimList != NULL)
-        ndim = tempDimList->size();
-    else
-        ndim = 0;
-
-    for (int i = 0; i < ndim; i++)
+void SymbolTable::addStructMember(QString structName, QString memType, QString memName) {
+    if (this->_structMembers.find(structName) == this->_structMembers.end())
     {
-        QString index = tempDimList->at(i)->toRaw();
-        QString dimVar = QString("_%1").arg(index);
-        realVar = realVar.append(dimVar);
+        //LogError("Unknown struct name");
     }
-    return realVar;
+    this->_structMembers[structName].push_back(std::make_pair(memType, memName));
 }
 
+long SymbolTable::getStructMemberIndex(QString structName, QString memberName) {
+    if (this->_structMembers.find(structName) == this->_structMembers.end()) {
+        //LogError("Unknown struct name");
+        return 0;
+    }
+    auto& members = this->_structMembers[structName];
+    for (auto it = members.begin(); it != members.end(); it++) {
+        if (it->second == memberName) {
+            return std::distance(members.begin(), it);
+        }
+    }
 
+    //LogError("Unknown struct member");
+
+    return 0;
+}
+
+QString SymbolTable::getVarType(VariableRecord& vr) 
+{
+    QString ret = "";
+
+    switch (vr.type)
+    {
+    case enum_v_type::variable:
+        ret = vr.var_type;
+        break;
+    case enum_v_type::integer:
+        ret = "int";
+        break;
+    case enum_v_type::decimal:
+        ret = "double";
+        break;
+    case enum_v_type::string:
+        ret = "string";
+        break;
+    case enum_v_type::boolean:
+        ret = "boolean";
+        break;
+    case enum_v_type::function:
+        ret = vr.var_type;
+        break;
+    case enum_v_type::identifier:
+        ret = vr.var_type;
+        break;
+    default:break;
+    }
+    return ret;
+}
 

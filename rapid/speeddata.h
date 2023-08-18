@@ -16,8 +16,8 @@ namespace Language
     public:
         SpeedDataNode(ASTNode* expression);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
+        void Accept(Visitor& v) override {}
     public:
         ASTNode* _expression;
  

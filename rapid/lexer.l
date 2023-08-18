@@ -78,7 +78,7 @@ num2    {dig}*\.{dig}+([eE][-+]?{dig}+)?
 number  {num1}|{num2}|{lnum}
 
 
-
+SPACE       [ \f\n\r\t\v]+
 PERS        PERS
 TOOLDATA    tooldata
 SPEEDDATA   SPEEDDATA
@@ -266,19 +266,19 @@ import              BEGIN(incl);
 "text"	 					{ return token::TextType; }
 "void" 						{ return token::VoidType; }
 
-"\\WObj"             { return token::WOBJ_P; }
-"\\SeamName"             { return token::SEAM_NAME; }
-"\\Z"             { return token::ZONE_P; }
-"\\V"             { return token::VEL_P; }
-"\\T"             { return token::TCP_P; }
-"\\NoEOffs"        { return token::NOEOFFS; }
-"\\Tool"           { return token::TOOL_P; }
-"\\PLength"       { return token::PLEN; }
-"\\MaxTime"       { return token::MAXTIME; }
-"\\TimeFlag"       { return token::TIMEFLAG; }
-"\\InPos"       { return token::INPOS; }
-"\\Conc"         { return token::CONC; }
-"\\ID"         { return token::ID_P; }
+\\[ \t]?(WObj)             { return token::WOBJ_P; }
+\\[ \t]?(SeamName)             { return token::SEAM_NAME; }
+\\[ \t]?(Z)             { return token::ZONE_P; }
+\\[ \t]?(V)            { return token::VEL_P; }
+\\[ \t]?(T)            { return token::TCP_P; }
+\\[ \t]?(NoEOffs)        { return token::NOEOFFS; }
+\\[ \t]?(Tool)           { return token::TOOL_P; }
+\\[ \t]?(PLength)       { return token::PLEN; }
+\\[ \t]?(MaxTime)       { return token::MAXTIME; }
+\\[ \t]?(TimeFlag)       { return token::TIMEFLAG; }
+\\[ \t]?(InPos)       { return token::INPOS; }
+\\[ \t]?(Conc)         { return token::CONC; }
+\\[ \t]?(ID)         { return token::ID_P; }
 
 {NOT}           { return token::NOT; }
 {IF}						{ return token::IF; }
@@ -322,7 +322,7 @@ import              BEGIN(incl);
 {DEACTUNIT}                      {return token::DEACTUNIT;}
 
 
-SPACE       [ \f\n\r\t\v]+
+
 {PERS}                      {return token::PERS;}
 {MODULE}                      {return token::MODULE;}
 {ENDMODULE}                      {return token::ENDMODULE;}
@@ -377,7 +377,7 @@ SPACE       [ \f\n\r\t\v]+
 ")"                     { return token::RC; }
 "{"                      { return token::LBRACE; }
 "}"                      { return token::RBRACE; }
-"\\"                     {return token::SPLASH;}
+
 "#"  {return token::JIN;}
 "+"  { return token::ADD; }
 "-"  { return token::SUB; }

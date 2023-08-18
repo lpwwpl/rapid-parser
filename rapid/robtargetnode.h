@@ -10,9 +10,8 @@ namespace Language
     public:
         RobTargetNode(QString* name);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
+        void Accept(Visitor& v) override {}
         QString toRaw(uint level = 0) override;
-
     public:
         QString _name;
         float trans[3];

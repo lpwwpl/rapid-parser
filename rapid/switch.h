@@ -9,10 +9,10 @@ namespace Language
     {
     public:
         SWitchNode(ASTNode * expression, ASTNode * caseLists, ASTNode * defaultCase = nullptr);
-        QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
-    private:
+        QVariant Execute() override;
+        void Accept(Visitor& v) override { v.VisitSwitch(this); }
+    public:
             ASTNode * _caseLists;
             ASTNode * _defaultCase;
             ASTNode * _expression;

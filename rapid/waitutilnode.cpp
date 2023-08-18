@@ -13,7 +13,7 @@ namespace Language
 
     QVariant WaitUntilNode::Execute()
     {
-      
+        signalRunInst();
         return QVariant();
         //return ASTNode::Execute();
     }
@@ -24,21 +24,6 @@ namespace Language
         for (int i = 0; i < level; i++)
         {
             str.append(INTENT);
-        }
-        str.append("WaitUntil ");
-        //str.append(_name);
-        str.append(" ");
-        str.append(_expression->toRaw());
-        str.append(";");
-        return str;
-    }
-
-    QString WaitUntilNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
         }
         str.append("WaitUntil ");
         //str.append(_name);

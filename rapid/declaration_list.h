@@ -10,8 +10,8 @@ namespace Language
     public:
         DeclareListNode(ASTNode* caseexpr);
         QVariant Execute() override;
-        QString toString(uint level = 0) ;
         QString toRaw(uint level = 0) override;
+        void Accept(Visitor& v) override { v.VisitDeclarelist(this); }
     private:
 
     };

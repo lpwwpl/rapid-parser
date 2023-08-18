@@ -10,7 +10,7 @@ namespace Language
     public:
         BuildInNode(QString*, ASTNode*);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
+        void Accept(Visitor& v) override {}
     private:
         QString _name;
         ASTNode* _expression;

@@ -9,13 +9,13 @@ namespace Language
     {
     public:
         StringLiteralNode(QString * value);
-        StringLiteralNode(bool,QString* value);
-        QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
+        enum_v_type getType() override { return enum_v_type::string; }
+        QVariant Execute() override;
+        void Accept(Visitor& v) override { v.VisitStringLiteral(this); }
     public:
         QString _value;
-        bool bIsType;
+        //bool bIsType;
     };
 }
 

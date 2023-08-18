@@ -52,26 +52,4 @@ namespace Language
 
         return str;
     }
-    QString ElseIfNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-
-        if (!_expression)
-        {
-            str.append("ELSE");
-        }
-        else if (_expression)
-        {
-            str.append("ELSEIF");
-            str.append(_expression->toString());
-            str.append("THEN");
-        }
-        str.append(_body->toString());
-        str.append("ENDIF");
-        return str; 
-    }
 }

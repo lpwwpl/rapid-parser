@@ -13,7 +13,7 @@ namespace Language
 
     QVariant VelSetNode::Execute()
     {
-
+        signalRunInst();
         return QVariant();
         //return ASTNode::Execute();
     }
@@ -25,29 +25,12 @@ namespace Language
         {
             str.append(INTENT);
         }
-        str.append("VelSet ");
+        str.append("VelSet");
         //str.append(_name);
         str.append(" ");
         str.append(_expression1->toRaw());
         str.append(",");
         str.append(_expression2->toRaw());
-        str.append(";");
-        return str;
-    }
-
-    QString VelSetNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-        str.append("VelSet ");
-        //str.append(_name);
-        str.append(" ");
-        str.append(_expression1->toString());
-        str.append(",");
-        str.append(_expression2->toString());
         str.append(";");
         return str;
     }

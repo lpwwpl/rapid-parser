@@ -6,7 +6,7 @@ extern int lineNumber;
 extern int eState;
 namespace Language
 {
-    ToolDataNode::ToolDataNode(QString* name) : _name(*name)
+    ToolDataNode::ToolDataNode(QString* name) :ASTNode(), _name(*name)
     {
 
     }
@@ -22,17 +22,5 @@ namespace Language
     {
         QString str = "";
         return str;
-    }
-    QString ToolDataNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-
-
-
-        return "";
     }
 }

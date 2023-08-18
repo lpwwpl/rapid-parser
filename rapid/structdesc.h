@@ -8,14 +8,16 @@ namespace Language
     class RobotAbbExport StructDescNode: public ASTNode
     {
     public:
-        StructDescNode( QString * name, ListNode<ASTNode> * arguments);
-        QVariant Execute() override;
-        QString toString(uint level = 0) override;
+        StructDescNode(IdentifierNode* id, ListNode<ASTNode> * arguments);
         QString toRaw(uint level = 0) override;
+        QVariant Execute() override;
+        enum_v_type getType() override { return enum_v_type::klass; }
+        void Accept(Visitor& v) override { v.VisitStructDeclaration(this); }
         QString GetName() { return _name; }
         void compute() override;
     public:
         ListNode<ASTNode> * _arguments;
+        IdentifierNode* _id;
         QString _name;
     };
 }

@@ -56,9 +56,6 @@
     <ClCompile Include="parameternode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="paramnode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="printnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -87,9 +84,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="twait.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="type.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="switch_case_list.cpp">
@@ -182,9 +176,6 @@
     <ClCompile Include="pulsedo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="recordnode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="reltool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -215,13 +206,7 @@
     <ClCompile Include="structindexnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="variabledeclare.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="modifiernode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="simplecrypt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="arrayindex.cpp">
@@ -234,6 +219,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dimnumnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VisitorTypeCheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VisitorPyPrint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -253,9 +244,6 @@
     <ClInclude Include="casenode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="identifiernode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -272,9 +260,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="parameternode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="paramnode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="printnode.h">
@@ -311,9 +296,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="labelnode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="type.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="twait.h">
@@ -406,9 +388,6 @@
     <ClInclude Include="pulsedo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="recordnode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="reltool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -439,13 +418,7 @@
     <ClInclude Include="structindexnode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="variabledeclare.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="modifiernode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="simplecrypt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="arrayindex.h">
@@ -467,6 +440,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="location.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VisitorTypeCheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VisitorPyPrint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

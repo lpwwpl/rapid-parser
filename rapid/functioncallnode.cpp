@@ -7,14 +7,14 @@
 namespace Language
 {
     FunctionCallNode::FunctionCallNode(QString * name, ListNode<ASTNode> * expressionList)
-            :  ASTNode("FUNC_CALL"), _name(name),
+            :  ASTNode(), _name(name),
              _expressionList(expressionList)
     {
         auto function = SymbolTable::Instance().Function(name);
         if (!function) { return; }
         auto expectedArguments = function->Arguments();
 
-        _type = function->Type();
+        //_type = function->getRetType();
 
         if (expectedArguments->size() != expressionList->size())
         {
@@ -22,18 +22,18 @@ namespace Language
             exit(EXIT_FAILURE);
         }
 
-     /*   for (size_t i=0; i<expectedArguments->size(); i++)
+        for (size_t i=0; i<expectedArguments->size(); i++)
         {
-            int typeExpected = expectedArguments->at(i)->Type();
-            int typeActual = expressionList->at(i)->Type();
+            QString typeExpected = expectedArguments->at(i)->getTypeName();
+            QString typeActual = expressionList->at(i)->getTypeName();
             if (typeExpected != typeActual)
             {
-                std::cerr << TYPE_CONFLICT << SymbolTable::Instance().TypeName(typeActual).toStdString() << " to " << SymbolTable::Instance().TypeName(typeExpected).toStdString() << std::endl;
+                std::cerr << TYPE_CONFLICT << typeActual.toStdString() << " to " << typeExpected.toStdString() << std::endl;
                 std::cerr << "in function: " << name->toStdString() << std::endl;
                 std::cerr << "argument: " << i << std::endl;
                 exit(EXIT_FAILURE);
             }
-        }*/
+        }
 
 
     }
@@ -41,7 +41,6 @@ namespace Language
     QVariant FunctionCallNode::Execute()
     {
         /// ////////////////////////////////////////
-        std::cout << toString().toStdString();
 
         // TODO: Maybe wrong order
         for (auto expression: *_expressionList)
@@ -62,37 +61,26 @@ namespace Language
         for (size_t i = 0; i < _expressionList->size(); i++)
         {
             ASTNode* arg = _expressionList->at(i);
-            str.append(arg->toRaw());
-            str.append(",");
+            ListNode<ASTNode>* list_arg = dynamic_cast<ListNode<ASTNode>*>(arg);
+            if (list_arg)
+            {
+                for (auto item : *list_arg)
+                {
+                    str.append(item->toRaw());
+                }
+            }
+            else
+            {
+                str.append(arg->toRaw());
+                str.append(",");
+            }
+
         }
         if (str.endsWith(","))
         {
             str = str.mid(0, str.size() - 1);
         }
         str.append(");");
-        return str;
-    }
-    QString FunctionCallNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-        //str.append("self.");
-        str.append(_name);
-        str.append(" ");
-        for (size_t i = 0; i < _expressionList->size(); i++)
-        {
-            ASTNode* arg = _expressionList->at(i);
-            str.append(arg->toString());
-            str.append(",");
-        }
-        if (str.endsWith(","))
-        {
-            str = str.mid(0, str.size() - 1);
-        }
-        str.append(";");
         return str;
     }
 }

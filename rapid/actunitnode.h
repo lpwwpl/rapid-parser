@@ -11,14 +11,14 @@ namespace Language
     public:
         ActUnitNode(/*QString * name,*/ ListNode<ASTNode>* expression);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
+        void Accept(Visitor& v) override { v.VisitActUnit(this); }
         QString toRaw(uint level = 0) override;
         ListNode<ASTNode>* Arguments() const
         {
             return _arguments;
         }
         ListNode<ASTNode>* GetArguments() { return _arguments; }
-    private:
+    public:
          //QString _name;
          ListNode<ASTNode>* _arguments;
     };

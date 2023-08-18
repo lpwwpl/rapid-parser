@@ -24,10 +24,4 @@ namespace Language
         str.append(_body->toRaw(level));
         return str;
     }
-    QString CaseNode::toString(uint level)
-    {
-        QString str = "";
-        str.append(_body->toString(level));
-        return str;
-    }
 }

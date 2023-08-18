@@ -10,9 +10,9 @@ namespace Language
     public:
         IfNode(ASTNode * expression, ASTNode * bodyTrue, ASTNode * bodyFalse = nullptr);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
-    private:
+        void Accept(Visitor& v) override { v.VisitIf(this); }
+    public:
             ASTNode * _bodyTrue;
             ASTNode * _bodyFalse;
             ASTNode * _expression;

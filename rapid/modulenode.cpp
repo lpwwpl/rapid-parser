@@ -49,18 +49,4 @@ namespace Language
         str += "\n";
         return str;
     }
-    QString ModuleNode::toString(uint level)
-    {
-
-        QString str = "";
-        for (auto statement : *_body)
-        {
-
-            if (!statement)continue;
-            //statement->Execute();
-            str.append(statement->toString(level+1));
-        }
-        return str;
-       
-    }
 }

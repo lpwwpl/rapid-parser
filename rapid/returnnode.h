@@ -9,11 +9,12 @@ namespace Language
     {
     public:
         ReturnNode(ASTNode * expression);
-        QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
-    private:
+        QVariant Execute() override;
+        void Accept(Visitor& v) override { v.VisitReturn(this); }
+    public:
             ASTNode * _expression;
+            Language::location _location;
     };
 }
 

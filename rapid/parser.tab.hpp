@@ -72,7 +72,6 @@
       class WobjDataNode;
       class ToolDataNode;
       class ArrayDataNode;
-      class ParamNode;
       class ArcLStartNode;
       class DeclareNode;
       class ArcLNode;
@@ -99,21 +98,19 @@
       class SetNode;
       class SetDONode;
       class ReSetNode;
-      class RecordNode;
       class PulseDONode;
       class RelToolNode;
       class StructIndexNode;
       class AccessNode;
       class ModifierNode;
-      class VariableDeclareNode;
       class DimNumsNode;
-      enum enum_v_type;
-      enum enum_v_scope;
+      class IdentifierNode;
+      class ParamWithModifierNode;
       template <class T> class ListNode;
    }
    class QString;
 
-#line 117 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.hpp"
+#line 114 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.hpp"
 
 
 # include <cstdlib> // std::abort
@@ -257,7 +254,7 @@
 
 #line 15 "parser.y"
 namespace Language {
-#line 261 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.hpp"
+#line 258 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.hpp"
 
 
 
@@ -275,7 +272,7 @@ namespace Language {
     /// Symbol semantic values.
     union value_type
     {
-#line 126 "parser.y"
+#line 123 "parser.y"
 
    QString *sval;
    double dval;
@@ -286,18 +283,19 @@ namespace Language {
    VariableNode* variableNode;
    ListNode<ASTNode> * listNode;
    ListNode<ParameterNode> * parameterListNode;
-   ListNode<ParamNode>* paramListNode;
    ListNode<ElseIfNode>* elseifListNode;
    ListNode<ModuleNode>* moduleListNode;
    ModuleNode* moduleNode;
    StatementListNode * statementListNode;
 
    ElseIfNode* elseif_stmNode;
-
+   IdentifierNode* idenNode;
    DimNumsNode*     dim_num_stmNode;
+
+   ParamWithModifierNode* paramWithModifi;
  
 
-#line 301 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.hpp"
+#line 299 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.hpp"
 
     };
 #endif
@@ -334,134 +332,132 @@ namespace Language {
     END = 0,                       // "end of file"
     D_YYerror = 256,               // error
     D_YYUNDEF = 257,               // "invalid token"
-    MINUS = 258,                   // MINUS
-    DIVIDE = 259,                  // DIVIDE
-    ELSE = 260,                    // ELSE
-    PREFIX = 261,                  // PREFIX
-    GE = 262,                      // GE
-    LE = 263,                      // LE
-    EQ = 264,                      // EQ
-    NE = 265,                      // NE
-    IF = 266,                      // IF
-    ADD = 267,                     // ADD
-    SUB = 268,                     // SUB
-    MUL = 269,                     // MUL
-    LT = 270,                      // LT
-    GT = 271,                      // GT
-    RETURN = 272,                  // RETURN
-    NumberType = 273,              // NumberType
-    TextType = 274,                // TextType
-    VoidType = 275,                // VoidType
-    SPACE = 276,                   // SPACE
-    THEN = 277,                    // THEN
-    JIN = 278,                     // JIN
-    DOLAR = 279,                   // DOLAR
-    RAPID_NAN = 280,               // RAPID_NAN
-    SEAMDATA = 281,                // SEAMDATA
-    WELDDATA = 282,                // WELDDATA
-    INPOS = 283,                   // INPOS
-    CONC = 284,                    // CONC
-    ENDFUNC = 285,                 // ENDFUNC
-    UMINUS = 286,                  // UMINUS
-    ACCSET = 287,                  // ACCSET
-    VELSET = 288,                  // VELSET
-    SETDO = 289,                   // SETDO
-    WAITDI = 290,                  // WAITDI
-    OFFS = 291,                    // OFFS
-    FUNC = 292,                    // FUNC
-    INOUT = 293,                   // INOUT
-    RELTOOl = 294,                 // RELTOOl
-    RECORD = 295,                  // RECORD
-    ENDRECORD = 296,               // ENDRECORD
-    PULSEDO = 297,                 // PULSEDO
-    WAITTIME_INPOS = 298,          // WAITTIME_INPOS
-    WOBJ_P = 299,                  // WOBJ_P
-    SEAM_NAME = 300,               // SEAM_NAME
-    ZONE_P = 301,                  // ZONE_P
-    VEL_P = 302,                   // VEL_P
-    TCP_P = 303,                   // TCP_P
-    NOEOFFS = 304,                 // NOEOFFS
-    PLEN = 305,                    // PLEN
-    DOT = 306,                     // DOT
-    MAXTIME = 307,                 // MAXTIME
-    TIMEFLAG = 308,                // TIMEFLAG
-    TOOL_P = 309,                  // TOOL_P
-    ID_P = 310,                    // ID_P
-    ASS = 311,                     // ASS
-    LR = 312,                      // LR
-    RR = 313,                      // RR
-    COMMA = 314,                   // COMMA
-    LC = 315,                      // LC
-    RC = 316,                      // RC
-    LESS = 317,                    // LESS
-    GREATER = 318,                 // GREATER
-    COLON = 319,                   // COLON
-    FNULL = 320,                   // FNULL
-    DEVCOLON = 321,                // DEVCOLON
-    NOT = 322,                     // NOT
-    UNINDENT = 323,                // UNINDENT
-    INDENT = 324,                  // INDENT
-    FTRUE = 325,                   // FTRUE
-    FFALSE = 326,                  // FFALSE
-    FOR = 327,                     // FOR
-    ENDFOR = 328,                  // ENDFOR
-    TO = 329,                      // TO
-    FROM = 330,                    // FROM
-    SEMICOLON = 331,               // SEMICOLON
-    SPLASH = 332,                  // SPLASH
-    LBRACE = 333,                  // LBRACE
-    RBRACE = 334,                  // RBRACE
-    LMOVE = 335,                   // LMOVE
-    VAR = 336,                     // VAR
-    DO = 337,                      // DO
-    WHILE = 338,                   // WHILE
-    ENDWHILE = 339,                // ENDWHILE
-    TEST = 340,                    // TEST
-    ENDTEST = 341,                 // ENDTEST
-    RETRY = 342,                   // RETRY
-    CASE = 343,                    // CASE
-    DEFAULT = 344,                 // DEFAULT
-    JOINTTARGET = 345,             // JOINTTARGET
-    ROBTARGET = 346,               // ROBTARGET
-    STRING = 347,                  // STRING
-    NUM = 348,                     // NUM
-    BOOL = 349,                    // BOOL
-    WOBJDATA = 350,                // WOBJDATA
-    ZONEDATA = 351,                // ZONEDATA
-    SPEEDDATA = 352,               // SPEEDDATA
-    TOOLDATA = 353,                // TOOLDATA
-    PERS = 354,                    // PERS
-    CONST_L = 355,                 // CONST_L
-    ACTUNIT = 356,                 // ACTUNIT
-    MOVEABSJ = 357,                // MOVEABSJ
-    ARCLSTART = 358,               // ARCLSTART
-    ARCL = 359,                    // ARCL
-    ARCC = 360,                    // ARCC
-    ARCEND = 361,                  // ARCEND
-    MOVEL = 362,                   // MOVEL
-    MOVEJ = 363,                   // MOVEJ
-    ENDMODULE = 364,               // ENDMODULE
-    ENDPROC = 365,                 // ENDPROC
-    MODULE = 366,                  // MODULE
-    PROC = 367,                    // PROC
-    AND = 368,                     // AND
-    OR = 369,                      // OR
-    MOD = 370,                     // MOD
-    DEACTUNIT = 371,               // DEACTUNIT
-    ELSEIF = 372,                  // ELSEIF
-    WAITTIME = 373,                // WAITTIME
-    WAITUNTIL = 374,               // WAITUNTIL
-    SET = 375,                     // SET
-    RESET = 376,                   // RESET
-    STEP = 377,                    // STEP
-    ARCCEND = 378,                 // ARCCEND
-    ENDIF = 379,                   // ENDIF
-    TPWRITE = 380,                 // TPWRITE
-    TASK = 381,                    // TASK
-    Number = 382,                  // Number
-    LNumber = 383,                 // LNumber
-    Identifier = 384,              // Identifier
-    String = 385                   // String
+    DIVIDE = 258,                  // DIVIDE
+    ELSE = 259,                    // ELSE
+    PREFIX = 260,                  // PREFIX
+    GE = 261,                      // GE
+    LE = 262,                      // LE
+    EQ = 263,                      // EQ
+    NE = 264,                      // NE
+    IF = 265,                      // IF
+    ADD = 266,                     // ADD
+    SUB = 267,                     // SUB
+    MUL = 268,                     // MUL
+    LT = 269,                      // LT
+    GT = 270,                      // GT
+    RETURN = 271,                  // RETURN
+    NumberType = 272,              // NumberType
+    TextType = 273,                // TextType
+    VoidType = 274,                // VoidType
+    SPACE = 275,                   // SPACE
+    THEN = 276,                    // THEN
+    JIN = 277,                     // JIN
+    DOLAR = 278,                   // DOLAR
+    RAPID_NAN = 279,               // RAPID_NAN
+    SEAMDATA = 280,                // SEAMDATA
+    WELDDATA = 281,                // WELDDATA
+    INPOS = 282,                   // INPOS
+    CONC = 283,                    // CONC
+    ENDFUNC = 284,                 // ENDFUNC
+    UMINUS = 285,                  // UMINUS
+    ACCSET = 286,                  // ACCSET
+    VELSET = 287,                  // VELSET
+    SETDO = 288,                   // SETDO
+    WAITDI = 289,                  // WAITDI
+    OFFS = 290,                    // OFFS
+    FUNC = 291,                    // FUNC
+    INOUT = 292,                   // INOUT
+    RELTOOl = 293,                 // RELTOOl
+    RECORD = 294,                  // RECORD
+    ENDRECORD = 295,               // ENDRECORD
+    PULSEDO = 296,                 // PULSEDO
+    WAITTIME_INPOS = 297,          // WAITTIME_INPOS
+    WOBJ_P = 298,                  // WOBJ_P
+    SEAM_NAME = 299,               // SEAM_NAME
+    ZONE_P = 300,                  // ZONE_P
+    VEL_P = 301,                   // VEL_P
+    TCP_P = 302,                   // TCP_P
+    NOEOFFS = 303,                 // NOEOFFS
+    PLEN = 304,                    // PLEN
+    DOT = 305,                     // DOT
+    MAXTIME = 306,                 // MAXTIME
+    TIMEFLAG = 307,                // TIMEFLAG
+    TOOL_P = 308,                  // TOOL_P
+    ID_P = 309,                    // ID_P
+    ASS = 310,                     // ASS
+    LR = 311,                      // LR
+    RR = 312,                      // RR
+    COMMA = 313,                   // COMMA
+    LC = 314,                      // LC
+    RC = 315,                      // RC
+    LESS = 316,                    // LESS
+    GREATER = 317,                 // GREATER
+    COLON = 318,                   // COLON
+    FNULL = 319,                   // FNULL
+    DEVCOLON = 320,                // DEVCOLON
+    NOT = 321,                     // NOT
+    UNINDENT = 322,                // UNINDENT
+    INDENT = 323,                  // INDENT
+    FTRUE = 324,                   // FTRUE
+    FFALSE = 325,                  // FFALSE
+    FOR = 326,                     // FOR
+    ENDFOR = 327,                  // ENDFOR
+    TO = 328,                      // TO
+    FROM = 329,                    // FROM
+    SEMICOLON = 330,               // SEMICOLON
+    LBRACE = 331,                  // LBRACE
+    RBRACE = 332,                  // RBRACE
+    LMOVE = 333,                   // LMOVE
+    VAR = 334,                     // VAR
+    DO = 335,                      // DO
+    WHILE = 336,                   // WHILE
+    ENDWHILE = 337,                // ENDWHILE
+    TEST = 338,                    // TEST
+    ENDTEST = 339,                 // ENDTEST
+    RETRY = 340,                   // RETRY
+    CASE = 341,                    // CASE
+    DEFAULT = 342,                 // DEFAULT
+    JOINTTARGET = 343,             // JOINTTARGET
+    ROBTARGET = 344,               // ROBTARGET
+    STRING = 345,                  // STRING
+    NUM = 346,                     // NUM
+    BOOL = 347,                    // BOOL
+    WOBJDATA = 348,                // WOBJDATA
+    ZONEDATA = 349,                // ZONEDATA
+    SPEEDDATA = 350,               // SPEEDDATA
+    TOOLDATA = 351,                // TOOLDATA
+    PERS = 352,                    // PERS
+    CONST_L = 353,                 // CONST_L
+    ACTUNIT = 354,                 // ACTUNIT
+    MOVEABSJ = 355,                // MOVEABSJ
+    ARCLSTART = 356,               // ARCLSTART
+    ARCL = 357,                    // ARCL
+    ARCC = 358,                    // ARCC
+    ARCEND = 359,                  // ARCEND
+    MOVEL = 360,                   // MOVEL
+    MOVEJ = 361,                   // MOVEJ
+    ENDMODULE = 362,               // ENDMODULE
+    ENDPROC = 363,                 // ENDPROC
+    MODULE = 364,                  // MODULE
+    PROC = 365,                    // PROC
+    AND = 366,                     // AND
+    OR = 367,                      // OR
+    MOD = 368,                     // MOD
+    DEACTUNIT = 369,               // DEACTUNIT
+    ELSEIF = 370,                  // ELSEIF
+    WAITTIME = 371,                // WAITTIME
+    WAITUNTIL = 372,               // WAITUNTIL
+    SET = 373,                     // SET
+    RESET = 374,                   // RESET
+    STEP = 375,                    // STEP
+    ARCCEND = 376,                 // ARCCEND
+    ENDIF = 377,                   // ENDIF
+    TPWRITE = 378,                 // TPWRITE
+    TASK = 379,                    // TASK
+    Number = 380,                  // Number
+    LNumber = 381,                 // LNumber
+    Identifier = 382,              // Identifier
+    String = 383                   // String
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -478,183 +474,183 @@ namespace Language {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 131, ///< Number of tokens.
+        YYNTOKENS = 129, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
         S_YYUNDEF = 2,                           // "invalid token"
-        S_MINUS = 3,                             // MINUS
-        S_DIVIDE = 4,                            // DIVIDE
-        S_ELSE = 5,                              // ELSE
-        S_PREFIX = 6,                            // PREFIX
-        S_GE = 7,                                // GE
-        S_LE = 8,                                // LE
-        S_EQ = 9,                                // EQ
-        S_NE = 10,                               // NE
-        S_IF = 11,                               // IF
-        S_ADD = 12,                              // ADD
-        S_SUB = 13,                              // SUB
-        S_MUL = 14,                              // MUL
-        S_LT = 15,                               // LT
-        S_GT = 16,                               // GT
-        S_RETURN = 17,                           // RETURN
-        S_NumberType = 18,                       // NumberType
-        S_TextType = 19,                         // TextType
-        S_VoidType = 20,                         // VoidType
-        S_SPACE = 21,                            // SPACE
-        S_THEN = 22,                             // THEN
-        S_JIN = 23,                              // JIN
-        S_DOLAR = 24,                            // DOLAR
-        S_RAPID_NAN = 25,                        // RAPID_NAN
-        S_SEAMDATA = 26,                         // SEAMDATA
-        S_WELDDATA = 27,                         // WELDDATA
-        S_INPOS = 28,                            // INPOS
-        S_CONC = 29,                             // CONC
-        S_ENDFUNC = 30,                          // ENDFUNC
-        S_UMINUS = 31,                           // UMINUS
-        S_ACCSET = 32,                           // ACCSET
-        S_VELSET = 33,                           // VELSET
-        S_SETDO = 34,                            // SETDO
-        S_WAITDI = 35,                           // WAITDI
-        S_OFFS = 36,                             // OFFS
-        S_FUNC = 37,                             // FUNC
-        S_INOUT = 38,                            // INOUT
-        S_RELTOOl = 39,                          // RELTOOl
-        S_RECORD = 40,                           // RECORD
-        S_ENDRECORD = 41,                        // ENDRECORD
-        S_PULSEDO = 42,                          // PULSEDO
-        S_WAITTIME_INPOS = 43,                   // WAITTIME_INPOS
-        S_WOBJ_P = 44,                           // WOBJ_P
-        S_SEAM_NAME = 45,                        // SEAM_NAME
-        S_ZONE_P = 46,                           // ZONE_P
-        S_VEL_P = 47,                            // VEL_P
-        S_TCP_P = 48,                            // TCP_P
-        S_NOEOFFS = 49,                          // NOEOFFS
-        S_PLEN = 50,                             // PLEN
-        S_DOT = 51,                              // DOT
-        S_MAXTIME = 52,                          // MAXTIME
-        S_TIMEFLAG = 53,                         // TIMEFLAG
-        S_TOOL_P = 54,                           // TOOL_P
-        S_ID_P = 55,                             // ID_P
-        S_ASS = 56,                              // ASS
-        S_LR = 57,                               // LR
-        S_RR = 58,                               // RR
-        S_COMMA = 59,                            // COMMA
-        S_LC = 60,                               // LC
-        S_RC = 61,                               // RC
-        S_LESS = 62,                             // LESS
-        S_GREATER = 63,                          // GREATER
-        S_COLON = 64,                            // COLON
-        S_FNULL = 65,                            // FNULL
-        S_DEVCOLON = 66,                         // DEVCOLON
-        S_NOT = 67,                              // NOT
-        S_UNINDENT = 68,                         // UNINDENT
-        S_INDENT = 69,                           // INDENT
-        S_FTRUE = 70,                            // FTRUE
-        S_FFALSE = 71,                           // FFALSE
-        S_FOR = 72,                              // FOR
-        S_ENDFOR = 73,                           // ENDFOR
-        S_TO = 74,                               // TO
-        S_FROM = 75,                             // FROM
-        S_SEMICOLON = 76,                        // SEMICOLON
-        S_SPLASH = 77,                           // SPLASH
-        S_LBRACE = 78,                           // LBRACE
-        S_RBRACE = 79,                           // RBRACE
-        S_LMOVE = 80,                            // LMOVE
-        S_VAR = 81,                              // VAR
-        S_DO = 82,                               // DO
-        S_WHILE = 83,                            // WHILE
-        S_ENDWHILE = 84,                         // ENDWHILE
-        S_TEST = 85,                             // TEST
-        S_ENDTEST = 86,                          // ENDTEST
-        S_RETRY = 87,                            // RETRY
-        S_CASE = 88,                             // CASE
-        S_DEFAULT = 89,                          // DEFAULT
-        S_JOINTTARGET = 90,                      // JOINTTARGET
-        S_ROBTARGET = 91,                        // ROBTARGET
-        S_STRING = 92,                           // STRING
-        S_NUM = 93,                              // NUM
-        S_BOOL = 94,                             // BOOL
-        S_WOBJDATA = 95,                         // WOBJDATA
-        S_ZONEDATA = 96,                         // ZONEDATA
-        S_SPEEDDATA = 97,                        // SPEEDDATA
-        S_TOOLDATA = 98,                         // TOOLDATA
-        S_PERS = 99,                             // PERS
-        S_CONST_L = 100,                         // CONST_L
-        S_ACTUNIT = 101,                         // ACTUNIT
-        S_MOVEABSJ = 102,                        // MOVEABSJ
-        S_ARCLSTART = 103,                       // ARCLSTART
-        S_ARCL = 104,                            // ARCL
-        S_ARCC = 105,                            // ARCC
-        S_ARCEND = 106,                          // ARCEND
-        S_MOVEL = 107,                           // MOVEL
-        S_MOVEJ = 108,                           // MOVEJ
-        S_ENDMODULE = 109,                       // ENDMODULE
-        S_ENDPROC = 110,                         // ENDPROC
-        S_MODULE = 111,                          // MODULE
-        S_PROC = 112,                            // PROC
-        S_AND = 113,                             // AND
-        S_OR = 114,                              // OR
-        S_MOD = 115,                             // MOD
-        S_DEACTUNIT = 116,                       // DEACTUNIT
-        S_ELSEIF = 117,                          // ELSEIF
-        S_WAITTIME = 118,                        // WAITTIME
-        S_WAITUNTIL = 119,                       // WAITUNTIL
-        S_SET = 120,                             // SET
-        S_RESET = 121,                           // RESET
-        S_STEP = 122,                            // STEP
-        S_ARCCEND = 123,                         // ARCCEND
-        S_ENDIF = 124,                           // ENDIF
-        S_TPWRITE = 125,                         // TPWRITE
-        S_TASK = 126,                            // TASK
-        S_Number = 127,                          // Number
-        S_LNumber = 128,                         // LNumber
-        S_Identifier = 129,                      // Identifier
-        S_String = 130,                          // String
-        S_YYACCEPT = 131,                        // $accept
-        S_program = 132,                         // program
-        S_module_list = 133,                     // module_list
-        S_module = 134,                          // module
-        S_declaration_list = 135,                // declaration_list
-        S_declaration = 136,                     // declaration
-        S_Type = 137,                            // Type
-        S_Record_declare = 138,                  // Record_declare
-        S_struct_members = 139,                  // struct_members
-        S_var_decl = 140,                        // var_decl
-        S_scope_pers = 141,                      // scope_pers
-        S_scope1 = 142,                          // scope1
-        S_scope2 = 143,                          // scope2
-        S_function_declaration = 144,            // function_declaration
-        S_parameter_declaration_list = 145,      // parameter_declaration_list
-        S_parameter_declaration = 146,           // parameter_declaration
-        S_func_call_parameter_list = 147,        // func_call_parameter_list
-        S_function_body = 148,                   // function_body
-        S_statement_list = 149,                  // statement_list
-        S_function_call = 150,                   // function_call
-        S_inst_modifer = 151,                    // inst_modifer
-        S_statement = 152,                       // statement
-        S_return = 153,                          // return
-        S_while_loop = 154,                      // while_loop
-        S_switch = 155,                          // switch
-        S_switch_case_list = 156,                // switch_case_list
-        S_switch_case_define = 157,              // switch_case_define
-        S_for = 158,                             // for
-        S_if = 159,                              // if
-        S_elseif_statment_list = 160,            // elseif_statment_list
-        S_elseif_statment = 161,                 // elseif_statment
-        S_variable_declaration = 162,            // variable_declaration
-        S_variable_for_body = 163,               // variable_for_body
-        S_var_expression = 164,                  // var_expression
-        S_var_assignment = 165,                  // var_assignment
-        S_assignment = 166,                      // assignment
-        S_dim_num_stm = 167,                     // dim_num_stm
-        S_struct_index = 168,                    // struct_index
-        S_array_index = 169,                     // array_index
-        S_offs_expr = 170,                       // offs_expr
-        S_reltool_expr = 171,                    // reltool_expr
-        S_op_expr = 172,                         // op_expr
-        S_inst_expr = 173,                       // inst_expr
-        S_expression = 174                       // expression
+        S_DIVIDE = 3,                            // DIVIDE
+        S_ELSE = 4,                              // ELSE
+        S_PREFIX = 5,                            // PREFIX
+        S_GE = 6,                                // GE
+        S_LE = 7,                                // LE
+        S_EQ = 8,                                // EQ
+        S_NE = 9,                                // NE
+        S_IF = 10,                               // IF
+        S_ADD = 11,                              // ADD
+        S_SUB = 12,                              // SUB
+        S_MUL = 13,                              // MUL
+        S_LT = 14,                               // LT
+        S_GT = 15,                               // GT
+        S_RETURN = 16,                           // RETURN
+        S_NumberType = 17,                       // NumberType
+        S_TextType = 18,                         // TextType
+        S_VoidType = 19,                         // VoidType
+        S_SPACE = 20,                            // SPACE
+        S_THEN = 21,                             // THEN
+        S_JIN = 22,                              // JIN
+        S_DOLAR = 23,                            // DOLAR
+        S_RAPID_NAN = 24,                        // RAPID_NAN
+        S_SEAMDATA = 25,                         // SEAMDATA
+        S_WELDDATA = 26,                         // WELDDATA
+        S_INPOS = 27,                            // INPOS
+        S_CONC = 28,                             // CONC
+        S_ENDFUNC = 29,                          // ENDFUNC
+        S_UMINUS = 30,                           // UMINUS
+        S_ACCSET = 31,                           // ACCSET
+        S_VELSET = 32,                           // VELSET
+        S_SETDO = 33,                            // SETDO
+        S_WAITDI = 34,                           // WAITDI
+        S_OFFS = 35,                             // OFFS
+        S_FUNC = 36,                             // FUNC
+        S_INOUT = 37,                            // INOUT
+        S_RELTOOl = 38,                          // RELTOOl
+        S_RECORD = 39,                           // RECORD
+        S_ENDRECORD = 40,                        // ENDRECORD
+        S_PULSEDO = 41,                          // PULSEDO
+        S_WAITTIME_INPOS = 42,                   // WAITTIME_INPOS
+        S_WOBJ_P = 43,                           // WOBJ_P
+        S_SEAM_NAME = 44,                        // SEAM_NAME
+        S_ZONE_P = 45,                           // ZONE_P
+        S_VEL_P = 46,                            // VEL_P
+        S_TCP_P = 47,                            // TCP_P
+        S_NOEOFFS = 48,                          // NOEOFFS
+        S_PLEN = 49,                             // PLEN
+        S_DOT = 50,                              // DOT
+        S_MAXTIME = 51,                          // MAXTIME
+        S_TIMEFLAG = 52,                         // TIMEFLAG
+        S_TOOL_P = 53,                           // TOOL_P
+        S_ID_P = 54,                             // ID_P
+        S_ASS = 55,                              // ASS
+        S_LR = 56,                               // LR
+        S_RR = 57,                               // RR
+        S_COMMA = 58,                            // COMMA
+        S_LC = 59,                               // LC
+        S_RC = 60,                               // RC
+        S_LESS = 61,                             // LESS
+        S_GREATER = 62,                          // GREATER
+        S_COLON = 63,                            // COLON
+        S_FNULL = 64,                            // FNULL
+        S_DEVCOLON = 65,                         // DEVCOLON
+        S_NOT = 66,                              // NOT
+        S_UNINDENT = 67,                         // UNINDENT
+        S_INDENT = 68,                           // INDENT
+        S_FTRUE = 69,                            // FTRUE
+        S_FFALSE = 70,                           // FFALSE
+        S_FOR = 71,                              // FOR
+        S_ENDFOR = 72,                           // ENDFOR
+        S_TO = 73,                               // TO
+        S_FROM = 74,                             // FROM
+        S_SEMICOLON = 75,                        // SEMICOLON
+        S_LBRACE = 76,                           // LBRACE
+        S_RBRACE = 77,                           // RBRACE
+        S_LMOVE = 78,                            // LMOVE
+        S_VAR = 79,                              // VAR
+        S_DO = 80,                               // DO
+        S_WHILE = 81,                            // WHILE
+        S_ENDWHILE = 82,                         // ENDWHILE
+        S_TEST = 83,                             // TEST
+        S_ENDTEST = 84,                          // ENDTEST
+        S_RETRY = 85,                            // RETRY
+        S_CASE = 86,                             // CASE
+        S_DEFAULT = 87,                          // DEFAULT
+        S_JOINTTARGET = 88,                      // JOINTTARGET
+        S_ROBTARGET = 89,                        // ROBTARGET
+        S_STRING = 90,                           // STRING
+        S_NUM = 91,                              // NUM
+        S_BOOL = 92,                             // BOOL
+        S_WOBJDATA = 93,                         // WOBJDATA
+        S_ZONEDATA = 94,                         // ZONEDATA
+        S_SPEEDDATA = 95,                        // SPEEDDATA
+        S_TOOLDATA = 96,                         // TOOLDATA
+        S_PERS = 97,                             // PERS
+        S_CONST_L = 98,                          // CONST_L
+        S_ACTUNIT = 99,                          // ACTUNIT
+        S_MOVEABSJ = 100,                        // MOVEABSJ
+        S_ARCLSTART = 101,                       // ARCLSTART
+        S_ARCL = 102,                            // ARCL
+        S_ARCC = 103,                            // ARCC
+        S_ARCEND = 104,                          // ARCEND
+        S_MOVEL = 105,                           // MOVEL
+        S_MOVEJ = 106,                           // MOVEJ
+        S_ENDMODULE = 107,                       // ENDMODULE
+        S_ENDPROC = 108,                         // ENDPROC
+        S_MODULE = 109,                          // MODULE
+        S_PROC = 110,                            // PROC
+        S_AND = 111,                             // AND
+        S_OR = 112,                              // OR
+        S_MOD = 113,                             // MOD
+        S_DEACTUNIT = 114,                       // DEACTUNIT
+        S_ELSEIF = 115,                          // ELSEIF
+        S_WAITTIME = 116,                        // WAITTIME
+        S_WAITUNTIL = 117,                       // WAITUNTIL
+        S_SET = 118,                             // SET
+        S_RESET = 119,                           // RESET
+        S_STEP = 120,                            // STEP
+        S_ARCCEND = 121,                         // ARCCEND
+        S_ENDIF = 122,                           // ENDIF
+        S_TPWRITE = 123,                         // TPWRITE
+        S_TASK = 124,                            // TASK
+        S_Number = 125,                          // Number
+        S_LNumber = 126,                         // LNumber
+        S_Identifier = 127,                      // Identifier
+        S_String = 128,                          // String
+        S_YYACCEPT = 129,                        // $accept
+        S_program = 130,                         // program
+        S_module_list = 131,                     // module_list
+        S_module = 132,                          // module
+        S_declaration_list = 133,                // declaration_list
+        S_declaration = 134,                     // declaration
+        S_Type = 135,                            // Type
+        S_Record_declare = 136,                  // Record_declare
+        S_struct_members = 137,                  // struct_members
+        S_var_decl = 138,                        // var_decl
+        S_scope_pers = 139,                      // scope_pers
+        S_scope1 = 140,                          // scope1
+        S_scope2 = 141,                          // scope2
+        S_function_declaration = 142,            // function_declaration
+        S_parameter_declaration_list = 143,      // parameter_declaration_list
+        S_parameter_declaration = 144,           // parameter_declaration
+        S_func_call_parameter_list = 145,        // func_call_parameter_list
+        S_function_body = 146,                   // function_body
+        S_statement_list = 147,                  // statement_list
+        S_function_call = 148,                   // function_call
+        S_inst_modifer = 149,                    // inst_modifer
+        S_statement = 150,                       // statement
+        S_return = 151,                          // return
+        S_while_loop = 152,                      // while_loop
+        S_switch = 153,                          // switch
+        S_switch_case_list = 154,                // switch_case_list
+        S_switch_case_define = 155,              // switch_case_define
+        S_for = 156,                             // for
+        S_if = 157,                              // if
+        S_elseif_statment_list = 158,            // elseif_statment_list
+        S_elseif_statment = 159,                 // elseif_statment
+        S_variable_declaration = 160,            // variable_declaration
+        S_variable_for_body = 161,               // variable_for_body
+        S_var_expression = 162,                  // var_expression
+        S_var_assignment = 163,                  // var_assignment
+        S_assignment = 164,                      // assignment
+        S_dim_num_stm = 165,                     // dim_num_stm
+        S_struct_index = 166,                    // struct_index
+        S_array_index = 167,                     // array_index
+        S_offs_expr = 168,                       // offs_expr
+        S_reltool_expr = 169,                    // reltool_expr
+        S_op_expr = 170,                         // op_expr
+        S_inst_expr = 171,                       // inst_expr
+        S_inst_expr_list = 172,                  // inst_expr_list
+        S_expression = 173,                      // expression
+        S_paramWithMod_stm = 174                 // paramWithMod_stm
       };
     };
 
@@ -1166,8 +1162,8 @@ namespace Language {
     /// Constants.
     enum
     {
-      yylast_ = 1361,     ///< Last index in yytable_.
-      yynnts_ = 44,  ///< Number of nonterminal symbols.
+      yylast_ = 1316,     ///< Last index in yytable_.
+      yynnts_ = 46,  ///< Number of nonterminal symbols.
       yyfinal_ = 6 ///< Termination state number.
     };
 
@@ -1180,7 +1176,7 @@ namespace Language {
 
 #line 15 "parser.y"
 } // Language
-#line 1184 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.hpp"
+#line 1180 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.hpp"
 
 
 

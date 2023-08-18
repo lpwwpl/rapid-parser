@@ -13,7 +13,7 @@ namespace Language
 
     QVariant SetDoNode::Execute()
     {
-
+        signalRunInst();
         return QVariant();
         //return ASTNode::Execute();
     }
@@ -27,22 +27,7 @@ namespace Language
         }
         str.append("SetDo ");
         str.append(_name->toRaw());
-        str.append(" ");
-        str.append(_expression->toRaw());
-        str.append(";");
-        return str;
-    }
-
-    QString SetDoNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-        str.append("SetDo ");
-        str.append(_name->toString());
-        str.append(" ");
+        str.append(",");
         str.append(_expression->toRaw());
         str.append(";");
         return str;

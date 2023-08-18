@@ -15,9 +15,9 @@ namespace Language
     {
     public:
         ToolDataNode(QString* name);
-        QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
+        QVariant Execute() override;
+        void Accept(Visitor& v) override {}
     public:
         QString _name;
         bool bTool;

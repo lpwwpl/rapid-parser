@@ -20,8 +20,4 @@ namespace Language
     {
         return "NULL";
     }
-    QString NullNode::toString(uint level)
-    {
-        return "None";
-    }
 }

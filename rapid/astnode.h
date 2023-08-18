@@ -2,70 +2,32 @@
 #define ASTNODE_H
 
 #include <QVariant>
-#include "IAction.h"
+#include <sstream>
+#include <iostream>
+#include <vector>
+#include <string>
 
 #include "PreCompiled.h"
 #include <boost/signals2.hpp>
+#include "Visitor.h"
 #include "parser.tab.hpp"
+#include "variablerecord.h"
+
 typedef Language::Parser::token token;
 #define SPACE " "
 #define INTENT "    "
 
-enum enum_v_type
-{
-    NUM = 1,
-    eBOOL = 2,
-    eSTRING = 3,
-    ROBTARGET = 4,
-    JOINTTARGET = 5,
-    WOBJDATA = 6,
-    ZONEDATA = 7,
-    SPEEDDATA = 8,
-    TOOLDATA = 9,
-    SEAMDATA = 10,
-    WELDDATA = 11,
-    MOVEL,
-    MOVEJ,
-    ARCL,
-    ARCLSTART,
-    ARCEND,
-    ARCC,
-    ACTUNIT,
-    CASE,
-    DEACTUNIT,
-    ELSEIF,
-    FOR,
-    FUNC,
-    FUNC_CALL,
-    GOTO,
-    IDENTIFIER,
-    LABEL,
-    IF,
-    MOVEABSJ,
-    RETURN,
-    SPEED,
-    SWITCH,
-    SWITCH_CASE_LIST,
-    WHILE,
-    PARAM,
-    ARRAYDATA,
-    CONC,
-     TOOL_P,
-     PLEN,
-     MAXTIME,
-     INPOS,
-     TIMEFLAG,
-     WOBJ_P,
-     SEAM_NAME,
-     ZONE_P,
-     VEL_P,
-     TCP_P,
-     NOEOFFS,
-     ID_P,
-};
 
 namespace Language
 {
+
+ 
+    struct SAstNodeType
+    {
+        char command[64];
+        enum_v_type eType;
+    };
+
     //class ASTNode;
     //template <class T >
     //class ListNode : public ASTNode, public std::vector<T*>
@@ -74,28 +36,130 @@ namespace Language
     //    ListNode() {}
     //    ListNode(T* node) { this->push_back(node); }
     //};
-    class RobotAbbExport ASTNode : public  IAction
+    class RobotAbbExport ASTNode 
     {
     public:
-        ASTNode(QString  type= QString::fromLatin1(""));
+        ASTNode();
         virtual ~ASTNode();
         virtual QVariant Execute();
         virtual void compute() {}
-        QString Type();
-        virtual QString toString(uint level=0);
-        //toPython
-        virtual QString toRaw(uint level = 0);
-    
+        //name
+        virtual QString getName() { return ""; }
+
+        //type: int,string,fun return type, var type
+        virtual enum_v_type getType() { return _type; }
+        //type's string: int,string,fun return type, var type
+        virtual QString getVariablenTypeName() const { return ""; }
+
+        //type's string: int,string,fun return type, var type
+        virtual QString getTypeName() 
+        { 
+            QString ret = "";
+
+            switch (_type)
+            {
+            case enum_v_type::variable:
+                ret = getVariablenTypeName();
+                break;
+            case enum_v_type::integer:
+                ret = "int";
+                break;
+            case enum_v_type::decimal:
+                ret = "double";
+                break;
+            case enum_v_type::string:
+                ret = "string";
+                break;
+            case enum_v_type::boolean:
+                ret = "boolean";
+                break;
+            case enum_v_type::function:
+                ret = getVariablenTypeName();
+                break;
+            case enum_v_type::identifier:
+                ret = getVariablenTypeName();
+                break;
+            default:break;
+            }
+            return ret;
+        } 
+
         void SetPrefix(bool value) { _prefix = value; }
-        //virtual QString toRaw(uint level = 0);
+        virtual void Accept(Visitor& v) {}
+        virtual QString toRaw(uint level = 0) { return ""; }
 
+        static void printError(Language::location location, std::string msg)
+        {
+            std::cerr
+                << location.end.filename
+                << ": line "
+                << location.begin.line << " column "
+                << location.begin.column << "-"
+                << location.end.column << ":"
+                << msg << std::endl;
+        }
 
-        boost::signals2::signal<void()> signalRunInst;
-        boost::signals2::signal<void(ASTNode*)> signalParseInst;
+        /*! Prints an error message where no source location is available.
+         * \param[in] msg      The message to print.
+         */
+        static void printError(std::string msg)
+        {
+            std::cerr << msg << std::endl;
+        }
+
     public:
         bool _prefix;
-        QString _type;
+        boost::signals2::signal<void()> signalRunInst;
+        boost::signals2::signal<void(ASTNode*)> signalParseInst;
+        enum_v_type _type = { enum_v_type::Not_found };
+    };
 
+
+    class RobotAbbExport Integer : public ASTNode
+    {
+    public:
+        explicit Integer(long long value) : value(value) {}
+        virtual ~Integer() = default;
+        QString toRaw(uint level = 0) override { return QString::number(value); }
+        enum_v_type getType() override { return enum_v_type::integer; }
+        void Accept(Visitor& v) override { v.VisitInteger(this); }
+
+    public:
+        long long value{ 0 };
+    };
+
+    class RobotAbbExport Boolean : public ASTNode
+    {
+    public:
+        explicit Boolean(int const value) : boolVal(value) {}
+        virtual ~Boolean() = default;
+        QString toRaw(uint level = 0) override 
+        { 
+            if (boolVal)
+                return "TRUE";
+            else
+                return "FALSE";
+        }
+        enum_v_type getType() override { return enum_v_type::boolean; }
+        void Accept(Visitor& v) override { v.VisitBoolean(this); }
+
+    public:
+        int         boolVal{ 0 };
+    };
+
+
+
+
+    class RobotAbbExport ParamWithModifierNode : public ASTNode {
+    public:
+        //QString realName;
+        ParamWithModifierNode(ASTNode* expression, ListNode<ASTNode>* dim);
+        QVariant Execute() override;
+        QString toRaw(uint level = 0) override;
+        void Accept(Visitor& v) override { v.VisitParamWithModifier(this); }
+    public:
+        ListNode<ASTNode>* _dimRawType;
+        ASTNode* _var_expr;
     };
 }
 

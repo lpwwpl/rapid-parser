@@ -11,9 +11,9 @@ namespace Language
         WaitDiNode(QString*  name,ASTNode* expression = NULL);
 
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
-    private:
+        void Accept(Visitor& v) override { v.VisitWaitDI(this); }
+    public:
         QString _name;
         ASTNode* _expression;
     };

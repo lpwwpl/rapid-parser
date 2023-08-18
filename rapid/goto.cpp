@@ -7,7 +7,7 @@
 namespace Language
 {
     GotoNode::GotoNode(ASTNode* expression)
-        : ASTNode("GOTO"), _expression(expression)
+        : ASTNode(), _expression(expression)
     {
         this->_topParent = NULL;
 
@@ -76,7 +76,7 @@ namespace Language
         QString str = "";
         return str;
     }
-    QString GotoNode::toString(uint level)
+ /*   QString GotoNode::toString(uint level)
     {
         QString str = "";
         for (int i = 0; i < level; i++)
@@ -98,5 +98,5 @@ namespace Language
             str.append(_expression->toString());
         }
         return str;
-    }
+    }*/
 }

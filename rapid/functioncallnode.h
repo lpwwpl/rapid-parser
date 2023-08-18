@@ -10,10 +10,9 @@ namespace Language
     public:
         FunctionCallNode(QString * name, ListNode<ASTNode> * expressionList=NULL);
         QVariant Execute() override;
-
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
-    private:
+        void Accept(Visitor& v) override { v.VisitFuncCall(this); }
+    public:
             QString * _name;
             ListNode<ASTNode> * _expressionList;
     };

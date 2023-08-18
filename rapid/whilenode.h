@@ -10,9 +10,9 @@ namespace Language
     public:
         WhileNode(ASTNode * expression, ASTNode * body);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
-    private:
+        void Accept(Visitor& v) override { v.VisitWhileLoop(this); }
+    public:
             ASTNode * _body;
             ASTNode * _expression;
     };

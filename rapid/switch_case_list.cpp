@@ -23,12 +23,6 @@ namespace Language
         return ASTNode::Execute();
     }
 
-    QString SWitchCaseListNode::toString(uint level)
-    {
-
-
-        return QString("");
-    }
     QString SWitchCaseListNode::toRaw(uint level)
     {
         QString str = "";

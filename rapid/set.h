@@ -9,11 +9,10 @@ namespace Language
     {
     public:
         SetNode(ASTNode* expression = NULL);
-
-        QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
-    private:
+        QVariant Execute() override;
+        void Accept(Visitor& v) override { v.VisitSet(this); }
+    public:
         //QString _name;
         ASTNode* _expression;
     };

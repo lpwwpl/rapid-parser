@@ -6,7 +6,7 @@
 namespace Language
 {
     SpeedDataNode::SpeedDataNode(ASTNode* expression)
-        : _expression(expression)
+        : ASTNode(), _expression(expression)
     {
     }
 
@@ -27,21 +27,21 @@ namespace Language
         return str;
     }
 
-    QString SpeedDataNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-        //str.append("self.");
-        str.append("speed");
+    //QString SpeedDataNode::toString(uint level)
+    //{
+    //    QString str = "";
+    //    for (int i = 0; i < level; i++)
+    //    {
+    //        str.append("    ");
+    //    }
+    //    //str.append("self.");
+    //    str.append("speed");
 
-        str.append("(");
-        str.append("\"");
-        str.append(_expression->toString());
-        str.append("\"");
-        str.append(")");
-        return str;
-    }
+    //    str.append("(");
+    //    str.append("\"");
+    //    str.append(_expression->toString());
+    //    str.append("\"");
+    //    str.append(")");
+    //    return str;
+    //}
 }

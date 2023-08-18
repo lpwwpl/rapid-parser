@@ -10,9 +10,9 @@ namespace Language
     public:
         PrintNode(ASTNode * expression);
         PrintNode(ASTNode* , ASTNode*);
+        QString toRaw(uint level = 0) override;
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
-        QString toRaw(uint level);
+        void Accept(Visitor& v) override {}
     private:
             ASTNode * _expression;
             ASTNode* _target;

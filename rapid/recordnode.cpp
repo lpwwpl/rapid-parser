@@ -32,19 +32,4 @@ namespace Language
         str.append(";");
         return str;
     }
-
-    QString RecordNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-        str.append("Set ");
-        //str.append(_name);
-        str.append(" ");
-        str.append(_expression->toRaw());
-        str.append(";");
-        return str;
-    }
 }

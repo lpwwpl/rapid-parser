@@ -11,20 +11,18 @@ namespace Language
         _op2(op2),
         _operator(type)
     {
-        _type = "NUM";// token::NumberType;
-
         if (nullptr == op2)
             return;
         //token::TextType
-        if ((_op1->Type() == "STRING") || (_op2->Type() == "STRING"))
+        if ((_op1->getTypeName() == "string") || (_op2->getTypeName() == "string"))
         {
            if (_operator == token::ADD)
             {
-                 _type = "STRING";
+                 _type = enum_v_type::string;
             }
            else if ((_operator != token::EQ) && (_operator != token::NE))
             {
-                //std::cout << NO_STRINGS_PLEASE << "(line: " << lineNumber << ")" << std::endl;
+                std::cout << NO_STRINGS_PLEASE << "(line: " << lineNumber << ")" << std::endl;
                 //exit(EXIT_FAILURE);
             }
         }
@@ -164,7 +162,7 @@ namespace Language
         break;
         case token::EQ:
         {
-            QString temp = QString("%1 == %2").arg(_op1->toRaw()).arg(_op2->toRaw());
+            QString temp = QString("%1 = %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
         break;
@@ -190,111 +188,6 @@ namespace Language
             exit(EXIT_FAILURE);
         }
         return str;
-    }
-
-    QString OperatorNode::toString(uint level)
-    {
-        QString str = "";
-        switch (_operator)
-        {
-        case token::ASS:
-        {
-            QString temp = QString("%1 = %2").arg(_op1->toRaw()).arg(_op2->toRaw());
-            str = temp;
-        }
-        break;
-        case token::UMINUS: 
-        {
-            QString temp = QString("%1%2").arg("-").arg(_op1->toString());         
-            str = temp;
-        }
-        break;
-        case token::ADD: 
-        {
-            QString temp = QString("%1 + %2").arg(_op1->toString()).arg(_op2->toString());
-            str = temp;
-        }
-        break;
-        case token::SUB: 
-        {
-            QString temp = QString("%1 - %2").arg(_op1->toString()).arg(_op2->toString());
-            str = temp;
-        }
-        break;
-        case token::MUL:
-        {
-            QString temp = QString("%1 * %2").arg(_op1->toString()).arg(_op2->toString());
-            str = temp;
-        }
-        break;
-        //case token::DIV: 
-        //{
-        //    QString temp = QString("%1 / %2").arg(_op1->toString()).arg(_op2->toString());
-        //    str = temp;
-        //}
-        //    break;
-        case token::LT: 
-        {
-          
-            {
-                QString temp = QString("%1 < %2").arg(_op1->toString()).arg(_op2->toString());
-                str = temp;
-            }
-          
-        }
-        break;
-        case token::GT: 
-        {
-            QString temp = QString("%1 > %2").arg(_op1->toString()).arg(_op2->toString());
-            str = temp;
-        }
-        break;
-        case token::GE: 
-        {
-            QString temp = QString("%1 >= %2").arg(_op1->toString()).arg(_op2->toString());
-            str = temp;
-        }
-        break;
-        case token::LE: 
-        {
-            QString temp = QString("%1 <= %2").arg(_op1->toString()).arg(_op2->toString());
-            str = temp;
-        }
-        break;
-        case token::NE: 
-        {
-            QString temp = QString("%1 != %2").arg(_op1->toString()).arg(_op2->toString());
-            str = temp;
-        }
-        break;
-        case token::EQ: 
-        {
-            QString temp = QString("%1 == %2").arg(_op1->toString()).arg(_op2->toString());
-            str = temp;
-        }
-        break;
-        case token::AND:
-        {
-            QString temp = QString("%1 and %2").arg(_op1->toString()).arg(_op2->toString());
-            str = temp;
-        }
-            break;
-        case token::OR:
-        {
-            QString temp = QString("%1 or %2").arg(_op1->toString()).arg(_op2->toString());
-            str = temp;
-        }
-            break;
-        case token::MOD:
-        {
-            QString temp = QString("%1 % %2").arg(_op1->toString()).arg(_op2->toString());
-            str = temp;
-        }
-            break;
-        default: std::cerr << "Damn ! Looks like we forgot to implement something..." << std::endl;
-            exit(EXIT_FAILURE);
-        }
-        return str;
-    }
+    } 
 }
 

@@ -10,8 +10,8 @@ namespace Language
     public:
         JointTargetNode(QString* name);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
+        void Accept(Visitor& v) override {}
     public:
         QString _name;
         float joints[6];

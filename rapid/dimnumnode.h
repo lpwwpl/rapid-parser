@@ -28,9 +28,9 @@ namespace  Language
         //QString realName;
         DimNumsNode(ASTNode* expression);
         QVariant Execute() override;
-        void push_back(ASTNode* expression);
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
+        void push_back(ASTNode* expression);
+        void Accept(Visitor& v) override { v.VisitDimnum(this); }
        /* void execute()
         {
             int ndim;

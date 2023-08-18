@@ -4,7 +4,7 @@
 namespace Language
 {
     ForNode::ForNode(ASTNode * assignment, ASTNode* from_expression,ASTNode * to_expression, ASTNode* step, ASTNode * function_body)
-        : ASTNode("FOR"),_assignment(assignment),_from_expression(from_expression),
+        : ASTNode(),_assignment(assignment),_from_expression(from_expression),
           _to_expression(to_expression),
          _step(step),
          _function_body(function_body)
@@ -57,35 +57,9 @@ namespace Language
         str.append("do");
         str.append("\n");
         level = level + 1;
-        str.append(_function_body->toString(level));
+        str.append(_function_body->toRaw(level));
         str.append("endfor");
         str.append("\n");
         return str;
-    }
-    QString ForNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-        str.append("for");
-        str.append(" ");
-        //AssignmentNode* assign = dynamic_cast<AssignmentNode*>(_assignment);
-        str.append(_assignment->toString());
-        str.append(" ");
-        str.append("in");
-        str.append(" ");
-        str.append("range");
-        str.append("(");
-        str.append(_from_expression->toString());
-        str.append(",");
-        str.append(_to_expression->toString());
-        str.append(")");
-        str.append(":");
-        str.append("\n");
-        level = level + 1;
-        str.append(_function_body->toString(level));
-        return str; 
     }
 }

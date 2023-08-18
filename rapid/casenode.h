@@ -10,13 +10,12 @@ namespace Language
     public:
         CaseNode(ASTNode * expression, ASTNode * body);
         QVariant Execute() override;
-        //void SetVar(ASTNode* var) { _var = var; }
         QString toRaw(uint level = 0) override;
-        QString toString(uint level = 0) override;
+        void Accept(Visitor& v) override { v.VisitCase(this); }
     public:
         ASTNode* _expression;
 
-    private:
+    public:
             ASTNode * _body;
 
 

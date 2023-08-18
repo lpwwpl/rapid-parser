@@ -10,7 +10,7 @@ namespace Language
     public:
         TypeNode(ASTNode* expression);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
+        void Accept(Visitor& v) override {v.VisitT}
     private:
         ASTNode* _expression;
     };

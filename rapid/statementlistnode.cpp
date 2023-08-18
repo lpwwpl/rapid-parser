@@ -58,25 +58,4 @@ namespace Language
 
         return str;
     }
-    QString StatementListNode::toString(uint level)
-    {
-        QString str = "";
-        
-        for (auto statement : *this)
-        {
-
-            if (!statement)continue;
-            //statement->Execute();
-            str.append(statement->toString(level));
-            
-            IfNode* ifNode = dynamic_cast<IfNode*>(statement);
-            ForNode* forNode = dynamic_cast<ForNode*>(statement);
-            if(!ifNode && !forNode)
-            str.append("\n");
-            //if (dynamic_cast<ReturnNode*>(statement))
-            //    break;
-        }
-       
-        return str;
-    }
 }

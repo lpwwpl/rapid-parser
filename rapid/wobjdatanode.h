@@ -10,8 +10,8 @@ namespace Language
     public:
         WobjDataNode(QString* name);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
+        void Accept(Visitor& v) override { /*v.VisitWobj(this);*/ }
     public:
         QString _name;
         bool wobj_install_style;

@@ -7,7 +7,7 @@ extern int lineNumber;
 namespace Language
 {
     FunctionNode::FunctionNode(ASTNode* type, QString * name, ListNode<ParameterNode> * arguments, StatementListNode * body)
-            : ASTNode("FUNC"),
+            : ASTNode(),
               _type(type),
               _name(*name),
               _arguments(arguments),
@@ -100,31 +100,6 @@ namespace Language
         str += QString::fromLatin1("\n");
         return str;
     }
-    QString FunctionNode::toString(uint level)
-    {
-        QString str = QString::fromLatin1("");
-        for (int i = 0; i < level; i++)
-        {
-            str.append(QString::fromLatin1("    "));
-        }
-        str += QString::fromLatin1("@allow_goto");
-        str += QString::fromLatin1("\n");
-        for (int i = 0; i < level; i++)
-        {
-            str.append(QString::fromLatin1("    "));
-        }
-        str += QString::fromLatin1("def");
-        str += QString::fromLatin1(SPACE);
-        str += _name;
-        str += QString::fromLatin1("(");
-        str += _arguments->toString();
-        str += QString::fromLatin1(")");
-        str += QString::fromLatin1(":");
-        str += QString::fromLatin1("\n");
-        //str += INTENT;
-        //str += _arguments->toString();
-        str.append(_body->toString(level+1));
-        return str;
-    }
+ 
 }
 

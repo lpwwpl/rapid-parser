@@ -14,8 +14,7 @@ namespace Language
         //ParamNode(ASTNode* p1,  ASTNode*);
 
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
-        QString toRaw(uint level);
+        void Accept(Visitor& v) override {}
     public:
         ASTNode* _param;
        // QString* p2_name;

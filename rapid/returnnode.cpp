@@ -6,9 +6,9 @@ namespace Language
     ReturnNode::ReturnNode(ASTNode * expression)
         : _expression(expression)
     {
-        _type = token::FNULL;
+        _type = enum_v_type::Not_found;
         if(expression)
-        _type = _expression->Type();
+        _type = _expression->getType();
     }
 
     QVariant ReturnNode::Execute()
@@ -25,19 +25,15 @@ namespace Language
     QString ReturnNode::toRaw(uint level)
     {
         QString str = "";
-        return str;
-    }
-    QString ReturnNode::toString(uint level)
-    {
-        QString str = "";
         for (int i = 0; i < level; i++)
         {
-            str.append("    ");
+            str.append(INTENT);
         }
         str.append("return");
         str.append(" ");
-        if(_expression)
-            str.append(_expression->toString());
+        if (_expression)
+            str +=_expression->toRaw();
         return str;
     }
+
 }

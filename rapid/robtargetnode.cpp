@@ -6,7 +6,7 @@ extern int lineNumber;
 extern int eState;
 namespace Language
 {
-    RobTargetNode::RobTargetNode(QString* name) : _name(*name)
+    RobTargetNode::RobTargetNode(QString* name) :ASTNode(), _name(*name)
     {
 
     }
@@ -20,18 +20,6 @@ namespace Language
     QString RobTargetNode::toRaw(uint level)
     {
         QString str = "";
-        return str;
-    }
-    QString RobTargetNode::toString(uint level )
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-
-
-
         return str;
     }
 }

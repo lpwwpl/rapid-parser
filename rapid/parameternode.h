@@ -8,15 +8,16 @@ namespace Language
     class RobotAbbExport ParameterNode: public ASTNode
     {
     public:
-        ParameterNode(ASTNode* type, QString * name, ASTNode * initializer = nullptr);
-        ParameterNode(ASTNode* inout,ASTNode* type,QString* name, ASTNode* initializer = nullptr);
+        ParameterNode(IdentifierNode* type, IdentifierNode* param, ASTNode * initializer );
+        ParameterNode(ASTNode* inout, IdentifierNode* type, IdentifierNode* param, ASTNode* initializer );
+        QString toRaw(uint level = 0) override;
         QVariant Execute() override;
         QString Name();
-        QString toString(uint level = 0) override;
-        QString toRaw(uint level = 0) override;
-    private:
+        void Accept(Visitor& v) override { v.VisitParamNode(this); }
+    public:
         QString  _name;
-        ASTNode* _type;
+        IdentifierNode* _param;
+        IdentifierNode* _type;
         ASTNode* _INOUT;
         ASTNode * _initializer;
     };

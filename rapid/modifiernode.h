@@ -13,9 +13,9 @@ namespace Language
         //QString* name
         ModifierNode(ASTNode* left, ASTNode* right);
         ModifierNode(ASTNode* left);
-        QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
+        QVariant Execute() override;
+        void Accept(Visitor& v) override { v.VisitModifier(this); }
     public:
         ASTNode* _left;
         ASTNode* _right;

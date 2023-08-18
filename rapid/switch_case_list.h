@@ -9,9 +9,9 @@ namespace Language
     {
     public:
         SWitchCaseListNode(ASTNode* caseexpr);
+        QString toRaw(uint level = 0) override;
         QVariant Execute() override;
-        QString toString(uint level = 0) ;
-        QString toRaw(uint level);
+        void Accept(Visitor& v) override { v.VisitSwitchCase(this); }
     private:
 
     };

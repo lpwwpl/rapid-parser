@@ -38,7 +38,6 @@
       class WobjDataNode;
       class ToolDataNode;
       class ArrayDataNode;
-      class ParamNode;
       class ArcLStartNode;
       class DeclareNode;
       class ArcLNode;
@@ -65,16 +64,14 @@
       class SetNode;
       class SetDONode;
       class ReSetNode;
-      class RecordNode;
       class PulseDONode;
       class RelToolNode;
       class StructIndexNode;
       class AccessNode;
       class ModifierNode;
-      class VariableDeclareNode;
       class DimNumsNode;
-      enum enum_v_type;
-      enum enum_v_scope;
+      class IdentifierNode;
+      class ParamWithModifierNode;
       template <class T> class ListNode;
    }
    class QString;
@@ -133,15 +130,16 @@
    VariableNode* variableNode;
    ListNode<ASTNode> * listNode;
    ListNode<ParameterNode> * parameterListNode;
-   ListNode<ParamNode>* paramListNode;
    ListNode<ElseIfNode>* elseifListNode;
    ListNode<ModuleNode>* moduleListNode;
    ModuleNode* moduleNode;
    StatementListNode * statementListNode;
 
    ElseIfNode* elseif_stmNode;
-
+   IdentifierNode* idenNode;
    DimNumsNode*     dim_num_stmNode;
+
+   ParamWithModifierNode* paramWithModifi;
  
 }
 %right ASS
@@ -149,20 +147,21 @@
 %left EQ 
 %left AND OR 
 %left GE LE  NE GT LT
-%left MINUS ADD SUB 
-%left MUL DIVIDE MOD
+%left  ADD SUB 
+%left MUL DIVIDE MOD 
 %left LBRACE RBRACE LC RC  
 /// -d --report="cex" 
 %nonassoc IF 
 %nonassoc ELSE
 %nonassoc NOT 
-%precedence PREFIX
+%nonassoc UMINUS
+%nonassoc PREFIX
 
 //DIV
 %token GE LE EQ NE IF ADD SUB MUL LT GT RETURN NumberType TextType VoidType SPACE THEN JIN DOLAR RAPID_NAN SEAMDATA WELDDATA INPOS CONC ENDFUNC UMINUS 
 %token ACCSET VELSET SETDO WAITDI OFFS FUNC INOUT RELTOOl RECORD ENDRECORD PULSEDO WAITTIME_INPOS WOBJ_P SEAM_NAME ZONE_P VEL_P TCP_P NOEOFFS PLEN DOT MAXTIME TIMEFLAG TOOL_P ID_P
 %token ASS LR RR COMMA LC RC LESS GREATER COLON FNULL DEVCOLON NOT UNINDENT INDENT
-%token FTRUE FFALSE FOR ENDFOR TO FROM SEMICOLON SPLASH LBRACE RBRACE
+%token FTRUE FFALSE FOR ENDFOR TO FROM SEMICOLON  LBRACE RBRACE
 %token LMOVE VAR DO WHILE ENDWHILE TEST ENDTEST RETRY CASE DEFAULT JOINTTARGET ROBTARGET STRING NUM BOOL WOBJDATA ZONEDATA SPEEDDATA TOOLDATA PERS CONST_L
 %token ACTUNIT MOVEABSJ ARCLSTART ARCL ARCC ARCEND MOVEL MOVEJ ENDMODULE ENDPROC MODULE PROC AND OR MOD
 %token DEACTUNIT ELSEIF WAITTIME WAITUNTIL SET RESET STEP ARCCEND ENDIF TPWRITE TASK 
@@ -174,7 +173,8 @@
 
 //struct_index splash_func_call_parameter
 %type<pNode>  ACTUNIT MOVEABSJ ARCLSTART ARCL ARCC ARCEND MOVEL MOVEJ DEACTUNIT  switch_case_define Record_declare  var_decl  array_index  var_assignment inst_modifer 
-%type<pNode>  program  expression assignment statement if while_loop return for  switch    declaration   function_call   Type var_expression  struct_index
+%type<pNode>  program  expression assignment statement if while_loop return for  switch    declaration   function_call    var_expression  struct_index
+%type<idenNode> Type
 %type<pNode>  offs_expr  reltool_expr  op_expr inst_expr 
 //inst_expr_ass
 %type <parameterNode> parameter_declaration 
@@ -184,9 +184,11 @@
 %type <functionNode> function_declaration
 %type <listNode>  switch_case_list   declaration_list struct_members 
 %type <dim_num_stmNode> dim_num_stm
+%type<paramWithModifi> paramWithMod_stm
 %type <variableNode> variable_declaration variable_for_body
 %type <statementListNode> statement_list function_body
 %type <listNode> func_call_parameter_list   
+%type <listNode> inst_expr_list
 //inst_expr_ass_list
 %type <elseifListNode> elseif_statment_list
 %type <elseif_stmNode> elseif_statment
@@ -226,22 +228,22 @@ declaration:
     | Record_declare {$$=$1;}
 	;
 
-Type: NUM   { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("NUM")); $$ = id;}
-	| BOOL  { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("BOOL")); $$ = id;}
-	| STRING  { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("STRING")); $$ = id;}
-	| ROBTARGET  { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("ROBTARGET")); $$ = id;}
-	| JOINTTARGET   {StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("JOINTTARGET")); $$ = id;}
-    | WOBJDATA {StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("WOBJDATA")); $$ = id;}
-    | ZONEDATA {StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("ZONEDATA")); $$ = id;}
-    | SPEEDDATA { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("SPEEDDATA")); $$ = id;}
-    | TOOLDATA {StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("TOOLDATA")); $$ = id;}
-    | SEAMDATA {StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("SEAMDATA")); $$ = id;}
-    | WELDDATA {StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("WELDDATA")); $$ = id;}
-    | Identifier {$$ = new StringLiteralNode($1); /*$$ = $1;*/ }
+Type: NUM   { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("NUM")); $$ = id;}
+	| BOOL  { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("BOOL")); $$ = id;}
+	| STRING  { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("STRING")); $$ = id;}
+	| ROBTARGET  { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("ROBTARGET")); $$ = id;}
+	| JOINTTARGET   {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("JOINTTARGET")); $$ = id;}
+    | WOBJDATA {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("WOBJDATA")); $$ = id;}
+    | ZONEDATA {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("ZONEDATA")); $$ = id;}
+    | SPEEDDATA { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("SPEEDDATA")); $$ = id;}
+    | TOOLDATA {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("TOOLDATA")); $$ = id;}
+    | SEAMDATA {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("SEAMDATA")); $$ = id;}
+    | WELDDATA {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("WELDDATA")); $$ = id;}
+    | Identifier {$$ = new IdentifierNode($1); /*$$ = $1;*/ }
 	;
 
 Record_declare:
-    RECORD Identifier struct_members ENDRECORD { $$ = new StructDescNode($2, $3); }
+    RECORD Identifier struct_members ENDRECORD { IdentifierNode* id = new IdentifierNode($2);$$ = new StructDescNode(id, $3); }
     ;
 
 struct_members:
@@ -249,7 +251,7 @@ struct_members:
     | struct_members var_decl { $1->push_back($2); }
 
 var_decl:
-    Type Identifier SEMICOLON {IdentifierNode* id = new IdentifierNode($2); $$ = new VariableDeclareNode($1,id); } 
+    Type Identifier SEMICOLON {IdentifierNode* id = new IdentifierNode($2); $$ = new VariableNode(VAR,$1,id,loc); } 
     ;
 
 scope_pers:
@@ -282,11 +284,12 @@ parameter_declaration_list:
     ;
 
 parameter_declaration:
-    Type Identifier {$$ = new ParameterNode($1,$2);}
+    Type Identifier {IdentifierNode* id = new IdentifierNode($2);$$ = new ParameterNode($1,id,nullptr);}
     | INOUT Type Identifier 
     {
-        StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("INOUT"));
-        $$ = new ParameterNode(id,$2,$3);
+        IdentifierNode* inout = new IdentifierNode(&QString::fromLatin1("INOUT"));
+        IdentifierNode* id = new IdentifierNode($3);
+        $$ = new ParameterNode(inout,$2,id,nullptr);
     }
     ;
 
@@ -326,19 +329,19 @@ function_call:
     ;
 
 inst_modifer:
-      CONC { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("Conc")); $$ = id;}
-    | TOOL_P { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("Tool")); $$ = id;}
-    | PLEN { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("PLength")); $$ = id;}
-    | MAXTIME { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("MaxTime")); $$ = id;}
-    | TIMEFLAG { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("TimeFlag")); $$ = id;}
-    | WOBJ_P  { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("WObj")); $$ = id;}
-    | SEAM_NAME { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("SeamName")); $$ = id;}
-    | ZONE_P { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("Z")); $$ = id;}
-    | INPOS { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("InPos")); $$ = id;}
-    | VEL_P { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("V")); $$ = id;}
-    | TCP_P { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("T")); $$ = id;}
-    | NOEOFFS { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("NoEOffs")); $$ = id;}
-    | ID_P { StringLiteralNode* id = new StringLiteralNode(&QString::fromLatin1("ID")); $$ = id;}
+       CONC { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\Conc")); $$ = id;}
+    | TOOL_P { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\Tool")); $$ = id;}
+    | PLEN { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\PLength")); $$ = id;}
+    | MAXTIME { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\MaxTime")); $$ = id;}
+    | TIMEFLAG { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\TimeFlag")); $$ = id;}
+    | WOBJ_P  { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\WObj")); $$ = id;}
+    | SEAM_NAME { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\SeamName")); $$ = id;}
+    | ZONE_P { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\Z")); $$ = id;}
+    | INPOS { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\InPos")); $$ = id;}
+    | VEL_P { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\V")); $$ = id;}
+    | TCP_P { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\T")); $$ = id;}
+    | NOEOFFS { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\NoEOffs")); $$ = id;}
+    | ID_P { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\ID")); $$ = id;}
     ;
 
 statement:
@@ -429,16 +432,16 @@ elseif_statment:
 
 
 variable_declaration:
-     scope1 Type var_expression SEMICOLON { $$ = new VariableNode($1,$2,$3);}
-    | scope_pers Type var_expression SEMICOLON { $$ = new VariableNode($1,$2,$3);}
-    | scope2 Type var_expression SEMICOLON { $$ = new VariableNode($1,$2,$3);}
+     scope1 Type var_expression SEMICOLON { $$ = new VariableNode($1,$2,$3,loc);}
+    | scope_pers Type var_expression SEMICOLON { $$ = new VariableNode($1,$2,$3,loc);}
+    | scope2 Type var_expression SEMICOLON { $$ = new VariableNode($1,$2,$3,loc);}
     ;
 
 variable_for_body:
-    scope2 Type var_expression SEMICOLON { $$ = new VariableNode($1,$2,$3);}
-    | scope2 Type Identifier ASS expression SEMICOLON { IdentifierNode* id = new IdentifierNode($3);$$ = new VariableNode($1,$2,id,$5);}
-    | scope2 Type  array_index ASS expression  SEMICOLON { $$ = new VariableNode($1,$2,$3,$5);}
-    | scope2 Type struct_index ASS expression SEMICOLON { $$ = new VariableNode($1,$2,$3,$5);}
+    scope2 Type var_expression SEMICOLON { $$ = new VariableNode($1,$2,$3,loc);}
+    | scope2 Type Identifier ASS expression SEMICOLON { IdentifierNode* id = new IdentifierNode($3);$$ = new VariableNode($1,$2,id,$5,loc);}
+    | scope2 Type  array_index ASS expression  SEMICOLON { $$ = new VariableNode($1,$2,$3,$5,loc);}
+    | scope2 Type struct_index ASS expression SEMICOLON { $$ = new VariableNode($1,$2,$3,$5,loc);}
     ;
 
 var_expression:
@@ -450,15 +453,15 @@ var_expression:
     ;
 
 var_assignment:
-    scope1 Type Identifier ASS expression SEMICOLON { IdentifierNode* id = new IdentifierNode($3);$$ = new VariableNode($1,$2,id,$5);}
-    | scope2 Type Identifier ASS expression SEMICOLON { IdentifierNode* id = new IdentifierNode($3);$$ = new VariableNode($1,$2,id,$5);}
-    | scope_pers Type Identifier ASS expression SEMICOLON { IdentifierNode* id = new IdentifierNode($3);$$ = new VariableNode($1,$2,id,$5);}
-    | scope1 Type  array_index ASS expression  SEMICOLON { $$ = new VariableNode($1,$2,$3,$5);}
-    | scope2 Type  array_index ASS expression  SEMICOLON { $$ = new VariableNode($1,$2,$3,$5);}
-    | scope_pers Type  array_index ASS expression  SEMICOLON { $$ = new VariableNode($1,$2,$3,$5);}
-    | scope1 Type struct_index ASS expression SEMICOLON { $$ = new VariableNode($1,$2,$3,$5);}
-    | scope2 Type struct_index ASS expression SEMICOLON { $$ = new VariableNode($1,$2,$3,$5);}
-    | scope_pers Type struct_index ASS expression SEMICOLON { $$ = new VariableNode($1,$2,$3,$5);}
+    scope1 Type Identifier ASS expression SEMICOLON { IdentifierNode* id = new IdentifierNode($3);$$ = new VariableNode($1,$2,id,$5,loc);}
+    | scope2 Type Identifier ASS expression SEMICOLON { IdentifierNode* id = new IdentifierNode($3);$$ = new VariableNode($1,$2,id,$5,loc);}
+    | scope_pers Type Identifier ASS expression SEMICOLON { IdentifierNode* id = new IdentifierNode($3);$$ = new VariableNode($1,$2,id,$5,loc);}
+    | scope1 Type  array_index ASS expression  SEMICOLON { $$ = new VariableNode($1,$2,$3,$5,loc);}
+    | scope2 Type  array_index ASS expression  SEMICOLON { $$ = new VariableNode($1,$2,$3,$5,loc);}
+    | scope_pers Type  array_index ASS expression  SEMICOLON { $$ = new VariableNode($1,$2,$3,$5,loc);}
+    | scope1 Type struct_index ASS expression SEMICOLON { $$ = new VariableNode($1,$2,$3,$5,loc);}
+    | scope2 Type struct_index ASS expression SEMICOLON { $$ = new VariableNode($1,$2,$3,$5,loc);}
+    | scope_pers Type struct_index ASS expression SEMICOLON { $$ = new VariableNode($1,$2,$3,$5,loc);}
     ;
 
 assignment:
@@ -473,6 +476,7 @@ assignment:
     {
         $$ = new AssignmentNode($1, $3);
     }
+
     ;
 
 dim_num_stm:
@@ -505,7 +509,7 @@ RELTOOl LC func_call_parameter_list RC  {$$ = new RelToolNode($3);}
 op_expr:
    expression ADD expression { $$ = new OperatorNode(token::ADD, $1, $3); }
  | expression SUB expression { $$ = new OperatorNode(token::SUB, $1, $3); }
- | SUB expression  %prec PREFIX{ $$ = new OperatorNode(token::UMINUS, $2); }
+ | SUB expression  %prec UMINUS{ $$ = new OperatorNode(token::UMINUS, $2); }
  | expression MUL expression { $$ = new OperatorNode(token::MUL, $1, $3); }
  | expression LT expression { $$ = new OperatorNode(token::LT, $1, $3); }
  | expression GT expression { $$ = new OperatorNode(token::GT, $1, $3); }
@@ -516,47 +520,47 @@ op_expr:
  | expression AND expression {$$ = new OperatorNode(token::AND, $1, $3);}
  | expression OR expression {$$ = new OperatorNode(token::OR, $1, $3);}
  | expression MOD expression {$$ = new OperatorNode(token::MOD, $1, $3);}
- | expression ASS expression { $$ = new OperatorNode(token::ASS, $1, $3); }
+ //| expression ASS expression { $$ = new OperatorNode(token::ASS, $1, $3); }
  //| ADD expression  %prec PREFIX{ $$ = new OperatorNode(token::UMINUS, $2); }
  | NOT expression %prec PREFIX{$$ = new OperatorNode(token::NOT, $2);}  
  | LC expression RC {$$ = $$ = new OperatorNode(token::LC, $2);}
-
  ;
-
- //inst_expr_ass:
-//  inst_expr ASS expression { $$ = new OperatorNode(token::ASS, $1, $3); }
-//  ;
-
-// inst_expr_ass_list:
-//  inst_expr_ass {$$ = new ListNode<ASTNode>($1); }
-//  |  inst_expr_ass_list inst_expr_ass {$1->push_back($2);   };
 
  inst_expr:
   inst_modifer {$$ = $1;}
- | var_expression inst_modifer { $$ = new ModifierNode($1,$2);}
+ | inst_modifer  ASS var_expression 
+ {
+        $$ = new AssignmentNode($1, $3);
+ }
  ;
 
+inst_expr_list:
+  inst_expr {$$ = new ListNode<ASTNode>($1); }
+  | inst_expr_list inst_expr { $1->push_back($2);   }
+  ;
+
 expression:
- //{$$=NULL;} 
  //RAPID_NAN { $$ = new StringLiteralNode(true,&QString::fromLatin1("9E+09"));}
- String { $$ = new StringLiteralNode(true,$1);}
+ String { $$ = new StringLiteralNode($1);}
  | FNULL { $$ = new NullNode();}
  | Number {$$ = new NumberLiteralNode($1); }
- | LNumber {$$ = new NumberLiteralNode($1); }
- | FTRUE {$$ = new NumberLiteralNode(1);}
- | FFALSE {$$ = new NumberLiteralNode(0);}
- //| OFFS LC func_call_parameter_list RC { $$ = new OffsNode($3);}
- //| RELTOOl LC func_call_parameter_list RC  {$$ = new RelToolNode($3);}
+ | LNumber {$$ = new Integer($1); }
+ | FTRUE {$$ = new Boolean(1);}
+ | FFALSE {$$ = new Boolean(0);}
  | var_expression {$$ = $1;}
  | op_expr {$$ = $1;}
  | offs_expr{$$ = $1;}
  | reltool_expr { $$ = $1;}
- | inst_expr  {$$=$1;}
+
+ | paramWithMod_stm {$$=$1;}
+ | inst_expr_list {$$=$1;}
  | Identifier LC func_call_parameter_list RC  { $$ = new FunctionCallNode($1, $3);}
  |  LR dim_num_stm RR {$$ = $2;}
  ;
 
-
+ paramWithMod_stm:
+  var_expression inst_expr_list {$$ = new  ParamWithModifierNode($1,$2); }
+  ;
 
 %%
 

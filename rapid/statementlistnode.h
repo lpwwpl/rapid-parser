@@ -11,9 +11,9 @@ class RobotAbbExport StatementListNode: public ListNode<ASTNode>
     public:
         StatementListNode(ASTNode * parameter);
         QVariant Execute() override;
-        void compute() override;
-        QString toString(uint level = 0) ;
         QString toRaw(uint level = 0) override;
+        void compute() override;
+        void Accept(Visitor& v) override { v.VisitStatementList(this); }
     };
 }
 

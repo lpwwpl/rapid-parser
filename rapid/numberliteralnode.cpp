@@ -3,7 +3,7 @@
 namespace Language
 {
     NumberLiteralNode::NumberLiteralNode(double value)
-        : ASTNode("NUM"),
+        : ASTNode(),
           _value(value)
     {
     }
@@ -14,10 +14,6 @@ namespace Language
     }
 
     QString NumberLiteralNode::toRaw(uint level)
-    {
-        return QString::number(_value,'g');
-    }
-    QString NumberLiteralNode::toString(uint level)
     {
         return QString::number(_value,'g');
     }

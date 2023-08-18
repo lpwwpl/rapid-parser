@@ -8,22 +8,12 @@ namespace Language
     class RobotAbbExport AssignmentNode: public ASTNode
     {
     public:
-        //AssignmentNode(QString * name, ASTNode * expression, ASTNode* dim=NULL);
-        //AssignmentNode(QString* name, ASTNode*, ASTNode* expression, ASTNode* dim);
         AssignmentNode(ASTNode* ,  ASTNode* expression);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0) override;
+        void Accept(Visitor& v) override { v.VisitAssignment(this); }
         //QString VarStr();
         QString getName() { return _name; }
-        //dimListType* getDimListType()
-        //{
-        //    DimNumsNode* dimNode = dynamic_cast<DimNumsNode*>(_dim);
-        //    dimListType* dimList = NULL;
-        //    if (dimNode)
-        //        dimList = &(dimNode->tempDimList);
-        //    return dimList;
-        //}
 
     public:
             QString _name;

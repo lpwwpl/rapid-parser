@@ -12,14 +12,14 @@ namespace Language
         ModuleNode(QString* name, ListNode<ASTNode>* body);
         QVariant Execute() override;
         QString toRaw(uint level = 0) override;
-        QString toString(uint level = 0) override;
+        void Accept(Visitor& v) override { v.VisitModule(this); }
         void compute() override;
         ListNode<ASTNode>* Arguments() const
         {
             return _body;
         }
         ListNode<ASTNode>* GetArguments() { return _body; }
-    private:
+    public:
         QString _name;
         ListNode<ASTNode>* _body;
     };

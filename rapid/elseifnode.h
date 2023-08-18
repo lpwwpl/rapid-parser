@@ -10,10 +10,10 @@ namespace Language
     public:
         ElseIfNode(ASTNode* body);
         ElseIfNode(ASTNode * expression, ASTNode * body);
-        QVariant Execute() override;
         QString toRaw(uint level = 0) override;
-        QString toString(uint level = 0) override;
-    private:
+        QVariant Execute() override;
+        void Accept(Visitor& v) override { v.VisitElseIf(this); }
+    public:
             ASTNode * _body;
             ASTNode * _expression;
     };

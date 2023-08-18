@@ -14,17 +14,17 @@ namespace Language
     {
         return ASTNode::Execute();
     }
-    QString BuildInNode::toString(uint level)
-    {
-        QString str = "";
+    //QString BuildInNode::toString(uint level)
+    //{
+    //    QString str = "";
 
-        if (_name == "BITS")
-        {
-            str.append("self.bits");
-            str.append("(");
-            str.append(_expression->toString());
-            str.append(")");
-        }
-        return str;
-    }
+    //    if (_name == "BITS")
+    //    {
+    //        str.append("self.bits");
+    //        str.append("(");
+    //        str.append(_expression->toString());
+    //        str.append(")");
+    //    }
+    //    return str;
+    //}
 }

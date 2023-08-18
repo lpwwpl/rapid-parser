@@ -14,8 +14,8 @@ public:
     public:
         LabelNode(ASTNode * id);
         QVariant Execute() override;
-        QString toString(uint level = 0) ;
         QString toRaw(uint level = 0) override;
+        void Accept(Visitor& v) override {}
     };
 }
 

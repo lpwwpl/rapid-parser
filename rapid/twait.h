@@ -9,8 +9,9 @@ namespace Language
     {
     public:
         TWaitNode(ASTNode* expression);
+        QString toRaw(uint level = 0) override;
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
+        void Accept(Visitor& v) override {}
     private:
         ASTNode* _expression;
     };

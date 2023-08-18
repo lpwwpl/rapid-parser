@@ -11,6 +11,8 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
+
+#include "VisitorPyPrint.h"
 int lineNumber = 1;
 extern std::stack<std::string> fileNames;
 extern std::vector<std::string> libPaths;
@@ -66,11 +68,24 @@ int Translator::parse(const QString& codestr)
     std::map<QString, Language::ModuleNode*> modules = SymbolTable::Instance().Modules();
     int count = modules.size();
     QString str = "";
+    VisitorPyPrint visitor;
+    //for (auto elem : modules)
+    //{
+    //    Language::ModuleNode* module = elem.second;
+
+    //    str.append(module->toRaw(0));
+
+
+    //}
     for (auto elem : modules)
     {
         Language::ModuleNode* module = elem.second;
-        str.append(module->toRaw(0));
+
+        module->Accept(visitor);
+
+       
     }
+    str.append(visitor.str);
     str.append("\n");
     std::cout << str.toStdString() << std::endl;
     std::cout << "------RunTime Info:------" << std::endl;

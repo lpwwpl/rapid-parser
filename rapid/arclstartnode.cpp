@@ -6,7 +6,7 @@ extern int lineNumber;
 extern int eState;
 namespace Language
 {
-    ArcLStartNode::ArcLStartNode(/*QString* name,*/ ListNode<ASTNode>* arguments) : ASTNode("ARCLSTART"),/*_name(*name),*/
+    ArcLStartNode::ArcLStartNode(/*QString* name,*/ ListNode<ASTNode>* arguments) : ASTNode(),/*_name(*name),*/
         _arguments(arguments)
     {
         signalParseInst(_arguments);
@@ -47,30 +47,5 @@ namespace Language
     void ArcLStartNode::compute()
     {
         signalParseInst(_arguments);
-    }
-    QString ArcLStartNode::toString(uint level)
-    {
-        QString str = "";
-        for (int i = 0; i < level; i++)
-        {
-            str.append("    ");
-        }
-      
-        str.append("arclStart");
-        str.append("(");
-        for (auto statement : *_arguments)
-        {
-
-            if (!statement)continue;
-            //statement->Execute();
-            str.append(statement->toString(level));
-            str.append(",");
-        }
-        if (str.endsWith(","))
-        {
-            str = str.mid(0, str.size() - 1);
-        }
-        str.append(")");
-        return str;
     }
 }

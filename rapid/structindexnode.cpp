@@ -6,7 +6,7 @@ extern int lineNumber;
 
 namespace Language
 {
-    StructIndexNode::StructIndexNode(ASTNode* left,  ASTNode* right/*dimListType* dim*/):_left(left),  _right(right)
+    StructIndexNode::StructIndexNode(ASTNode* left, IdentifierNode* right/*dimListType* dim*/):_left(left),  _right(right)
     {
         //DimNumsNode* dimNode = dynamic_cast<DimNumsNode*>(_dim);
         //dimListType* dimList=NULL;
@@ -41,13 +41,5 @@ namespace Language
        
         QString ret = _name;
         return ret;
-    }
-
-    QString StructIndexNode::toString(uint level)
-    {
-       
-        QString str = _name;   
-
-        return str;
     }
 }

@@ -9,11 +9,11 @@ namespace Language
     {
     public:
         OperatorNode(token::yytokentype type, ASTNode * op1, ASTNode * op2 = nullptr);
+        QString toRaw(uint level = 0) override;
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
-        QString toRaw(uint level = 0)override;
+        void Accept(Visitor& v) override { v.VisitOpera(this); }
         //QString toPython(uint level = 0)override;
-    private:
+    public:
         ASTNode * _op1;
         ASTNode * _op2;
         int _operator;

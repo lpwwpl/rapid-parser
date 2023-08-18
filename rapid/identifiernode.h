@@ -10,10 +10,14 @@ namespace Language
     public:
         IdentifierNode(QString * name);
         QVariant Execute() override;
-        QString toString(uint level = 0) override;
         QString toRaw(uint level = 0);
+        enum_v_type getType() override { return enum_v_type::identifier; }
+        QString getVariablenTypeName() const override { return _name; }
+        virtual void Accept(Visitor& v) { v.VisitIdentifier(this); }
+        QString getName() override { return _name; }
     public:
         QString _name;
+        Language::location location;
         //bool isType = false;
     };
 }
