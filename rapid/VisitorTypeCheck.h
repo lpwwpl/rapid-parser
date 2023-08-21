@@ -9,7 +9,7 @@
 #include "Visitor.h"
 namespace Language {
 
-	class VisitorTypeCheck : public Visitor
+	class RobotAbbExport VisitorTypeCheck : public Visitor
 	{
 	public:
 		int syntaxErrors{ 0 };

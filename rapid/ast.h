@@ -2,7 +2,7 @@
 #define AST_H
 #include "cfloat"
 #include "functioncallnode.h"
-#include "arraydatanode.h"
+
 #include "declaration_list.h"
 #include "modulenode.h"
 #include "variable.h"
@@ -49,14 +49,14 @@
 #include "switch_case_list.h"
 #include "whilenode.h"
 #include "labelnode.h"
-#include "paramnode.h"
+
 //#include "bits.h"
 #include "buildin.h"
 
 
 #include "accset.h"
 #include "velset.h"
-#include "variableAss.h"
+
 #include "waitdinode.h"
 #include "waittime.h"
 #include "waitutilnode.h"

@@ -46,7 +46,11 @@ namespace Language
         for (auto expression: *_expressionList)
             SymbolTable::Instance().PushArgument(expression->Execute());
         SymbolTable::Instance().PushArgument((int)_expressionList->size());
-        return SymbolTable::Instance().Function(_name)->Execute();
+        Language::FunctionNode*  func = SymbolTable::Instance().Function(_name);
+        if (func)
+            return SymbolTable::Instance().Function(_name)->Execute();
+        else
+            return 0;
     }
     QString FunctionCallNode::toRaw(uint level)
     {

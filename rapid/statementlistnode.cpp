@@ -34,7 +34,6 @@ namespace Language
                 break;
         }
         SymbolTable::Instance().GetActivationRecord()->SetCurNode(NULL);
-        std::cout << str.toStdString() << std::endl;
         return ASTNode::Execute();
     }
     QString StatementListNode::toRaw(uint level)

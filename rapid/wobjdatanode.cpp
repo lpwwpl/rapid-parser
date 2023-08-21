@@ -2,8 +2,8 @@
 #include "symboltable.h"
 #include "errors.h"
 
-extern int lineNumber;
-extern int eState;
+
+
 namespace Language
 {
     WobjDataNode::WobjDataNode(QString* name/*, ListNode<ParameterNode>* arguments*/):ASTNode(), _name(*name)/*,

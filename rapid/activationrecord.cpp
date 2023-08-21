@@ -16,10 +16,10 @@ ActivationRecord::ActivationRecord()
 void ActivationRecord::AssignVariable(QString name, QVariant value)
 {
     _variables[name] = value;
-    if (!name.startsWith("."))
-    {
-        GlobalRecord::Instance().AssignVariable(name, value);
-    }
+    //if (!name.startsWith("."))
+    //{
+    //    GlobalRecord::Instance().AssignVariable(name, value);
+    //}
     //SymbolTable::Instance().AssignVariable(_name, typeActual,_expression->Execute(), dimList);
 }
     

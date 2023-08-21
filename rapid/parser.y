@@ -91,6 +91,7 @@
     
     static int yylex(Language::Parser::semantic_type *yylval, Language::location* loc,Language::Lexer  &lexer);
 
+    std::string err;
     extern std::string cur_yytext;
     extern std::stack<std::string> fileNames;
     extern Language::location loc;//ÉùÃ÷Î»ÖÃÊµÀý
@@ -528,7 +529,8 @@ op_expr:
 
  inst_expr:
   inst_modifer {$$ = $1;}
- | inst_modifer  ASS var_expression 
+ | inst_modifer  ASS  String { StringLiteralNode* str = new StringLiteralNode($3);$$ = new AssignmentNode($1,str);} 
+  | inst_modifer  ASS var_expression 
  {
         $$ = new AssignmentNode($1, $3);
  }
@@ -571,5 +573,10 @@ static int yylex( Language::Parser::semantic_type *yylval,Language::location* lo
 }
 void Language::Parser::error( const Language::location& location,const std::string &err_message )
 {
-    printf("error parsed %s(%s)at %d.%d-%d.%d: %s\n",loc.end.filename->c_str(), err_message.c_str(),loc.begin.line, loc.begin.column, loc.end.line, loc.end.column,cur_yytext.c_str());   
+
+    char format_str[128] = { 0 };
+	snprintf(format_str, sizeof(format_str) - 1, "error parsed %s(%s)at %d.%d-%d.%d: %s\n",loc.end.filename->c_str(), err_message.c_str(),loc.begin.line, loc.begin.column, loc.end.line, loc.end.column,cur_yytext.c_str());
+    
+    err=std::string(format_str);
+    printf("%s",format_str);   
 }

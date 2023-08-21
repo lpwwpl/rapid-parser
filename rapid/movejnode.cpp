@@ -2,8 +2,8 @@
 #include "symboltable.h"
 #include "errors.h"
 
-extern int lineNumber;
-extern int eState;
+
+
 namespace Language
 {
     MoveJNode::MoveJNode(/*QString* name,*/ ListNode<ASTNode>* arguments) :  ASTNode(),/*_name(*name),*/

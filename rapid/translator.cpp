@@ -13,9 +13,12 @@
 #include <QDir>
 
 #include "VisitorPyPrint.h"
-int lineNumber = 1;
+
 extern std::stack<std::string> fileNames;
 extern std::vector<std::string> libPaths;
+
+extern std::string err;
+
 namespace Language
 {
 
@@ -36,7 +39,8 @@ void Translator::PrepareCommandLineArguments(const int argc, char **argv)
     SymbolTable::Instance().PushCommandLineArguments(argc-2, &argv[2]);
 }
 
-int Translator::parse(const QString& codestr)
+
+int Translator::parse(const QString& codestr, QString& err_qst)
 {    
     QFileInfo fileInfo(codestr);
     if (!fileInfo.exists())
@@ -46,7 +50,7 @@ int Translator::parse(const QString& codestr)
     if (!in_file.good())
     {
         std::cerr << BAD_SCRIPT_FILE << std::endl;
-        exit(EXIT_FAILURE);
+        return -1;
     }
     //fileNames.push("");       // Add the empty file name after last EOF.
     fileNames.push(codestr.toStdString()); // Add the top level file name.
@@ -55,16 +59,11 @@ int Translator::parse(const QString& codestr)
 
     if (parser.parse() != 0)
     {
+        err_qst = QString::fromStdString(err);
         std::cerr << "Parse failed!!\n";
+        return -1;
     }
-
-    /////PrepareCommandLineArguments(argc, argv);
-    //std::cout << "------compile Info:------" << std::endl;
-    //QString str = SymbolTable::Instance().EntryPoint()->toString();
-    //std::cout << str.toStdString() << std::endl;
-   //std::cout << "------RunTime Info:------" << std::endl;
-    //return SymbolTable::Instance().EntryPoint()->Execute().toInt();
-    //std::map<QString, Language::ModuleNode*> modules = SymbolTable::Instance().Modules();
+    SymbolTable sym = SymbolTable::Instance();
     std::map<QString, Language::ModuleNode*> modules = SymbolTable::Instance().Modules();
     int count = modules.size();
     QString str = "";
@@ -72,23 +71,21 @@ int Translator::parse(const QString& codestr)
     //for (auto elem : modules)
     //{
     //    Language::ModuleNode* module = elem.second;
-
     //    str.append(module->toRaw(0));
-
-
     //}
     for (auto elem : modules)
     {
         Language::ModuleNode* module = elem.second;
-
-        module->Accept(visitor);
-
-       
+        module->Accept(visitor);       
     }
+    
     str.append(visitor.str);
     str.append("\n");
     std::cout << str.toStdString() << std::endl;
     std::cout << "------RunTime Info:------" << std::endl;
+    int expectedArgumentCount = SymbolTable::Instance().EntryPoint()->Arguments()->size();
+    ////SymbolTable::Instance().PushCommandLineArguments(0,NULL);
+    ////SymbolTable::Instance().EntryPoint()->Execute().toInt();
     //QFile file("D:/_testlpw.txt");
     //bool isOK = file.open(QIODevice::WriteOnly);
     //file.write(str.toStdString().data());

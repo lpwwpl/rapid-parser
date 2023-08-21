@@ -288,31 +288,41 @@ void VisitorPyPrint::VisitFuncCall(FunctionCallNode* expr)
     //str.append("self.");
     str.append(expr->_name);
     str.append("(");
-    for (size_t i = 0; i < expr->_expressionList->size(); i++)
+    int expr_count = expr->_expressionList->size();
+    for (size_t i = 0; i < expr_count; i++)
     {
         ASTNode* arg = expr->_expressionList->at(i);
         ListNode<ASTNode>* list_arg = dynamic_cast<ListNode<ASTNode>*>(arg);
         if (list_arg)
         {
-            for (auto item : *list_arg)
+            int count = list_arg->size();
+            for (int j = 0; j < count;j++) //auto item : *list_arg
             {
+                auto item = list_arg->at(j);
+                str.append("\"");
                 item->Accept(*this);
-                str.append(",");
+                str.append("\"");
+
+                if(j<count-1)
+                    str.append(",");
             }
         }
         else
         {
             arg->Accept(*this);
-            str.append(",");
+            if (i < expr_count - 1)
+                str.append(",");
         }
 
     }
-    if (str.endsWith(","))
-    {
-        str = str.mid(0, str.size() - 1);
-    }
+    //if (str.endsWith(","))
+    //{
+    //    str = str.mid(0, str.size() - 1);
+    //}
     str.append(")");
 }
+//int,double,string..
+//var name
 void VisitorPyPrint::VisitVariable(VariableNode* expr)
 {
     for (int i = 0; i < indent; i++)
@@ -321,6 +331,11 @@ void VisitorPyPrint::VisitVariable(VariableNode* expr)
     }
  
     IdentifierNode* type = dynamic_cast<IdentifierNode*>(expr->_e_type);
+
+    QString typeName = type->getTypeName();
+    
+    //if(typeName == "")
+
     int curIndent = indent;
     indent = 0;
     if (expr->_src && expr->_expression)
@@ -648,7 +663,9 @@ void VisitorPyPrint::VisitParamNode(ParameterNode* expr)
     //str += s_type->getName();
     //str += " ";
     IdentifierNode* s_param = (IdentifierNode*)(expr->_param);
+    //str += "\"";
     str += s_param->getName();
+    //str += "\"";
 }
 
 void VisitorPyPrint::VisitOpera(OperatorNode* expr)
@@ -780,7 +797,20 @@ void VisitorPyPrint::VisitOffs(OffsNode* expr)
     str.append("Offs");
     //str.append(_name);
     str.append("(");
-    expr->_expression->Accept(*this);
+    ListNode<ASTNode>* nodes = dynamic_cast<ListNode<ASTNode>*>(expr->_expression);
+    if (nodes)
+    {
+        int count = nodes->size();
+        for (int i = 0; i < count; i++)
+        {
+            auto node = nodes->at(i);
+            node->Accept(*this);
+            if (i == (count - 1))
+                ;
+            else
+                str.append(",");
+        }
+    }
     str.append(")");
 }
 void VisitorPyPrint::VisitMoveJ(MoveJNode* expr)
@@ -935,13 +965,16 @@ void VisitorPyPrint::VisitVelset(VelSetNode* expr)
 
 void VisitorPyPrint::VisitParamWithModifier(ParamWithModifierNode* expr)
 {
+    str.append("\"");
     expr->_var_expr->Accept(*this);
     int curIndent = indent;
     indent = 0;
+
     for (auto stm : *expr->_dimRawType)
     {
         stm->Accept(*this);
     }
+    str.append("\"");
     indent = curIndent;
 }
     

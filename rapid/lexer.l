@@ -75,7 +75,7 @@ dig     [0-9]
 lnum    {dig}+([eE][-+]?{dig}+)?
 num1    {dig}+\.([eE][-+]?{dig}+)?
 num2    {dig}*\.{dig}+([eE][-+]?{dig}+)?
-number  {num1}|{num2}|{lnum}
+number  {num1}|{num2}
 
 
 SPACE       [ \f\n\r\t\v]+
@@ -252,7 +252,11 @@ import              BEGIN(incl);
 
 
 
-
+{lnum}  {
+                                                        yylval->ival = atoi(yytext);
+                                                        cur_yytext=yytext;
+                                                        return token::LNumber;
+                                                }
 {number}	{
                                                         yylval->dval = atof(yytext);
                                                         cur_yytext=yytext;

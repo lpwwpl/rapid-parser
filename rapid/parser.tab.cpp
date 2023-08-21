@@ -52,6 +52,7 @@
     
     static int yylex(Language::Parser::semantic_type *yylval, Language::location* loc,Language::Lexer  &lexer);
 
+    std::string err;
     extern std::string cur_yytext;
     extern std::stack<std::string> fileNames;
     extern Language::location loc;//ÉùÃ÷Î»ÖÃÊµÀý
@@ -76,7 +77,7 @@
     while (0)
 
 
-#line 80 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 81 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
 
 
 #ifndef YY_
@@ -169,7 +170,7 @@
 
 #line 15 "parser.y"
 namespace Language {
-#line 173 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 174 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
 
   /// Build a parser object.
   Parser::Parser (Lexer  &lexer_yyarg)
@@ -640,999 +641,1005 @@ namespace Language {
           switch (yyn)
             {
   case 2: // program: module_list
-#line 206 "parser.y"
+#line 207 "parser.y"
                 {}
-#line 646 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 647 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 3: // module_list: module
-#line 210 "parser.y"
+#line 211 "parser.y"
                 {(yylhs.value.moduleListNode) = new ListNode<ModuleNode>((yystack_[0].value.moduleNode));}
-#line 652 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 653 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 4: // module_list: module_list module
-#line 211 "parser.y"
+#line 212 "parser.y"
                          {(yystack_[1].value.moduleListNode)->push_back((yystack_[0].value.moduleNode));}
-#line 658 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 659 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 5: // module: MODULE Identifier declaration_list ENDMODULE
-#line 215 "parser.y"
+#line 216 "parser.y"
                                                      {(yylhs.value.moduleNode) = new ModuleNode((yystack_[2].value.sval),(yystack_[1].value.listNode));}
-#line 664 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 665 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 6: // declaration_list: declaration
-#line 220 "parser.y"
+#line 221 "parser.y"
                  {(yylhs.value.listNode) = new DeclareListNode((yystack_[0].value.pNode));}
-#line 670 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 671 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 7: // declaration_list: declaration_list declaration
-#line 221 "parser.y"
+#line 222 "parser.y"
                                      {(yystack_[1].value.listNode)->push_back((yystack_[0].value.pNode));}
-#line 676 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 677 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 8: // declaration: variable_declaration
-#line 225 "parser.y"
+#line 226 "parser.y"
                            {(yylhs.value.pNode)=(yystack_[0].value.variableNode);}
-#line 682 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 683 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 9: // declaration: function_declaration
-#line 226 "parser.y"
+#line 227 "parser.y"
                                {(yylhs.value.pNode)=(yystack_[0].value.functionNode);}
-#line 688 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 689 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 10: // declaration: var_assignment
-#line 227 "parser.y"
+#line 228 "parser.y"
                     {(yylhs.value.pNode)=(yystack_[0].value.pNode);}
-#line 694 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 695 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 11: // declaration: Record_declare
-#line 228 "parser.y"
+#line 229 "parser.y"
                      {(yylhs.value.pNode)=(yystack_[0].value.pNode);}
-#line 700 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 701 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 12: // Type: NUM
-#line 231 "parser.y"
+#line 232 "parser.y"
             { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("NUM")); (yylhs.value.idenNode) = id;}
-#line 706 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 707 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 13: // Type: BOOL
-#line 232 "parser.y"
+#line 233 "parser.y"
                 { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("BOOL")); (yylhs.value.idenNode) = id;}
-#line 712 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 713 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 14: // Type: STRING
-#line 233 "parser.y"
+#line 234 "parser.y"
                   { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("STRING")); (yylhs.value.idenNode) = id;}
-#line 718 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 719 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 15: // Type: ROBTARGET
-#line 234 "parser.y"
+#line 235 "parser.y"
                      { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("ROBTARGET")); (yylhs.value.idenNode) = id;}
-#line 724 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 725 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 16: // Type: JOINTTARGET
-#line 235 "parser.y"
+#line 236 "parser.y"
                         {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("JOINTTARGET")); (yylhs.value.idenNode) = id;}
-#line 730 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 731 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 17: // Type: WOBJDATA
-#line 236 "parser.y"
+#line 237 "parser.y"
                {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("WOBJDATA")); (yylhs.value.idenNode) = id;}
-#line 736 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 737 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 18: // Type: ZONEDATA
-#line 237 "parser.y"
+#line 238 "parser.y"
                {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("ZONEDATA")); (yylhs.value.idenNode) = id;}
-#line 742 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 743 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 19: // Type: SPEEDDATA
-#line 238 "parser.y"
+#line 239 "parser.y"
                 { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("SPEEDDATA")); (yylhs.value.idenNode) = id;}
-#line 748 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 749 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 20: // Type: TOOLDATA
-#line 239 "parser.y"
+#line 240 "parser.y"
                {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("TOOLDATA")); (yylhs.value.idenNode) = id;}
-#line 754 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 755 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 21: // Type: SEAMDATA
-#line 240 "parser.y"
+#line 241 "parser.y"
                {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("SEAMDATA")); (yylhs.value.idenNode) = id;}
-#line 760 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 761 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 22: // Type: WELDDATA
-#line 241 "parser.y"
+#line 242 "parser.y"
                {IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("WELDDATA")); (yylhs.value.idenNode) = id;}
-#line 766 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 767 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 23: // Type: Identifier
-#line 242 "parser.y"
+#line 243 "parser.y"
                  {(yylhs.value.idenNode) = new IdentifierNode((yystack_[0].value.sval)); /*$$ = $1;*/ }
-#line 772 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 773 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 24: // Record_declare: RECORD Identifier struct_members ENDRECORD
-#line 246 "parser.y"
+#line 247 "parser.y"
                                                { IdentifierNode* id = new IdentifierNode((yystack_[2].value.sval));(yylhs.value.pNode) = new StructDescNode(id, (yystack_[1].value.listNode)); }
-#line 778 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 779 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 25: // struct_members: var_decl
-#line 250 "parser.y"
+#line 251 "parser.y"
               { (yylhs.value.listNode) = new  ListNode<ASTNode>(); (yylhs.value.listNode)->push_back((yystack_[0].value.pNode)); }
-#line 784 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 785 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 26: // struct_members: struct_members var_decl
-#line 251 "parser.y"
+#line 252 "parser.y"
                               { (yystack_[1].value.listNode)->push_back((yystack_[0].value.pNode)); }
-#line 790 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 791 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 27: // var_decl: Type Identifier SEMICOLON
-#line 254 "parser.y"
+#line 255 "parser.y"
                               {IdentifierNode* id = new IdentifierNode((yystack_[1].value.sval)); (yylhs.value.pNode) = new VariableNode(VAR,(yystack_[2].value.idenNode),id,loc); }
-#line 796 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 797 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 28: // scope_pers: PERS
-#line 258 "parser.y"
+#line 259 "parser.y"
        { (yylhs.value.ival) =  PERS;}
-#line 802 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 803 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 29: // scope1: TASK PERS
-#line 262 "parser.y"
+#line 263 "parser.y"
               { (yylhs.value.ival) =  TASK_PERS;}
-#line 808 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 809 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 30: // scope1: CONST_L
-#line 264 "parser.y"
+#line 265 "parser.y"
             { (yylhs.value.ival) = eCONST;}
-#line 814 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 815 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 31: // scope2: VAR
-#line 268 "parser.y"
+#line 269 "parser.y"
         { (yylhs.value.ival) =  VAR;}
-#line 820 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 821 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 32: // function_declaration: PROC Identifier LC parameter_declaration_list RC function_body ENDPROC
-#line 276 "parser.y"
+#line 277 "parser.y"
                                                                            {(yylhs.value.functionNode) = new FunctionNode(nullptr, (yystack_[5].value.sval), (yystack_[3].value.parameterListNode), (yystack_[1].value.statementListNode)); }
-#line 826 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 827 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 33: // function_declaration: FUNC Type Identifier LC parameter_declaration_list RC function_body ENDFUNC
-#line 277 "parser.y"
+#line 278 "parser.y"
                                                                                  {(yylhs.value.functionNode) = new FunctionNode((yystack_[6].value.idenNode), (yystack_[5].value.sval), (yystack_[3].value.parameterListNode), (yystack_[1].value.statementListNode)); }
-#line 832 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 833 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 34: // parameter_declaration_list: parameter_declaration
-#line 281 "parser.y"
+#line 282 "parser.y"
                           { (yylhs.value.parameterListNode) = new ListNode<ParameterNode>((yystack_[0].value.parameterNode)); }
-#line 838 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 839 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 35: // parameter_declaration_list: parameter_declaration_list COMMA parameter_declaration
-#line 282 "parser.y"
+#line 283 "parser.y"
                                                              {(yystack_[2].value.parameterListNode)->push_back((yystack_[0].value.parameterNode));}
-#line 844 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 845 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 36: // parameter_declaration_list: %empty
-#line 283 "parser.y"
+#line 284 "parser.y"
       {(yylhs.value.parameterListNode) = new ListNode<ParameterNode>();}
-#line 850 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 851 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 37: // parameter_declaration: Type Identifier
-#line 287 "parser.y"
+#line 288 "parser.y"
                     {IdentifierNode* id = new IdentifierNode((yystack_[0].value.sval));(yylhs.value.parameterNode) = new ParameterNode((yystack_[1].value.idenNode),id,nullptr);}
-#line 856 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 857 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 38: // parameter_declaration: INOUT Type Identifier
-#line 289 "parser.y"
+#line 290 "parser.y"
     {
         IdentifierNode* inout = new IdentifierNode(&QString::fromLatin1("INOUT"));
         IdentifierNode* id = new IdentifierNode((yystack_[0].value.sval));
         (yylhs.value.parameterNode) = new ParameterNode(inout,(yystack_[1].value.idenNode),id,nullptr);
     }
-#line 866 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 867 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 39: // func_call_parameter_list: expression
-#line 298 "parser.y"
+#line 299 "parser.y"
     {
         (yylhs.value.listNode) = new ListNode<ASTNode>((yystack_[0].value.pNode)); 
     }
-#line 874 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 875 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 40: // func_call_parameter_list: func_call_parameter_list COMMA expression
-#line 302 "parser.y"
+#line 303 "parser.y"
         {
         (yystack_[2].value.listNode)->push_back((yystack_[0].value.pNode));   
 	}
-#line 882 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 883 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 41: // function_body: %empty
-#line 316 "parser.y"
+#line 317 "parser.y"
   {(yylhs.value.statementListNode)=NULL;}
-#line 888 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 889 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 42: // function_body: statement_list
-#line 317 "parser.y"
+#line 318 "parser.y"
                      {(yylhs.value.statementListNode) = (yystack_[0].value.statementListNode);}
-#line 894 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 895 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 43: // statement_list: statement
-#line 321 "parser.y"
+#line 322 "parser.y"
               {(yylhs.value.statementListNode) = new StatementListNode((yystack_[0].value.pNode));}
-#line 900 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 901 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 44: // statement_list: statement_list statement
-#line 322 "parser.y"
+#line 323 "parser.y"
                                {(yystack_[1].value.statementListNode)->push_back((yystack_[0].value.pNode));}
-#line 906 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 907 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 45: // function_call: Identifier SEMICOLON
-#line 327 "parser.y"
+#line 328 "parser.y"
                            { (yylhs.value.pNode) = new FunctionCallNode((yystack_[1].value.sval), new ListNode<ASTNode>());}
-#line 912 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 913 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 46: // function_call: Identifier func_call_parameter_list SEMICOLON
-#line 328 "parser.y"
+#line 329 "parser.y"
                                                      { (yylhs.value.pNode) = new FunctionCallNode((yystack_[2].value.sval), (yystack_[1].value.listNode));}
-#line 918 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 919 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 47: // inst_modifer: CONC
-#line 332 "parser.y"
+#line 333 "parser.y"
             { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\Conc")); (yylhs.value.pNode) = id;}
-#line 924 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 925 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 48: // inst_modifer: TOOL_P
-#line 333 "parser.y"
+#line 334 "parser.y"
              { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\Tool")); (yylhs.value.pNode) = id;}
-#line 930 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 931 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 49: // inst_modifer: PLEN
-#line 334 "parser.y"
+#line 335 "parser.y"
            { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\PLength")); (yylhs.value.pNode) = id;}
-#line 936 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 937 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 50: // inst_modifer: MAXTIME
-#line 335 "parser.y"
+#line 336 "parser.y"
               { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\MaxTime")); (yylhs.value.pNode) = id;}
-#line 942 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 943 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 51: // inst_modifer: TIMEFLAG
-#line 336 "parser.y"
+#line 337 "parser.y"
                { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\TimeFlag")); (yylhs.value.pNode) = id;}
-#line 948 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 949 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 52: // inst_modifer: WOBJ_P
-#line 337 "parser.y"
+#line 338 "parser.y"
               { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\WObj")); (yylhs.value.pNode) = id;}
-#line 954 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 955 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 53: // inst_modifer: SEAM_NAME
-#line 338 "parser.y"
+#line 339 "parser.y"
                 { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\SeamName")); (yylhs.value.pNode) = id;}
-#line 960 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 961 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 54: // inst_modifer: ZONE_P
-#line 339 "parser.y"
+#line 340 "parser.y"
              { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\Z")); (yylhs.value.pNode) = id;}
-#line 966 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 967 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 55: // inst_modifer: INPOS
-#line 340 "parser.y"
+#line 341 "parser.y"
             { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\InPos")); (yylhs.value.pNode) = id;}
-#line 972 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 973 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 56: // inst_modifer: VEL_P
-#line 341 "parser.y"
+#line 342 "parser.y"
             { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\V")); (yylhs.value.pNode) = id;}
-#line 978 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 979 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 57: // inst_modifer: TCP_P
-#line 342 "parser.y"
+#line 343 "parser.y"
             { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\T")); (yylhs.value.pNode) = id;}
-#line 984 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 985 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 58: // inst_modifer: NOEOFFS
-#line 343 "parser.y"
+#line 344 "parser.y"
               { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\NoEOffs")); (yylhs.value.pNode) = id;}
-#line 990 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 991 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 59: // inst_modifer: ID_P
-#line 344 "parser.y"
+#line 345 "parser.y"
            { IdentifierNode* id = new IdentifierNode(&QString::fromLatin1("\\ID")); (yylhs.value.pNode) = id;}
-#line 996 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 997 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 60: // statement: variable_for_body
-#line 348 "parser.y"
+#line 349 "parser.y"
                       {(yylhs.value.pNode) = (yystack_[0].value.variableNode);}
-#line 1002 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1003 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 61: // statement: assignment
-#line 349 "parser.y"
+#line 350 "parser.y"
                   {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1008 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1009 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 62: // statement: if
-#line 350 "parser.y"
+#line 351 "parser.y"
          { (yylhs.value.pNode) = (yystack_[0].value.pNode); }
-#line 1014 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1015 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 63: // statement: while_loop
-#line 351 "parser.y"
+#line 352 "parser.y"
                  { (yylhs.value.pNode) = (yystack_[0].value.pNode); }
-#line 1020 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1021 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 64: // statement: for
-#line 352 "parser.y"
+#line 353 "parser.y"
           { (yylhs.value.pNode) = (yystack_[0].value.pNode); }
-#line 1026 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1027 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 65: // statement: return
-#line 353 "parser.y"
+#line 354 "parser.y"
               { (yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1032 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1033 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 66: // statement: function_call
-#line 354 "parser.y"
+#line 355 "parser.y"
                     {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1038 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1039 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 67: // statement: MOVEJ func_call_parameter_list SEMICOLON
-#line 355 "parser.y"
+#line 356 "parser.y"
                                                {(yylhs.value.pNode) = new MoveJNode((yystack_[1].value.listNode));}
-#line 1044 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1045 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 68: // statement: ACTUNIT func_call_parameter_list SEMICOLON
-#line 356 "parser.y"
+#line 357 "parser.y"
                                                 {(yylhs.value.pNode) = new ActUnitNode((yystack_[1].value.listNode));}
-#line 1050 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1051 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 69: // statement: ARCLSTART func_call_parameter_list SEMICOLON
-#line 357 "parser.y"
+#line 358 "parser.y"
                                                   {(yylhs.value.pNode) = new ArcLStartNode((yystack_[1].value.listNode));}
-#line 1056 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1057 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 70: // statement: ARCL func_call_parameter_list SEMICOLON
-#line 358 "parser.y"
+#line 359 "parser.y"
                                              {(yylhs.value.pNode) = new ArcLNode((yystack_[1].value.listNode));}
-#line 1062 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1063 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 71: // statement: ARCC func_call_parameter_list SEMICOLON
-#line 359 "parser.y"
+#line 360 "parser.y"
                                              {(yylhs.value.pNode) = new ArccNode((yystack_[1].value.listNode));}
-#line 1068 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1069 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 72: // statement: ARCEND func_call_parameter_list SEMICOLON
-#line 360 "parser.y"
+#line 361 "parser.y"
                                                {(yylhs.value.pNode) = new ArcEndNode((yystack_[1].value.listNode));}
-#line 1074 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1075 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 73: // statement: MOVEL func_call_parameter_list SEMICOLON
-#line 361 "parser.y"
+#line 362 "parser.y"
                                               { (yylhs.value.pNode) = new MoveLNode((yystack_[1].value.listNode));}
-#line 1080 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1081 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 74: // statement: MOVEABSJ func_call_parameter_list SEMICOLON
-#line 362 "parser.y"
+#line 363 "parser.y"
                                                  {(yylhs.value.pNode) = new MoveABSJNode((yystack_[1].value.listNode));}
-#line 1086 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1087 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 75: // statement: DEACTUNIT func_call_parameter_list SEMICOLON
-#line 363 "parser.y"
+#line 364 "parser.y"
                                                   { (yylhs.value.pNode) = new DeActUnitNode((yystack_[1].value.listNode));}
-#line 1092 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1093 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 76: // statement: TPWRITE expression SEMICOLON
-#line 364 "parser.y"
+#line 365 "parser.y"
                                   {(yylhs.value.pNode) = new TpWriteNode((yystack_[1].value.pNode));}
-#line 1098 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1099 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 77: // statement: ACCSET expression COMMA expression SEMICOLON
-#line 365 "parser.y"
+#line 366 "parser.y"
                                                    {(yylhs.value.pNode) = new AccSetNode((yystack_[3].value.pNode),(yystack_[1].value.pNode));}
-#line 1104 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1105 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 78: // statement: VELSET expression COMMA expression SEMICOLON
-#line 366 "parser.y"
+#line 367 "parser.y"
                                                   {(yylhs.value.pNode) = new VelSetNode((yystack_[3].value.pNode),(yystack_[1].value.pNode));}
-#line 1110 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1111 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 79: // statement: WAITTIME func_call_parameter_list SEMICOLON
-#line 367 "parser.y"
+#line 368 "parser.y"
                                                   {(yylhs.value.pNode) = new WaitTimeNode((yystack_[1].value.listNode));}
-#line 1116 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1117 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 80: // statement: SETDO Identifier COMMA expression SEMICOLON
-#line 368 "parser.y"
+#line 369 "parser.y"
                                                    {IdentifierNode* id = new IdentifierNode((yystack_[3].value.sval));(yylhs.value.pNode) = new SetDoNode(id,(yystack_[1].value.pNode));}
-#line 1122 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1123 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 81: // statement: SET Identifier SEMICOLON
-#line 369 "parser.y"
+#line 370 "parser.y"
                                {IdentifierNode* id = new IdentifierNode((yystack_[1].value.sval));(yylhs.value.pNode) = new SetNode(id);}
-#line 1128 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1129 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 82: // statement: RESET Identifier SEMICOLON
-#line 370 "parser.y"
+#line 371 "parser.y"
                                  {IdentifierNode* id = new IdentifierNode((yystack_[1].value.sval));(yylhs.value.pNode) = new ReSetNode(id);}
-#line 1134 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1135 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 83: // statement: WAITDI Identifier COMMA expression SEMICOLON
-#line 371 "parser.y"
+#line 372 "parser.y"
                                                    {(yylhs.value.pNode) = new WaitDiNode((yystack_[3].value.sval),(yystack_[1].value.pNode));}
-#line 1140 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1141 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 84: // statement: WAITUNTIL expression SEMICOLON
-#line 372 "parser.y"
+#line 373 "parser.y"
                                      {(yylhs.value.pNode) = new WaitUntilNode((yystack_[1].value.pNode));}
-#line 1146 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1147 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 85: // statement: PULSEDO func_call_parameter_list SEMICOLON
-#line 373 "parser.y"
+#line 374 "parser.y"
                                                  {  (yylhs.value.pNode) = new PulseDONode((yystack_[1].value.listNode));}
-#line 1152 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1153 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 86: // statement: switch
-#line 374 "parser.y"
+#line 375 "parser.y"
              {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1158 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1159 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 87: // return: RETURN SEMICOLON
-#line 378 "parser.y"
+#line 379 "parser.y"
                  {(yylhs.value.pNode) = new ReturnNode(NULL); }
-#line 1164 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1165 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 88: // return: RETURN expression SEMICOLON
-#line 379 "parser.y"
+#line 380 "parser.y"
                                 {(yylhs.value.pNode) = new ReturnNode((yystack_[1].value.pNode)); }
-#line 1170 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1171 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 89: // while_loop: WHILE expression DO function_body ENDWHILE
-#line 383 "parser.y"
+#line 384 "parser.y"
                                                             { (yylhs.value.pNode) = new WhileNode((yystack_[3].value.pNode), (yystack_[1].value.statementListNode)); }
-#line 1176 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1177 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 90: // switch: TEST expression switch_case_list ENDTEST
-#line 388 "parser.y"
+#line 389 "parser.y"
     {
         (yylhs.value.pNode) = new SWitchNode((yystack_[2].value.pNode),(yystack_[1].value.listNode),NULL);
     }
-#line 1184 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1185 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 91: // switch_case_list: switch_case_define
-#line 396 "parser.y"
+#line 397 "parser.y"
         {
         (yylhs.value.listNode) = new SWitchCaseListNode((yystack_[0].value.pNode));
 	}
-#line 1192 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1193 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 92: // switch_case_list: switch_case_list switch_case_define
-#line 401 "parser.y"
+#line 402 "parser.y"
         {
         (yystack_[1].value.listNode)->push_back((yystack_[0].value.pNode));   
 	}
-#line 1200 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1201 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 93: // switch_case_define: CASE expression COLON function_body
-#line 408 "parser.y"
+#line 409 "parser.y"
         {
         (yylhs.value.pNode) = new CaseNode((yystack_[2].value.pNode),(yystack_[0].value.statementListNode)); //$$->dimListType->push_back($1);
 	}
-#line 1208 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1209 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 94: // for: FOR Identifier FROM expression TO expression STEP expression DO function_body ENDFOR
-#line 414 "parser.y"
+#line 415 "parser.y"
                                                                                          {  IdentifierNode* id = new IdentifierNode((yystack_[9].value.sval));(yylhs.value.pNode) = new ForNode(id,(yystack_[7].value.pNode),(yystack_[5].value.pNode),(yystack_[3].value.pNode),(yystack_[1].value.statementListNode));}
-#line 1214 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1215 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 95: // if: IF expression THEN function_body ENDIF
-#line 418 "parser.y"
+#line 419 "parser.y"
                                              { (yylhs.value.pNode) = new IfNode((yystack_[3].value.pNode), (yystack_[1].value.statementListNode)); }
-#line 1220 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1221 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 96: // if: IF expression statement
-#line 419 "parser.y"
+#line 420 "parser.y"
                                { (yylhs.value.pNode) = new IfNode((yystack_[1].value.pNode), (yystack_[0].value.pNode)); }
-#line 1226 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1227 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 97: // if: IF expression THEN function_body elseif_statment_list ENDIF
-#line 420 "parser.y"
+#line 421 "parser.y"
                                                                   { (yylhs.value.pNode) = new IfNode((yystack_[4].value.pNode), (yystack_[2].value.statementListNode), (yystack_[1].value.elseifListNode)); }
-#line 1232 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1233 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 98: // elseif_statment_list: elseif_statment
-#line 424 "parser.y"
+#line 425 "parser.y"
                      {(yylhs.value.elseifListNode) = new ListNode<ElseIfNode>((yystack_[0].value.elseif_stmNode));}
-#line 1238 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1239 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 99: // elseif_statment_list: elseif_statment_list elseif_statment
-#line 425 "parser.y"
+#line 426 "parser.y"
                                            {(yystack_[1].value.elseifListNode)->push_back((yystack_[0].value.elseif_stmNode));}
-#line 1244 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1245 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 100: // elseif_statment: ELSE function_body
-#line 429 "parser.y"
+#line 430 "parser.y"
                         { (yylhs.value.elseif_stmNode) = new ElseIfNode((yystack_[0].value.statementListNode)); }
-#line 1250 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1251 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 101: // elseif_statment: ELSEIF expression THEN function_body
-#line 430 "parser.y"
+#line 431 "parser.y"
                                            { (yylhs.value.elseif_stmNode) = new ElseIfNode((yystack_[2].value.pNode), (yystack_[0].value.statementListNode)); }
-#line 1256 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1257 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 102: // variable_declaration: scope1 Type var_expression SEMICOLON
-#line 435 "parser.y"
+#line 436 "parser.y"
                                           { (yylhs.value.variableNode) = new VariableNode((yystack_[3].value.ival),(yystack_[2].value.idenNode),(yystack_[1].value.pNode),loc);}
-#line 1262 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1263 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 103: // variable_declaration: scope_pers Type var_expression SEMICOLON
-#line 436 "parser.y"
+#line 437 "parser.y"
                                                { (yylhs.value.variableNode) = new VariableNode((yystack_[3].value.ival),(yystack_[2].value.idenNode),(yystack_[1].value.pNode),loc);}
-#line 1268 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1269 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 104: // variable_declaration: scope2 Type var_expression SEMICOLON
-#line 437 "parser.y"
+#line 438 "parser.y"
                                            { (yylhs.value.variableNode) = new VariableNode((yystack_[3].value.ival),(yystack_[2].value.idenNode),(yystack_[1].value.pNode),loc);}
-#line 1274 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1275 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 105: // variable_for_body: scope2 Type var_expression SEMICOLON
-#line 441 "parser.y"
+#line 442 "parser.y"
                                          { (yylhs.value.variableNode) = new VariableNode((yystack_[3].value.ival),(yystack_[2].value.idenNode),(yystack_[1].value.pNode),loc);}
-#line 1280 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1281 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 106: // variable_for_body: scope2 Type Identifier ASS expression SEMICOLON
-#line 442 "parser.y"
+#line 443 "parser.y"
                                                       { IdentifierNode* id = new IdentifierNode((yystack_[3].value.sval));(yylhs.value.variableNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),id,(yystack_[1].value.pNode),loc);}
-#line 1286 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1287 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 107: // variable_for_body: scope2 Type array_index ASS expression SEMICOLON
-#line 443 "parser.y"
+#line 444 "parser.y"
                                                          { (yylhs.value.variableNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),(yystack_[3].value.pNode),(yystack_[1].value.pNode),loc);}
-#line 1292 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1293 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 108: // variable_for_body: scope2 Type struct_index ASS expression SEMICOLON
-#line 444 "parser.y"
+#line 445 "parser.y"
                                                         { (yylhs.value.variableNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),(yystack_[3].value.pNode),(yystack_[1].value.pNode),loc);}
-#line 1298 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1299 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 109: // var_expression: Identifier
-#line 448 "parser.y"
+#line 449 "parser.y"
                { (yylhs.value.pNode) = new IdentifierNode((yystack_[0].value.sval)); }
-#line 1304 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1305 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 110: // var_expression: array_index
-#line 449 "parser.y"
+#line 450 "parser.y"
                   { (yylhs.value.pNode) = (yystack_[0].value.pNode); }
-#line 1310 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1311 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 111: // var_expression: struct_index
-#line 450 "parser.y"
+#line 451 "parser.y"
                    {(yylhs.value.pNode) = (yystack_[0].value.pNode); }
-#line 1316 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1317 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 112: // var_assignment: scope1 Type Identifier ASS expression SEMICOLON
-#line 456 "parser.y"
+#line 457 "parser.y"
                                                     { IdentifierNode* id = new IdentifierNode((yystack_[3].value.sval));(yylhs.value.pNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),id,(yystack_[1].value.pNode),loc);}
-#line 1322 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1323 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 113: // var_assignment: scope2 Type Identifier ASS expression SEMICOLON
-#line 457 "parser.y"
+#line 458 "parser.y"
                                                       { IdentifierNode* id = new IdentifierNode((yystack_[3].value.sval));(yylhs.value.pNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),id,(yystack_[1].value.pNode),loc);}
-#line 1328 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1329 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 114: // var_assignment: scope_pers Type Identifier ASS expression SEMICOLON
-#line 458 "parser.y"
+#line 459 "parser.y"
                                                           { IdentifierNode* id = new IdentifierNode((yystack_[3].value.sval));(yylhs.value.pNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),id,(yystack_[1].value.pNode),loc);}
-#line 1334 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1335 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 115: // var_assignment: scope1 Type array_index ASS expression SEMICOLON
-#line 459 "parser.y"
+#line 460 "parser.y"
                                                          { (yylhs.value.pNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),(yystack_[3].value.pNode),(yystack_[1].value.pNode),loc);}
-#line 1340 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1341 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 116: // var_assignment: scope2 Type array_index ASS expression SEMICOLON
-#line 460 "parser.y"
+#line 461 "parser.y"
                                                          { (yylhs.value.pNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),(yystack_[3].value.pNode),(yystack_[1].value.pNode),loc);}
-#line 1346 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1347 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 117: // var_assignment: scope_pers Type array_index ASS expression SEMICOLON
-#line 461 "parser.y"
+#line 462 "parser.y"
                                                              { (yylhs.value.pNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),(yystack_[3].value.pNode),(yystack_[1].value.pNode),loc);}
-#line 1352 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1353 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 118: // var_assignment: scope1 Type struct_index ASS expression SEMICOLON
-#line 462 "parser.y"
+#line 463 "parser.y"
                                                         { (yylhs.value.pNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),(yystack_[3].value.pNode),(yystack_[1].value.pNode),loc);}
-#line 1358 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1359 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 119: // var_assignment: scope2 Type struct_index ASS expression SEMICOLON
-#line 463 "parser.y"
+#line 464 "parser.y"
                                                         { (yylhs.value.pNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),(yystack_[3].value.pNode),(yystack_[1].value.pNode),loc);}
-#line 1364 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1365 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 120: // var_assignment: scope_pers Type struct_index ASS expression SEMICOLON
-#line 464 "parser.y"
+#line 465 "parser.y"
                                                             { (yylhs.value.pNode) = new VariableNode((yystack_[5].value.ival),(yystack_[4].value.idenNode),(yystack_[3].value.pNode),(yystack_[1].value.pNode),loc);}
-#line 1370 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1371 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 121: // assignment: var_expression ASS expression
-#line 471 "parser.y"
+#line 472 "parser.y"
     { 
         (yylhs.value.pNode) = new AssignmentNode((yystack_[2].value.pNode), (yystack_[0].value.pNode));
     }
-#line 1378 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1379 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 122: // assignment: var_expression ASS expression SEMICOLON
-#line 476 "parser.y"
+#line 477 "parser.y"
     {
         (yylhs.value.pNode) = new AssignmentNode((yystack_[3].value.pNode), (yystack_[1].value.pNode));
     }
-#line 1386 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1387 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 123: // dim_num_stm: expression
-#line 484 "parser.y"
+#line 485 "parser.y"
     {
         (yylhs.value.dim_num_stmNode) = new DimNumsNode((yystack_[0].value.pNode)); 
     }
-#line 1394 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1395 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 124: // dim_num_stm: dim_num_stm COMMA expression
-#line 488 "parser.y"
+#line 489 "parser.y"
         {
        (yystack_[2].value.dim_num_stmNode)->push_back((yystack_[0].value.pNode));   
 	}
-#line 1402 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1403 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 125: // struct_index: var_expression DOT Identifier
-#line 494 "parser.y"
+#line 495 "parser.y"
                                    { IdentifierNode* id = new IdentifierNode((yystack_[0].value.sval));(yylhs.value.pNode) = new StructIndexNode((yystack_[2].value.pNode),id); }
-#line 1408 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1409 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 126: // array_index: Identifier LBRACE expression RBRACE
-#line 498 "parser.y"
+#line 499 "parser.y"
                                      {IdentifierNode* id = new IdentifierNode((yystack_[3].value.sval));(yylhs.value.pNode) = new ArrayIndexNode(id, (yystack_[1].value.pNode));}
-#line 1414 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1415 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 127: // offs_expr: OFFS LC func_call_parameter_list RC
-#line 502 "parser.y"
+#line 503 "parser.y"
                                      {(yylhs.value.pNode) = new OffsNode((yystack_[1].value.listNode));}
-#line 1420 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1421 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 128: // reltool_expr: RELTOOl LC func_call_parameter_list RC
-#line 506 "parser.y"
+#line 507 "parser.y"
                                         {(yylhs.value.pNode) = new RelToolNode((yystack_[1].value.listNode));}
-#line 1426 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1427 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 129: // op_expr: expression ADD expression
-#line 510 "parser.y"
+#line 511 "parser.y"
                              { (yylhs.value.pNode) = new OperatorNode(token::ADD, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1432 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1433 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 130: // op_expr: expression SUB expression
-#line 511 "parser.y"
+#line 512 "parser.y"
                              { (yylhs.value.pNode) = new OperatorNode(token::SUB, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1438 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1439 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 131: // op_expr: SUB expression
-#line 512 "parser.y"
+#line 513 "parser.y"
                                { (yylhs.value.pNode) = new OperatorNode(token::UMINUS, (yystack_[0].value.pNode)); }
-#line 1444 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1445 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 132: // op_expr: expression MUL expression
-#line 513 "parser.y"
+#line 514 "parser.y"
                              { (yylhs.value.pNode) = new OperatorNode(token::MUL, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1450 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1451 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 133: // op_expr: expression LT expression
-#line 514 "parser.y"
+#line 515 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::LT, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1456 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1457 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 134: // op_expr: expression GT expression
-#line 515 "parser.y"
+#line 516 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::GT, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1462 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1463 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 135: // op_expr: expression GE expression
-#line 516 "parser.y"
+#line 517 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::GE, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1468 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1469 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 136: // op_expr: expression LE expression
-#line 517 "parser.y"
+#line 518 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::LE, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1474 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1475 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 137: // op_expr: expression NE expression
-#line 518 "parser.y"
+#line 519 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::NE, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1480 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1481 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 138: // op_expr: expression EQ expression
-#line 519 "parser.y"
+#line 520 "parser.y"
                             { (yylhs.value.pNode) = new OperatorNode(token::EQ, (yystack_[2].value.pNode), (yystack_[0].value.pNode)); }
-#line 1486 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1487 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 139: // op_expr: expression AND expression
-#line 520 "parser.y"
+#line 521 "parser.y"
                              {(yylhs.value.pNode) = new OperatorNode(token::AND, (yystack_[2].value.pNode), (yystack_[0].value.pNode));}
-#line 1492 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1493 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 140: // op_expr: expression OR expression
-#line 521 "parser.y"
+#line 522 "parser.y"
                             {(yylhs.value.pNode) = new OperatorNode(token::OR, (yystack_[2].value.pNode), (yystack_[0].value.pNode));}
-#line 1498 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1499 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 141: // op_expr: expression MOD expression
-#line 522 "parser.y"
+#line 523 "parser.y"
                              {(yylhs.value.pNode) = new OperatorNode(token::MOD, (yystack_[2].value.pNode), (yystack_[0].value.pNode));}
-#line 1504 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1505 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 142: // op_expr: NOT expression
-#line 525 "parser.y"
+#line 526 "parser.y"
                               {(yylhs.value.pNode) = new OperatorNode(token::NOT, (yystack_[0].value.pNode));}
-#line 1510 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1511 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 143: // op_expr: LC expression RC
-#line 526 "parser.y"
+#line 527 "parser.y"
                     {(yylhs.value.pNode) = (yylhs.value.pNode) = new OperatorNode(token::LC, (yystack_[1].value.pNode));}
-#line 1516 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1517 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
   case 144: // inst_expr: inst_modifer
-#line 530 "parser.y"
+#line 531 "parser.y"
                {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1522 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1523 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 145: // inst_expr: inst_modifer ASS var_expression
+  case 145: // inst_expr: inst_modifer ASS String
 #line 532 "parser.y"
+                             { StringLiteralNode* str = new StringLiteralNode((yystack_[0].value.sval));(yylhs.value.pNode) = new AssignmentNode((yystack_[2].value.pNode),str);}
+#line 1529 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+    break;
+
+  case 146: // inst_expr: inst_modifer ASS var_expression
+#line 534 "parser.y"
  {
         (yylhs.value.pNode) = new AssignmentNode((yystack_[2].value.pNode), (yystack_[0].value.pNode));
  }
-#line 1530 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1537 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 146: // inst_expr_list: inst_expr
-#line 538 "parser.y"
+  case 147: // inst_expr_list: inst_expr
+#line 540 "parser.y"
             {(yylhs.value.listNode) = new ListNode<ASTNode>((yystack_[0].value.pNode)); }
-#line 1536 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1543 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 147: // inst_expr_list: inst_expr_list inst_expr
-#line 539 "parser.y"
+  case 148: // inst_expr_list: inst_expr_list inst_expr
+#line 541 "parser.y"
                              { (yystack_[1].value.listNode)->push_back((yystack_[0].value.pNode));   }
-#line 1542 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1549 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 148: // expression: String
-#line 544 "parser.y"
-        { (yylhs.value.pNode) = new StringLiteralNode((yystack_[0].value.sval));}
-#line 1548 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
-    break;
-
-  case 149: // expression: FNULL
-#line 545 "parser.y"
-         { (yylhs.value.pNode) = new NullNode();}
-#line 1554 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
-    break;
-
-  case 150: // expression: Number
+  case 149: // expression: String
 #line 546 "parser.y"
-          {(yylhs.value.pNode) = new NumberLiteralNode((yystack_[0].value.dval)); }
-#line 1560 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+        { (yylhs.value.pNode) = new StringLiteralNode((yystack_[0].value.sval));}
+#line 1555 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 151: // expression: LNumber
+  case 150: // expression: FNULL
 #line 547 "parser.y"
-           {(yylhs.value.pNode) = new Integer((yystack_[0].value.ival)); }
-#line 1566 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+         { (yylhs.value.pNode) = new NullNode();}
+#line 1561 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 152: // expression: FTRUE
+  case 151: // expression: Number
 #line 548 "parser.y"
-         {(yylhs.value.pNode) = new Boolean(1);}
-#line 1572 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+          {(yylhs.value.pNode) = new NumberLiteralNode((yystack_[0].value.dval)); }
+#line 1567 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 153: // expression: FFALSE
+  case 152: // expression: LNumber
 #line 549 "parser.y"
-          {(yylhs.value.pNode) = new Boolean(0);}
-#line 1578 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+           {(yylhs.value.pNode) = new Integer((yystack_[0].value.ival)); }
+#line 1573 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 154: // expression: var_expression
+  case 153: // expression: FTRUE
 #line 550 "parser.y"
-                  {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1584 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+         {(yylhs.value.pNode) = new Boolean(1);}
+#line 1579 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 155: // expression: op_expr
+  case 154: // expression: FFALSE
 #line 551 "parser.y"
-           {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1590 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+          {(yylhs.value.pNode) = new Boolean(0);}
+#line 1585 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 156: // expression: offs_expr
+  case 155: // expression: var_expression
 #line 552 "parser.y"
-            {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1596 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+                  {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
+#line 1591 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 157: // expression: reltool_expr
+  case 156: // expression: op_expr
 #line 553 "parser.y"
-                { (yylhs.value.pNode) = (yystack_[0].value.pNode);}
-#line 1602 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+           {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
+#line 1597 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 158: // expression: paramWithMod_stm
+  case 157: // expression: offs_expr
+#line 554 "parser.y"
+            {(yylhs.value.pNode) = (yystack_[0].value.pNode);}
+#line 1603 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+    break;
+
+  case 158: // expression: reltool_expr
 #line 555 "parser.y"
-                    {(yylhs.value.pNode)=(yystack_[0].value.paramWithModifi);}
-#line 1608 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+                { (yylhs.value.pNode) = (yystack_[0].value.pNode);}
+#line 1609 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 159: // expression: inst_expr_list
-#line 556 "parser.y"
-                  {(yylhs.value.pNode)=(yystack_[0].value.listNode);}
-#line 1614 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
-    break;
-
-  case 160: // expression: Identifier LC func_call_parameter_list RC
+  case 159: // expression: paramWithMod_stm
 #line 557 "parser.y"
-                                              { (yylhs.value.pNode) = new FunctionCallNode((yystack_[3].value.sval), (yystack_[1].value.listNode));}
-#line 1620 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+                    {(yylhs.value.pNode)=(yystack_[0].value.paramWithModifi);}
+#line 1615 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 161: // expression: LR dim_num_stm RR
+  case 160: // expression: inst_expr_list
 #line 558 "parser.y"
+                  {(yylhs.value.pNode)=(yystack_[0].value.listNode);}
+#line 1621 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+    break;
+
+  case 161: // expression: Identifier LC func_call_parameter_list RC
+#line 559 "parser.y"
+                                              { (yylhs.value.pNode) = new FunctionCallNode((yystack_[3].value.sval), (yystack_[1].value.listNode));}
+#line 1627 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+    break;
+
+  case 162: // expression: LR dim_num_stm RR
+#line 560 "parser.y"
                       {(yylhs.value.pNode) = (yystack_[1].value.dim_num_stmNode);}
-#line 1626 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1633 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
-  case 162: // paramWithMod_stm: var_expression inst_expr_list
-#line 562 "parser.y"
+  case 163: // paramWithMod_stm: var_expression inst_expr_list
+#line 564 "parser.y"
                                 {(yylhs.value.paramWithModifi) = new  ParamWithModifierNode((yystack_[1].value.pNode),(yystack_[0].value.listNode)); }
-#line 1632 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1639 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
     break;
 
 
-#line 1636 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 1643 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
 
             default:
               break;
@@ -1984,48 +1991,49 @@ namespace Language {
   }
 
 
-  const short Parser::yypact_ninf_ = -142;
+  const short Parser::yypact_ninf_ = -143;
 
   const signed char Parser::yytable_ninf_ = -1;
 
   const short
   Parser::yypact_[] =
   {
-     -95,  -109,    48,   -95,  -142,  1146,  -142,  -142,  1125,   -94,
-    -142,  -142,  -142,   -55,     5,   193,  -142,  -142,  1125,  1125,
-    1125,  -142,  -142,  -142,  -142,  -142,  -142,  -142,  -142,  -142,
-    -142,  -142,  -142,  -142,  -142,  -142,   -35,  1125,    56,  -142,
-    -142,  -142,   -34,    15,    65,    64,    67,   230,  -142,  1112,
-     -24,    -5,    52,   105,    20,    -1,   126,   142,    34,    26,
-     147,   157,  1112,   140,  -142,  -142,  1125,    91,   -28,  -142,
-     419,   419,    92,  -142,   419,   419,   419,  -142,   419,   419,
-     419,  -142,   419,   419,    61,  -142,    95,  -142,  1112,    72,
-     419,  -142,  -142,   158,   162,  -142,  -142,  -142,  -142,  -142,
-    -142,  -142,  -142,  -142,  -142,  -142,   419,   419,  -142,   419,
-    -142,  -142,  -142,  -142,    22,  -142,   161,  1250,  -142,  -142,
-    -142,  -142,  -142,  -142,  1262,   503,  -142,   513,  -142,   523,
-     542,   552,   562,   573,   632,   681,   691,    72,  -142,  -142,
-     419,   370,   419,   419,    97,    98,   419,    99,   419,   419,
-     419,   419,   419,   419,   419,   419,   419,   419,   419,   419,
-     419,   101,   103,   419,   325,  1125,   137,    72,  -142,  -142,
-    -142,  -142,  -142,  -142,  -142,  -142,   -21,  -142,  -142,   419,
-     419,   -16,  1111,    54,  -142,   419,   119,  1262,  -142,   419,
-     419,   419,   419,   419,   419,   419,   419,   419,  -142,   419,
-     419,   419,  -142,  -142,  -142,  -142,  -142,  -142,  -142,  -142,
-    -142,   218,   228,  -142,   702,   712,   722,   190,   192,    33,
-    1111,   178,   740,   775,    41,    60,    83,    87,    89,    94,
-     110,   121,   125,   129,   830,   183,   188,   851,  -142,   135,
-     139,  -142,  -142,   419,    62,    90,  -142,   419,  -142,    96,
-     191,   214,    27,    27,  1121,    27,    -4,    -4,  -142,    27,
-      27,    44,    44,  -142,  -142,    72,  -142,  -142,   419,   419,
-     419,   419,   419,  -142,   419,    72,   419,    77,  -142,  -142,
-    -142,  -142,  -142,  -142,  -142,  -142,  -142,  -142,  -142,  -142,
-    -142,  -142,  -142,  -142,    35,    37,   213,   216,   861,  -142,
-    -142,  1111,  -142,     2,   883,   895,   905,   916,  1111,   938,
-     194,   970,  -142,  -142,   419,  -142,   419,   419,  -142,    72,
-     419,  -142,    24,  -142,  -142,  -142,  -142,  -142,   419,  -142,
-      72,  1028,  1046,  1056,  -142,  1078,  -142,  -142,   493,  -142,
-    -142,  -142,  -142,    72,   419,  -142,  1098,    72,   201,  -142
+     -91,  -101,    30,   -91,  -143,   193,  -143,  -143,  1147,   -90,
+    -143,  -143,  -143,   -82,   -49,   149,  -143,  -143,  1147,  1147,
+    1147,  -143,  -143,  -143,  -143,  -143,  -143,  -143,  -143,  -143,
+    -143,  -143,  -143,  -143,  -143,  -143,   -52,  1147,    29,  -143,
+    -143,  -143,   -43,   -13,    -8,    98,    31,  1051,  -143,  1063,
+      17,    19,   112,   117,    26,    21,   128,   141,    34,    33,
+     147,   160,  1063,   143,  -143,  -143,  1147,    60,    90,  -143,
+     473,   473,    96,  -143,   473,   473,   473,  -143,   473,   473,
+     473,  -143,   473,   473,    91,  -143,    99,  -143,  1063,   282,
+     473,  -143,  -143,   166,   168,  -143,  -143,  -143,  -143,  -143,
+    -143,  -143,  -143,  -143,  -143,  -143,   473,   473,  -143,   473,
+    -143,  -143,  -143,  -143,   -45,  -143,   175,   323,  -143,  -143,
+    -143,  -143,  -143,  -143,  1201,   547,  -143,   109,  -143,   557,
+     567,   577,   596,   606,   622,   687,   714,   282,  -143,  -143,
+     473,   424,   473,   473,   122,   126,   473,   138,   473,   473,
+     473,   473,   473,   473,   473,   473,   473,   473,   473,   473,
+     473,   142,   144,   473,   379,  1147,   169,   282,  -143,  -143,
+    -143,  -143,  -143,  -143,  -143,  -143,   -17,  -143,  -143,   473,
+     473,    95,  1121,    53,  -143,   473,   -36,  1201,  -143,   473,
+     473,   473,   473,   473,   473,   473,   473,   473,  -143,   473,
+     473,   473,  -143,  -143,  -143,  -143,  -143,  -143,  -143,  -143,
+    -143,   222,   229,  -143,   730,   743,   757,   218,   221,    84,
+    1121,   212,   767,   779,    85,   103,   104,   124,   136,   158,
+     173,   199,   206,   209,   822,   205,   208,   887,  -143,   210,
+     161,  -143,  -143,   473,   132,   133,  -143,   473,  -143,   137,
+     211,  -143,   243,    28,    28,    92,    28,    -4,    -4,  -143,
+      28,    28,   162,   162,  -143,  -143,   282,  -143,  -143,   473,
+     473,   473,   473,   473,  -143,   473,   282,   473,   -10,  -143,
+    -143,  -143,  -143,  -143,  -143,  -143,  -143,  -143,  -143,  -143,
+    -143,  -143,  -143,  -143,  -143,    35,    37,   239,   240,   897,
+    -143,  -143,  1121,  -143,    24,   907,   917,   930,   940,  1121,
+     952,   214,   972,  -143,  -143,   473,  -143,   473,   473,  -143,
+     282,   473,  -143,    25,  -143,  -143,  -143,  -143,  -143,   473,
+    -143,   282,   962,   982,  1090,  -143,  1100,  -143,  -143,    43,
+    -143,  -143,  -143,  -143,   282,   473,  -143,  1111,   282,   225,
+    -143
   };
 
   const unsigned char
@@ -2041,41 +2049,42 @@ namespace Language {
        0,     0,     0,   103,     0,     0,     0,   102,     0,     0,
        0,   104,     0,     0,     0,    27,     0,    37,     0,    41,
        0,    55,    47,     0,     0,    52,    53,    54,    56,    57,
-      58,    49,    50,    51,    48,    59,     0,     0,   149,     0,
-     152,   153,   150,   151,   109,   148,   144,   154,   111,   110,
-     156,   157,   155,   146,   159,     0,   158,     0,   125,     0,
+      58,    49,    50,    51,    48,    59,     0,     0,   150,     0,
+     153,   154,   151,   152,   109,   149,   144,   155,   111,   110,
+     157,   158,   156,   147,   160,     0,   159,     0,   125,     0,
        0,     0,     0,     0,     0,     0,     0,    41,    38,    35,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,   109,     0,     0,    42,    66,    43,
       65,    63,    86,    64,    62,    60,     0,    61,   131,     0,
-       0,     0,   123,     0,   142,     0,     0,   162,   147,     0,
+       0,     0,   123,     0,   142,     0,     0,   163,   148,     0,
        0,     0,     0,     0,     0,     0,     0,     0,   114,     0,
        0,     0,   126,   120,   117,   112,   118,   115,   113,   119,
      116,     0,     0,    87,     0,     0,     0,     0,     0,     0,
       39,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,    45,     0,
-       0,    32,    44,     0,     0,     0,   161,     0,   143,     0,
-     109,   145,   135,   136,   138,   137,   129,   130,   132,   133,
-     134,   139,   140,   141,    33,    41,    96,    88,     0,     0,
-       0,     0,     0,    85,     0,    41,     0,     0,    91,    68,
-      74,    69,    70,    71,    72,    73,    67,    75,    79,    84,
-      81,    82,    76,    46,   109,     0,   111,   110,   121,   127,
-     128,   124,   160,     0,     0,     0,     0,     0,    40,     0,
-       0,     0,    90,    92,     0,   105,     0,     0,   122,    41,
-       0,    95,     0,    98,    77,    78,    80,    83,     0,    89,
-      41,     0,     0,     0,   100,     0,    97,    99,     0,    93,
-     106,   108,   107,    41,     0,   101,     0,    41,     0,    94
+       0,    32,    44,     0,     0,     0,   162,     0,   143,     0,
+     109,   145,   146,   135,   136,   138,   137,   129,   130,   132,
+     133,   134,   139,   140,   141,    33,    41,    96,    88,     0,
+       0,     0,     0,     0,    85,     0,    41,     0,     0,    91,
+      68,    74,    69,    70,    71,    72,    73,    67,    75,    79,
+      84,    81,    82,    76,    46,   109,     0,   111,   110,   121,
+     127,   128,   124,   161,     0,     0,     0,     0,     0,    40,
+       0,     0,     0,    90,    92,     0,   105,     0,     0,   122,
+      41,     0,    95,     0,    98,    77,    78,    80,    83,     0,
+      89,    41,     0,     0,     0,   100,     0,    97,    99,     0,
+      93,   106,   108,   107,    41,     0,   101,     0,    41,     0,
+      94
   };
 
   const short
   Parser::yypgoto_[] =
   {
-    -142,  -142,  -142,   271,  -142,   260,    17,  -142,  -142,   231,
-    -142,  -142,    79,  -142,   217,   195,  1107,  -116,  -142,  -142,
-    -142,  -141,  -142,  -142,  -142,  -142,     3,  -142,  -142,  -142,
-     -40,  -142,  -142,   -42,  -142,  -142,  -142,   -39,   -20,  -142,
-    -142,  -142,  -114,   167,   -63,  -142
+    -143,  -143,  -143,   296,  -143,   286,    16,  -143,  -143,   257,
+    -143,  -143,    27,  -143,   245,   217,  1029,  -131,  -143,  -143,
+    -143,  -142,  -143,  -143,  -143,  -143,    40,  -143,  -143,  -143,
+     -14,  -143,  -143,   -42,  -143,  -143,  -143,   -39,   -21,  -143,
+    -143,  -143,  -114,   194,   -63,  -143
   };
 
   const short
@@ -2083,283 +2092,275 @@ namespace Language {
   {
        0,     2,     3,     4,    15,    16,    67,    17,    47,    48,
       18,    19,   165,    21,    68,    69,   219,   166,   167,   168,
-     116,   169,   170,   171,   172,   277,   278,   173,   174,   322,
-     323,    22,   175,   117,    23,   177,   181,   118,   119,   120,
+     116,   169,   170,   171,   172,   278,   279,   173,   174,   323,
+     324,    22,   175,   117,    23,   177,   181,   118,   119,   120,
      121,   122,   123,   124,   220,   126
   };
 
   const short
   Parser::yytable_[] =
   {
-      51,    55,    59,    52,    56,    60,   319,   125,   127,   195,
-     188,   129,   130,   131,     1,   132,   133,   134,     5,   135,
-     136,   211,    53,    57,    61,    36,   242,   178,   319,    72,
-      88,    70,    89,    37,   243,    42,    43,    44,   193,   194,
-     195,   246,   247,   182,   183,    72,   184,   176,     6,    72,
-     189,   190,    71,   192,    46,   193,   194,   195,   196,   197,
-     189,   190,   191,   192,    46,   193,   194,   195,   196,   197,
-      73,   266,    38,   188,    77,    76,    72,   212,   214,   215,
-     216,   185,   140,    86,    20,   222,   223,    72,   141,    80,
-     314,   272,    45,    50,    20,   176,    71,   234,    71,   272,
-     237,    81,    39,   142,   143,   144,   145,    74,   273,   201,
-      71,    71,   315,   146,   248,    49,   279,   320,   272,    88,
-     272,   137,   299,    62,   321,   176,   252,   253,   254,   255,
-     256,   257,   258,   259,   260,   280,   261,   262,   263,   320,
-     201,   272,    54,   147,   251,   272,   336,   272,   272,   303,
-     300,    10,   272,   148,   272,   149,   302,   201,   281,   310,
-      75,   312,   282,   276,   283,   199,   200,   201,   272,   284,
-     176,   150,   151,   152,   153,   154,   155,   156,   157,   272,
-     298,    78,   240,   272,   301,   285,   158,   272,   159,   160,
-     161,   162,    58,   272,    63,   163,   286,    79,   295,   164,
-     287,   296,    82,   334,   288,   304,   305,   306,   307,   308,
-     293,   309,    83,   311,   339,    85,   186,   179,    87,   128,
-     297,   180,   138,   176,   217,   218,   221,   345,   235,     8,
-     236,   348,     9,   176,   189,   190,   191,   192,   140,   193,
-     194,   195,   196,   197,   141,   241,   250,   264,   270,   265,
-     271,   331,   274,   332,   333,    24,    25,   335,   290,   142,
-     143,   144,   145,   291,    72,   338,   294,    71,   316,   146,
-      64,   317,    10,   349,     7,    41,   329,   176,    65,    84,
-     313,   346,   337,   139,   187,     0,     0,     0,   176,     0,
-      11,    12,     0,     0,     0,     0,     0,     0,     0,   147,
-      40,   176,     0,    13,     0,   176,     0,    10,     0,   148,
-       0,   149,     0,     0,     0,     0,     0,    14,    26,    27,
-      28,    29,    30,    31,    32,    33,    34,   150,   151,   152,
-     153,   154,   155,   156,   157,     0,     0,    90,     0,   199,
-     200,   201,   158,     0,   159,   160,   161,   162,     0,     0,
-       0,   163,    91,    92,     0,   164,     0,    35,     0,     0,
-      93,     0,     0,    94,     0,     0,     0,     0,    95,    96,
-      97,    98,    99,   100,   101,     0,   102,   103,   104,   105,
-       0,   106,    90,     0,   107,     0,     0,     0,     0,   108,
-       0,   109,     0,     0,   110,   111,     0,    91,    92,     0,
-     238,    71,     0,     0,     0,    93,     0,     0,    94,     0,
-       0,     0,     0,    95,    96,    97,    98,    99,   100,   101,
-       0,   102,   103,   104,   105,     0,   106,     0,     0,   107,
-       0,    90,     0,     0,   108,     0,   109,     0,     0,   110,
-     111,     0,     0,     0,     0,   213,    91,    92,     0,     0,
-     112,   113,   114,   115,    93,     0,     0,    94,     0,     0,
+      51,    55,    59,    52,    56,    60,   211,   125,   127,   195,
+     188,   129,   130,   131,   185,   132,   133,   134,     1,   135,
+     136,    53,    57,    61,    36,   242,     5,   178,   320,   320,
+       6,    71,    20,    72,    42,    43,    44,    37,   243,   193,
+     194,   195,    20,   182,   183,    38,   184,   176,    39,   189,
+     190,   191,   192,    46,   193,   194,   195,   196,   197,   189,
+     190,   191,   192,    46,   193,   194,   195,   196,   197,    72,
+     267,    72,    70,   188,   313,    45,   277,   212,   214,   215,
+     216,    76,    86,    72,    50,   222,   223,    72,    49,    80,
+     315,   250,   251,    71,    73,   176,    77,   234,   189,   190,
+     237,   192,    71,   193,   194,   195,   196,   197,    81,   201,
+      71,    71,   316,   248,    54,   189,   190,   191,   192,    58,
+     193,   194,   195,   196,   197,   176,   253,   254,   255,   256,
+     257,   258,   259,   260,   261,   304,   262,   263,   264,   321,
+     321,   201,   273,   273,   252,   311,   322,   337,    88,    88,
+      89,   137,   246,   247,   199,   200,   201,    62,    63,   274,
+     280,   273,   273,   345,   199,   200,   201,    74,   189,   190,
+     176,   192,    75,   193,   194,   195,   196,   197,   281,   282,
+     299,   240,   273,    78,   302,     8,   202,    87,     9,   335,
+     273,   273,   300,   301,   273,   273,    79,   303,   296,   283,
+     340,   297,    82,   199,   200,   201,   305,   306,   307,   308,
+     309,   284,   310,   346,   312,    83,   273,   349,    85,   298,
+     199,   200,   201,   128,   176,   179,   138,   180,    10,     8,
+     186,   273,     9,   285,   176,   189,   190,   191,   192,   140,
+     193,   194,   195,   196,   197,   141,    11,    12,   286,   217,
+     266,   265,   332,   218,   333,   334,    40,   273,   336,    13,
+     142,   143,   144,   145,   273,   221,   339,   273,   273,   235,
+     146,   236,    10,    14,   287,   201,   271,   241,   176,   272,
+     291,   288,   347,   292,   289,   294,   275,    71,   295,   176,
+      11,    12,   140,    72,   317,   318,   330,   350,   141,     7,
+     147,    41,   176,    13,    65,   139,   176,    84,    10,   338,
+     148,   187,   149,   142,   143,   144,   145,    14,   314,     0,
+       0,     0,     0,   146,     0,     0,     0,     0,   150,   151,
+     152,   153,   154,   155,   156,   157,     0,     0,     0,     0,
+     199,   200,   201,   158,     0,   159,   160,   161,   162,     0,
+      91,    92,   163,   147,     0,     0,   164,     0,     0,     0,
+       0,    10,     0,   148,     0,   149,    95,    96,    97,    98,
+      99,   100,   101,    72,   102,   103,   104,   105,     0,     0,
+       0,   150,   151,   152,   153,   154,   155,   156,   157,     0,
+       0,    90,     0,     0,     0,     0,   158,     0,   159,   160,
+     161,   162,     0,     0,     0,   163,    91,    92,     0,   164,
+       0,     0,     0,     0,    93,     0,     0,    94,     0,     0,
        0,     0,    95,    96,    97,    98,    99,   100,   101,     0,
-     102,   103,   104,   105,     0,   106,     0,     0,   107,     0,
+     102,   103,   104,   105,     0,   106,    90,     0,   107,     0,
        0,     0,     0,   108,     0,   109,     0,     0,   110,   111,
-       0,     0,     0,     0,     0,   112,   113,   114,   115,   189,
-     190,   191,   192,     0,   193,   194,   195,   196,   197,   189,
-     190,   191,   192,     0,   193,   194,   195,   196,   197,   189,
-     190,   191,   192,     0,   193,   194,   195,   196,   197,   189,
-     190,   191,   192,     0,   193,   194,   195,   196,   197,     0,
-       0,     0,     0,     0,   112,   113,   114,   115,   189,   190,
-     191,   192,     0,   193,   194,   195,   196,   197,   189,   190,
-     191,   192,     0,   193,   194,   195,   196,   197,   189,   190,
-     191,   192,     0,   193,   194,   195,   196,   197,   198,   189,
-     190,   191,   192,     0,   193,   194,   195,   196,   197,     0,
-     202,     0,     0,     0,     0,     0,     0,     0,   203,     0,
-       0,     0,     0,     0,   199,   200,   201,     0,     0,     0,
-       0,     0,     0,   344,   199,   200,   201,   204,     0,     0,
-       0,     0,     0,     0,   199,   200,   201,   205,     0,     0,
-       0,     0,     0,     0,   199,   200,   201,   206,   189,   190,
-     191,   192,     0,   193,   194,   195,   196,   197,   207,     0,
-       0,     0,     0,   199,   200,   201,     0,     0,     0,     0,
-       0,     0,     0,   199,   200,   201,     0,     0,     0,     0,
-       0,     0,     0,   199,   200,   201,     0,     0,     0,     0,
-       0,     0,     0,     0,   199,   200,   201,   189,   190,   191,
-     192,     0,   193,   194,   195,   196,   197,   189,   190,   191,
-     192,     0,   193,   194,   195,   196,   197,   208,   189,   190,
-     191,   192,     0,   193,   194,   195,   196,   197,   189,   190,
-     191,   192,     0,   193,   194,   195,   196,   197,   189,   190,
-     191,   192,     0,   193,   194,   195,   196,   197,     0,     0,
-       0,     0,     0,   199,   200,   201,   189,   190,   191,   192,
-       0,   193,   194,   195,   196,   197,   209,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,   210,     0,     0,     0,
-     268,     0,     0,     0,     0,     0,     0,   267,     0,     0,
-     269,   189,   190,   191,   192,     0,   193,   194,   195,   196,
-     197,     0,   199,   200,   201,     0,     0,     0,     0,     0,
-       0,     0,   199,   200,   201,     0,     0,     0,     0,     0,
-       0,     0,     0,   199,   200,   201,     0,     0,     0,     0,
-     275,     0,     0,   199,   200,   201,     0,     0,     0,     0,
-       0,     0,     0,   199,   200,   201,   189,   190,   191,   192,
-       0,   193,   194,   195,   196,   197,     0,     0,     0,     0,
-       0,   199,   200,   201,     0,     0,     0,   189,   190,   191,
-     192,   276,   193,   194,   195,   196,   197,   189,   190,   191,
-     192,     0,   193,   194,   195,   196,   197,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,   199,   200,   201,   189,
-     190,   191,   192,     0,   193,   194,   195,   196,   197,     0,
-       0,   189,   190,   191,   192,   289,   193,   194,   195,   196,
-     197,   189,   190,   191,   192,     0,   193,   194,   195,   196,
-     197,     0,   189,   190,   191,   192,   292,   193,   194,   195,
-     196,   197,     0,     0,     0,     0,   318,     0,     0,     0,
-       0,   199,   200,   201,   189,   190,   191,   192,     0,   193,
-     194,   195,   196,   197,     0,     0,     0,     0,   324,     0,
-       0,     0,   199,   200,   201,     0,     0,     0,     0,     0,
-     325,     0,   199,   200,   201,     0,   189,   190,   191,   192,
-     326,   193,   194,   195,   196,   197,     0,     0,     0,     0,
-       0,   327,     0,     0,   199,   200,   201,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,   199,   200,   201,     0,
-       0,   328,     0,     0,     0,     0,   199,   200,   201,     0,
-       0,     0,     0,     0,     0,     0,     0,   199,   200,   201,
-       0,     0,     0,   330,   189,   190,   191,   192,     0,   193,
-     194,   195,   196,   197,     0,     0,     0,     0,     0,   199,
-     200,   201,   189,   190,   191,   192,     0,   193,   194,   195,
+       0,    91,    92,     0,   238,    71,     0,     0,     0,    93,
+       0,     0,    94,     0,     0,     0,     0,    95,    96,    97,
+      98,    99,   100,   101,     0,   102,   103,   104,   105,     0,
+     106,     0,     0,   107,     0,    90,     0,     0,   108,     0,
+     109,     0,     0,   110,   111,     0,     0,     0,     0,   213,
+      91,    92,     0,     0,   112,   113,   114,   115,    93,     0,
+       0,    94,     0,     0,     0,     0,    95,    96,    97,    98,
+      99,   100,   101,     0,   102,   103,   104,   105,     0,   106,
+       0,     0,   107,     0,     0,     0,     0,   108,     0,   109,
+       0,     0,   110,   111,     0,     0,     0,     0,     0,   112,
+     113,   114,   115,   189,   190,   191,   192,     0,   193,   194,
+     195,   196,   197,   189,   190,   191,   192,     0,   193,   194,
+     195,   196,   197,   189,   190,   191,   192,     0,   193,   194,
+     195,   196,   197,   189,   190,   191,   192,     0,   193,   194,
+     195,   196,   197,     0,     0,     0,     0,     0,   112,   113,
+     114,   115,   189,   190,   191,   192,     0,   193,   194,   195,
      196,   197,   189,   190,   191,   192,     0,   193,   194,   195,
-     196,   197,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,   199,   200,   201,   189,   190,   191,   192,     0,   193,
-     194,   195,   196,   197,     0,     0,     0,     0,     0,   343,
-       0,     0,     0,   340,   189,   190,   191,   192,     0,   193,
-     194,   195,   196,   197,     0,     0,     0,   189,   190,   191,
-     192,   341,   193,   194,   195,   196,   197,   189,   190,     0,
-     192,   342,   193,   194,   195,   196,   197,    24,    25,   199,
-     200,   201,     0,     0,     0,     0,     0,     0,     0,    66,
-      24,    25,     0,     0,     0,     0,     0,   199,   200,   201,
+     196,   197,   198,     0,     0,     0,     0,     0,   189,   190,
+     191,   192,   203,   193,   194,   195,   196,   197,     0,     0,
+       0,     0,   204,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,   205,     0,     0,     0,     0,     0,   199,   200,
+     201,     0,     0,     0,     0,     0,     0,     0,   199,   200,
+     201,   206,     0,     0,     0,     0,     0,     0,   199,   200,
+     201,   207,     0,     0,     0,     0,     0,     0,   199,   200,
+     201,     0,     0,   189,   190,   191,   192,   208,   193,   194,
+     195,   196,   197,     0,     0,     0,     0,   199,   200,   201,
        0,     0,     0,     0,     0,     0,     0,   199,   200,   201,
-       0,     0,     0,     0,     0,     0,     0,     0,   347,     0,
-       0,     0,     8,     0,     0,     9,     0,     0,     0,   199,
-     200,   201,     0,     0,     0,     0,     0,     0,     0,     0,
-      26,    27,    28,    29,    30,    31,    32,    33,    34,   199,
-     200,   201,     0,    26,    27,    28,    29,    30,    31,    32,
-      33,    34,   199,   200,   201,    10,     0,     0,     0,     0,
-       0,     0,   199,   200,   201,     0,     0,     0,     0,    35,
-       0,     0,     0,    11,    12,     0,     0,     0,     0,     0,
-       0,     0,    35,     0,     0,     0,    13,   224,   225,   226,
-     227,   228,   229,   230,   231,   232,   233,     0,     0,     0,
-      14,   239,     0,     0,     0,     0,     0,    91,    92,     0,
-       0,     0,     0,     0,     0,     0,   244,   245,     0,    91,
-      92,     0,   249,    95,    96,    97,    98,    99,   100,   101,
-      72,   102,   103,   104,   105,    95,    96,    97,    98,    99,
-     100,   101,     0,   102,   103,   104,   105
+     189,   190,   191,   192,     0,   193,   194,   195,   196,   197,
+       0,     0,     0,   199,   200,   201,   189,   190,   191,   192,
+       0,   193,   194,   195,   196,   197,     0,     0,     0,   189,
+     190,   191,   192,     0,   193,   194,   195,   196,   197,     0,
+       0,     0,   209,   189,   190,   191,   192,     0,   193,   194,
+     195,   196,   197,   189,   190,   191,   192,     0,   193,   194,
+     195,   196,   197,     0,     0,   189,   190,   191,   192,   210,
+     193,   194,   195,   196,   197,     0,     0,     0,   199,   200,
+     201,   269,     0,     0,     0,   268,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,   270,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,   199,   200,   201,   189,   190,
+     191,   192,     0,   193,   194,   195,   196,   197,     0,     0,
+       0,   199,   200,   201,     0,     0,     0,   276,     0,     0,
+       0,     0,     0,     0,   199,   200,   201,     0,     0,     0,
+       0,     0,     0,     0,     0,   277,     0,     0,   199,   200,
+     201,     0,     0,     0,     0,     0,     0,     0,   199,   200,
+     201,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+     199,   200,   201,   189,   190,   191,   192,   290,   193,   194,
+     195,   196,   197,   189,   190,   191,   192,     0,   193,   194,
+     195,   196,   197,   189,   190,   191,   192,     0,   193,   194,
+     195,   196,   197,   189,   190,   191,   192,     0,   193,   194,
+     195,   196,   197,   199,   200,   201,   189,   190,   191,   192,
+       0,   193,   194,   195,   196,   197,   189,   190,   191,   192,
+       0,   193,   194,   195,   196,   197,     0,     0,   189,   190,
+     191,   192,   293,   193,   194,   195,   196,   197,   189,   190,
+     191,   192,   319,   193,   194,   195,   196,   197,   189,   190,
+     191,   192,   325,   193,   194,   195,   196,   197,   189,   190,
+     191,   192,   326,   193,   194,   195,   196,   197,   199,   200,
+     201,     0,     0,     0,     0,   327,     0,     0,   199,   200,
+     201,     0,     0,     0,     0,   328,     0,     0,   199,   200,
+     201,     0,     0,     0,     0,   329,     0,     0,   199,   200,
+     201,     0,     0,     0,     0,   331,     0,   341,     0,     0,
+       0,   199,   200,   201,     0,     0,     0,     0,     0,     0,
+       0,   199,   200,   201,     0,     0,     0,   342,     0,     0,
+       0,     0,     0,   199,   200,   201,     0,     0,     0,     0,
+       0,     0,     0,   199,   200,   201,    24,    25,     0,     0,
+       0,     0,     0,   199,   200,   201,     0,     0,    24,    25,
+       0,    64,     0,   199,   200,   201,   189,   190,   191,   192,
+      66,   193,   194,   195,   196,   197,   189,   190,   191,   192,
+       0,   193,   194,   195,   196,   197,     0,   189,   190,   191,
+     192,   344,   193,   194,   195,   196,   197,   189,   190,   191,
+     192,     0,   193,   194,   195,   196,   197,     0,     0,    26,
+      27,    28,    29,    30,    31,    32,    33,    34,     0,     0,
+       0,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+       0,     0,     0,     0,     0,   343,     0,     0,     0,     0,
+       0,     0,    24,    25,     0,     0,     0,     0,    35,   224,
+     225,   226,   227,   228,   229,   230,   231,   232,   233,     0,
+      35,   348,     0,   239,     0,     0,     0,     0,     0,     0,
+       0,   199,   200,   201,     0,     0,     0,     0,   244,   245,
+       0,   199,   200,   201,   249,     0,     0,     0,     0,     0,
+       0,     0,   199,   200,   201,     0,     0,     0,    91,    92,
+       0,     0,   199,   200,   201,    26,    27,    28,    29,    30,
+      31,    32,    33,    34,    95,    96,    97,    98,    99,   100,
+     101,     0,   102,   103,   104,   105,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    35
   };
 
   const short
   Parser::yycheck_[] =
   {
-      42,    43,    44,    42,    43,    44,     4,    70,    71,    13,
-     124,    74,    75,    76,   109,    78,    79,    80,   127,    82,
-      83,   137,    42,    43,    44,     8,   167,    90,     4,    50,
-      58,    55,    60,   127,    55,    18,    19,    20,    11,    12,
-      13,    57,    58,   106,   107,    50,   109,    89,     0,    50,
-       6,     7,    76,     9,    37,    11,    12,    13,    14,    15,
-       6,     7,     8,     9,    47,    11,    12,    13,    14,    15,
-      75,   212,   127,   187,    75,    55,    50,   140,   141,   142,
-     143,    59,    10,    66,     5,   148,   149,    50,    16,    55,
-      55,    58,   127,   127,    15,   137,    76,   160,    76,    58,
-     163,    75,    97,    31,    32,    33,    34,    55,    75,   113,
-      76,    76,    75,    41,    60,    59,    75,   115,    58,    58,
-      58,    60,    60,    59,   122,   167,   189,   190,   191,   192,
-     193,   194,   195,   196,   197,    75,   199,   200,   201,   115,
-     113,    58,   127,    71,   186,    58,   122,    58,    58,   265,
-      60,    79,    58,    81,    58,    83,    60,   113,    75,   275,
-      55,    84,    75,    86,    75,   111,   112,   113,    58,    75,
-     212,    99,   100,   101,   102,   103,   104,   105,   106,    58,
-     243,    55,   165,    58,   247,    75,   114,    58,   116,   117,
-     118,   119,   127,    58,   127,   123,    75,    55,   240,   127,
-      75,   240,    55,   319,    75,   268,   269,   270,   271,   272,
-      75,   274,    55,   276,   330,    75,    55,    59,   127,   127,
-     240,    59,   127,   265,   127,   127,   127,   343,   127,    36,
-     127,   347,    39,   275,     6,     7,     8,     9,    10,    11,
-      12,    13,    14,    15,    16,   108,   127,    29,    58,    21,
-      58,   314,    74,   316,   317,    25,    26,   320,    75,    31,
-      32,    33,    34,    75,    50,   328,   127,    76,    55,    41,
-      40,    55,    79,    72,     3,    15,    82,   319,    47,    62,
-     277,   344,   322,    88,   117,    -1,    -1,    -1,   330,    -1,
-      97,    98,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    71,
-     107,   343,    -1,   110,    -1,   347,    -1,    79,    -1,    81,
-      -1,    83,    -1,    -1,    -1,    -1,    -1,   124,    88,    89,
-      90,    91,    92,    93,    94,    95,    96,    99,   100,   101,
-     102,   103,   104,   105,   106,    -1,    -1,    12,    -1,   111,
-     112,   113,   114,    -1,   116,   117,   118,   119,    -1,    -1,
-      -1,   123,    27,    28,    -1,   127,    -1,   127,    -1,    -1,
-      35,    -1,    -1,    38,    -1,    -1,    -1,    -1,    43,    44,
-      45,    46,    47,    48,    49,    -1,    51,    52,    53,    54,
-      -1,    56,    12,    -1,    59,    -1,    -1,    -1,    -1,    64,
-      -1,    66,    -1,    -1,    69,    70,    -1,    27,    28,    -1,
-      75,    76,    -1,    -1,    -1,    35,    -1,    -1,    38,    -1,
-      -1,    -1,    -1,    43,    44,    45,    46,    47,    48,    49,
-      -1,    51,    52,    53,    54,    -1,    56,    -1,    -1,    59,
-      -1,    12,    -1,    -1,    64,    -1,    66,    -1,    -1,    69,
-      70,    -1,    -1,    -1,    -1,    75,    27,    28,    -1,    -1,
-     125,   126,   127,   128,    35,    -1,    -1,    38,    -1,    -1,
+      42,    43,    44,    42,    43,    44,   137,    70,    71,    13,
+     124,    74,    75,    76,    59,    78,    79,    80,   109,    82,
+      83,    42,    43,    44,     8,   167,   127,    90,     4,     4,
+       0,    76,     5,    50,    18,    19,    20,   127,    55,    11,
+      12,    13,    15,   106,   107,   127,   109,    89,    97,     6,
+       7,     8,     9,    37,    11,    12,    13,    14,    15,     6,
+       7,     8,     9,    47,    11,    12,    13,    14,    15,    50,
+     212,    50,    55,   187,    84,   127,    86,   140,   141,   142,
+     143,    55,    66,    50,   127,   148,   149,    50,    59,    55,
+      55,   127,   128,    76,    75,   137,    75,   160,     6,     7,
+     163,     9,    76,    11,    12,    13,    14,    15,    75,   113,
+      76,    76,    75,    60,   127,     6,     7,     8,     9,   127,
+      11,    12,    13,    14,    15,   167,   189,   190,   191,   192,
+     193,   194,   195,   196,   197,   266,   199,   200,   201,   115,
+     115,   113,    58,    58,   186,   276,   122,   122,    58,    58,
+      60,    60,    57,    58,   111,   112,   113,    59,   127,    75,
+      75,    58,    58,   120,   111,   112,   113,    55,     6,     7,
+     212,     9,    55,    11,    12,    13,    14,    15,    75,    75,
+     243,   165,    58,    55,   247,    36,    77,   127,    39,   320,
+      58,    58,    60,    60,    58,    58,    55,    60,   240,    75,
+     331,   240,    55,   111,   112,   113,   269,   270,   271,   272,
+     273,    75,   275,   344,   277,    55,    58,   348,    75,   240,
+     111,   112,   113,   127,   266,    59,   127,    59,    79,    36,
+      55,    58,    39,    75,   276,     6,     7,     8,     9,    10,
+      11,    12,    13,    14,    15,    16,    97,    98,    75,   127,
+      21,    29,   315,   127,   317,   318,   107,    58,   321,   110,
+      31,    32,    33,    34,    58,   127,   329,    58,    58,   127,
+      41,   127,    79,   124,    75,   113,    58,   108,   320,    58,
+      75,    75,   345,    75,    75,    75,    74,    76,   127,   331,
+      97,    98,    10,    50,    55,    55,    82,    72,    16,     3,
+      71,    15,   344,   110,    47,    88,   348,    62,    79,   323,
+      81,   117,    83,    31,    32,    33,    34,   124,   278,    -1,
+      -1,    -1,    -1,    41,    -1,    -1,    -1,    -1,    99,   100,
+     101,   102,   103,   104,   105,   106,    -1,    -1,    -1,    -1,
+     111,   112,   113,   114,    -1,   116,   117,   118,   119,    -1,
+      27,    28,   123,    71,    -1,    -1,   127,    -1,    -1,    -1,
+      -1,    79,    -1,    81,    -1,    83,    43,    44,    45,    46,
+      47,    48,    49,    50,    51,    52,    53,    54,    -1,    -1,
+      -1,    99,   100,   101,   102,   103,   104,   105,   106,    -1,
+      -1,    12,    -1,    -1,    -1,    -1,   114,    -1,   116,   117,
+     118,   119,    -1,    -1,    -1,   123,    27,    28,    -1,   127,
+      -1,    -1,    -1,    -1,    35,    -1,    -1,    38,    -1,    -1,
       -1,    -1,    43,    44,    45,    46,    47,    48,    49,    -1,
-      51,    52,    53,    54,    -1,    56,    -1,    -1,    59,    -1,
+      51,    52,    53,    54,    -1,    56,    12,    -1,    59,    -1,
       -1,    -1,    -1,    64,    -1,    66,    -1,    -1,    69,    70,
-      -1,    -1,    -1,    -1,    -1,   125,   126,   127,   128,     6,
-       7,     8,     9,    -1,    11,    12,    13,    14,    15,     6,
-       7,     8,     9,    -1,    11,    12,    13,    14,    15,     6,
-       7,     8,     9,    -1,    11,    12,    13,    14,    15,     6,
-       7,     8,     9,    -1,    11,    12,    13,    14,    15,    -1,
-      -1,    -1,    -1,    -1,   125,   126,   127,   128,     6,     7,
-       8,     9,    -1,    11,    12,    13,    14,    15,     6,     7,
-       8,     9,    -1,    11,    12,    13,    14,    15,     6,     7,
-       8,     9,    -1,    11,    12,    13,    14,    15,    75,     6,
-       7,     8,     9,    -1,    11,    12,    13,    14,    15,    -1,
-      77,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    75,    -1,
-      -1,    -1,    -1,    -1,   111,   112,   113,    -1,    -1,    -1,
-      -1,    -1,    -1,   120,   111,   112,   113,    75,    -1,    -1,
-      -1,    -1,    -1,    -1,   111,   112,   113,    75,    -1,    -1,
-      -1,    -1,    -1,    -1,   111,   112,   113,    75,     6,     7,
-       8,     9,    -1,    11,    12,    13,    14,    15,    75,    -1,
-      -1,    -1,    -1,   111,   112,   113,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,   111,   112,   113,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,   111,   112,   113,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,   111,   112,   113,     6,     7,     8,
-       9,    -1,    11,    12,    13,    14,    15,     6,     7,     8,
-       9,    -1,    11,    12,    13,    14,    15,    75,     6,     7,
-       8,     9,    -1,    11,    12,    13,    14,    15,     6,     7,
-       8,     9,    -1,    11,    12,    13,    14,    15,     6,     7,
-       8,     9,    -1,    11,    12,    13,    14,    15,    -1,    -1,
-      -1,    -1,    -1,   111,   112,   113,     6,     7,     8,     9,
-      -1,    11,    12,    13,    14,    15,    75,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    75,    -1,    -1,    -1,
-      58,    -1,    -1,    -1,    -1,    -1,    -1,    75,    -1,    -1,
-      58,     6,     7,     8,     9,    -1,    11,    12,    13,    14,
-      15,    -1,   111,   112,   113,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,   111,   112,   113,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,   111,   112,   113,    -1,    -1,    -1,    -1,
-      80,    -1,    -1,   111,   112,   113,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,   111,   112,   113,     6,     7,     8,     9,
-      -1,    11,    12,    13,    14,    15,    -1,    -1,    -1,    -1,
-      -1,   111,   112,   113,    -1,    -1,    -1,     6,     7,     8,
-       9,    86,    11,    12,    13,    14,    15,     6,     7,     8,
-       9,    -1,    11,    12,    13,    14,    15,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,   111,   112,   113,     6,
-       7,     8,     9,    -1,    11,    12,    13,    14,    15,    -1,
-      -1,     6,     7,     8,     9,    75,    11,    12,    13,    14,
-      15,     6,     7,     8,     9,    -1,    11,    12,    13,    14,
-      15,    -1,     6,     7,     8,     9,    75,    11,    12,    13,
-      14,    15,    -1,    -1,    -1,    -1,    75,    -1,    -1,    -1,
-      -1,   111,   112,   113,     6,     7,     8,     9,    -1,    11,
-      12,    13,    14,    15,    -1,    -1,    -1,    -1,    75,    -1,
-      -1,    -1,   111,   112,   113,    -1,    -1,    -1,    -1,    -1,
-      75,    -1,   111,   112,   113,    -1,     6,     7,     8,     9,
-      75,    11,    12,    13,    14,    15,    -1,    -1,    -1,    -1,
-      -1,    75,    -1,    -1,   111,   112,   113,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,   111,   112,   113,    -1,
-      -1,    73,    -1,    -1,    -1,    -1,   111,   112,   113,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,   111,   112,   113,
-      -1,    -1,    -1,    63,     6,     7,     8,     9,    -1,    11,
-      12,    13,    14,    15,    -1,    -1,    -1,    -1,    -1,   111,
-     112,   113,     6,     7,     8,     9,    -1,    11,    12,    13,
+      -1,    27,    28,    -1,    75,    76,    -1,    -1,    -1,    35,
+      -1,    -1,    38,    -1,    -1,    -1,    -1,    43,    44,    45,
+      46,    47,    48,    49,    -1,    51,    52,    53,    54,    -1,
+      56,    -1,    -1,    59,    -1,    12,    -1,    -1,    64,    -1,
+      66,    -1,    -1,    69,    70,    -1,    -1,    -1,    -1,    75,
+      27,    28,    -1,    -1,   125,   126,   127,   128,    35,    -1,
+      -1,    38,    -1,    -1,    -1,    -1,    43,    44,    45,    46,
+      47,    48,    49,    -1,    51,    52,    53,    54,    -1,    56,
+      -1,    -1,    59,    -1,    -1,    -1,    -1,    64,    -1,    66,
+      -1,    -1,    69,    70,    -1,    -1,    -1,    -1,    -1,   125,
+     126,   127,   128,     6,     7,     8,     9,    -1,    11,    12,
+      13,    14,    15,     6,     7,     8,     9,    -1,    11,    12,
+      13,    14,    15,     6,     7,     8,     9,    -1,    11,    12,
+      13,    14,    15,     6,     7,     8,     9,    -1,    11,    12,
+      13,    14,    15,    -1,    -1,    -1,    -1,    -1,   125,   126,
+     127,   128,     6,     7,     8,     9,    -1,    11,    12,    13,
       14,    15,     6,     7,     8,     9,    -1,    11,    12,    13,
-      14,    15,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,   111,   112,   113,     6,     7,     8,     9,    -1,    11,
-      12,    13,    14,    15,    -1,    -1,    -1,    -1,    -1,    21,
-      -1,    -1,    -1,    75,     6,     7,     8,     9,    -1,    11,
-      12,    13,    14,    15,    -1,    -1,    -1,     6,     7,     8,
-       9,    75,    11,    12,    13,    14,    15,     6,     7,    -1,
-       9,    75,    11,    12,    13,    14,    15,    25,    26,   111,
-     112,   113,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    37,
-      25,    26,    -1,    -1,    -1,    -1,    -1,   111,   112,   113,
+      14,    15,    75,    -1,    -1,    -1,    -1,    -1,     6,     7,
+       8,     9,    75,    11,    12,    13,    14,    15,    -1,    -1,
+      -1,    -1,    75,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    75,    -1,    -1,    -1,    -1,    -1,   111,   112,
+     113,    -1,    -1,    -1,    -1,    -1,    -1,    -1,   111,   112,
+     113,    75,    -1,    -1,    -1,    -1,    -1,    -1,   111,   112,
+     113,    75,    -1,    -1,    -1,    -1,    -1,    -1,   111,   112,
+     113,    -1,    -1,     6,     7,     8,     9,    75,    11,    12,
+      13,    14,    15,    -1,    -1,    -1,    -1,   111,   112,   113,
       -1,    -1,    -1,    -1,    -1,    -1,    -1,   111,   112,   113,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    80,    -1,
-      -1,    -1,    36,    -1,    -1,    39,    -1,    -1,    -1,   111,
-     112,   113,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      88,    89,    90,    91,    92,    93,    94,    95,    96,   111,
-     112,   113,    -1,    88,    89,    90,    91,    92,    93,    94,
-      95,    96,   111,   112,   113,    79,    -1,    -1,    -1,    -1,
-      -1,    -1,   111,   112,   113,    -1,    -1,    -1,    -1,   127,
-      -1,    -1,    -1,    97,    98,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,   127,    -1,    -1,    -1,   110,   150,   151,   152,
-     153,   154,   155,   156,   157,   158,   159,    -1,    -1,    -1,
-     124,   164,    -1,    -1,    -1,    -1,    -1,    27,    28,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,   179,   180,    -1,    27,
-      28,    -1,   185,    43,    44,    45,    46,    47,    48,    49,
-      50,    51,    52,    53,    54,    43,    44,    45,    46,    47,
-      48,    49,    -1,    51,    52,    53,    54
+       6,     7,     8,     9,    -1,    11,    12,    13,    14,    15,
+      -1,    -1,    -1,   111,   112,   113,     6,     7,     8,     9,
+      -1,    11,    12,    13,    14,    15,    -1,    -1,    -1,     6,
+       7,     8,     9,    -1,    11,    12,    13,    14,    15,    -1,
+      -1,    -1,    75,     6,     7,     8,     9,    -1,    11,    12,
+      13,    14,    15,     6,     7,     8,     9,    -1,    11,    12,
+      13,    14,    15,    -1,    -1,     6,     7,     8,     9,    75,
+      11,    12,    13,    14,    15,    -1,    -1,    -1,   111,   112,
+     113,    58,    -1,    -1,    -1,    75,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    58,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,   111,   112,   113,     6,     7,
+       8,     9,    -1,    11,    12,    13,    14,    15,    -1,    -1,
+      -1,   111,   112,   113,    -1,    -1,    -1,    80,    -1,    -1,
+      -1,    -1,    -1,    -1,   111,   112,   113,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    86,    -1,    -1,   111,   112,
+     113,    -1,    -1,    -1,    -1,    -1,    -1,    -1,   111,   112,
+     113,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+     111,   112,   113,     6,     7,     8,     9,    75,    11,    12,
+      13,    14,    15,     6,     7,     8,     9,    -1,    11,    12,
+      13,    14,    15,     6,     7,     8,     9,    -1,    11,    12,
+      13,    14,    15,     6,     7,     8,     9,    -1,    11,    12,
+      13,    14,    15,   111,   112,   113,     6,     7,     8,     9,
+      -1,    11,    12,    13,    14,    15,     6,     7,     8,     9,
+      -1,    11,    12,    13,    14,    15,    -1,    -1,     6,     7,
+       8,     9,    75,    11,    12,    13,    14,    15,     6,     7,
+       8,     9,    75,    11,    12,    13,    14,    15,     6,     7,
+       8,     9,    75,    11,    12,    13,    14,    15,     6,     7,
+       8,     9,    75,    11,    12,    13,    14,    15,   111,   112,
+     113,    -1,    -1,    -1,    -1,    75,    -1,    -1,   111,   112,
+     113,    -1,    -1,    -1,    -1,    75,    -1,    -1,   111,   112,
+     113,    -1,    -1,    -1,    -1,    73,    -1,    -1,   111,   112,
+     113,    -1,    -1,    -1,    -1,    63,    -1,    75,    -1,    -1,
+      -1,   111,   112,   113,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,   111,   112,   113,    -1,    -1,    -1,    75,    -1,    -1,
+      -1,    -1,    -1,   111,   112,   113,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,   111,   112,   113,    25,    26,    -1,    -1,
+      -1,    -1,    -1,   111,   112,   113,    -1,    -1,    25,    26,
+      -1,    40,    -1,   111,   112,   113,     6,     7,     8,     9,
+      37,    11,    12,    13,    14,    15,     6,     7,     8,     9,
+      -1,    11,    12,    13,    14,    15,    -1,     6,     7,     8,
+       9,    21,    11,    12,    13,    14,    15,     6,     7,     8,
+       9,    -1,    11,    12,    13,    14,    15,    -1,    -1,    88,
+      89,    90,    91,    92,    93,    94,    95,    96,    -1,    -1,
+      -1,    88,    89,    90,    91,    92,    93,    94,    95,    96,
+      -1,    -1,    -1,    -1,    -1,    75,    -1,    -1,    -1,    -1,
+      -1,    -1,    25,    26,    -1,    -1,    -1,    -1,   127,   150,
+     151,   152,   153,   154,   155,   156,   157,   158,   159,    -1,
+     127,    80,    -1,   164,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,   111,   112,   113,    -1,    -1,    -1,    -1,   179,   180,
+      -1,   111,   112,   113,   185,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,   111,   112,   113,    -1,    -1,    -1,    27,    28,
+      -1,    -1,   111,   112,   113,    88,    89,    90,    91,    92,
+      93,    94,    95,    96,    43,    44,    45,    46,    47,    48,
+      49,    -1,    51,    52,    53,    54,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,   127
   };
 
   const unsigned char
@@ -2390,16 +2391,17 @@ namespace Language {
      173,   127,   173,   173,   145,   145,   145,   145,   145,   145,
      145,   145,   145,   145,   173,   127,   127,   173,    75,   145,
      135,   108,   150,    55,   145,   145,    57,    58,    60,   145,
-     127,   162,   173,   173,   173,   173,   173,   173,   173,   173,
-     173,   173,   173,   173,    29,    21,   150,    75,    58,    58,
-      58,    58,    58,    75,    74,    80,    86,   154,   155,    75,
+     127,   128,   162,   173,   173,   173,   173,   173,   173,   173,
+     173,   173,   173,   173,   173,    29,    21,   150,    75,    58,
+      58,    58,    58,    58,    75,    74,    80,    86,   154,   155,
       75,    75,    75,    75,    75,    75,    75,    75,    75,    75,
-      75,    75,    75,    75,   127,   162,   166,   167,   173,    60,
-      60,   173,    60,   146,   173,   173,   173,   173,   173,   173,
-     146,   173,    84,   155,    55,    75,    55,    55,    75,     4,
-     115,   122,   158,   159,    75,    75,    75,    75,    73,    82,
-      63,   173,   173,   173,   146,   173,   122,   159,   173,   146,
-      75,    75,    75,    21,   120,   146,   173,    80,   146,    72
+      75,    75,    75,    75,    75,   127,   162,   166,   167,   173,
+      60,    60,   173,    60,   146,   173,   173,   173,   173,   173,
+     173,   146,   173,    84,   155,    55,    75,    55,    55,    75,
+       4,   115,   122,   158,   159,    75,    75,    75,    75,    73,
+      82,    63,   173,   173,   173,   146,   173,   122,   159,   173,
+     146,    75,    75,    75,    21,   120,   146,   173,    80,   146,
+      72
   };
 
   const unsigned char
@@ -2419,9 +2421,9 @@ namespace Language {
      162,   162,   163,   163,   163,   163,   163,   163,   163,   163,
      163,   164,   164,   165,   165,   166,   167,   168,   169,   170,
      170,   170,   170,   170,   170,   170,   170,   170,   170,   170,
-     170,   170,   170,   170,   171,   171,   172,   172,   173,   173,
+     170,   170,   170,   170,   171,   171,   171,   172,   172,   173,
      173,   173,   173,   173,   173,   173,   173,   173,   173,   173,
-     173,   173,   174
+     173,   173,   173,   174
   };
 
   const signed char
@@ -2441,9 +2443,9 @@ namespace Language {
        1,     1,     6,     6,     6,     6,     6,     6,     6,     6,
        6,     3,     4,     1,     3,     3,     4,     4,     4,     3,
        3,     2,     3,     3,     3,     3,     3,     3,     3,     3,
-       3,     3,     2,     3,     1,     3,     1,     2,     1,     1,
+       3,     3,     2,     3,     1,     3,     3,     1,     2,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       4,     3,     2
+       1,     4,     3,     2
   };
 
 
@@ -2491,23 +2493,23 @@ namespace Language {
   const short
   Parser::yyrline_[] =
   {
-       0,   206,   206,   210,   211,   215,   220,   221,   225,   226,
-     227,   228,   231,   232,   233,   234,   235,   236,   237,   238,
-     239,   240,   241,   242,   246,   250,   251,   254,   258,   262,
-     264,   268,   276,   277,   281,   282,   283,   287,   288,   297,
-     301,   316,   317,   321,   322,   327,   328,   332,   333,   334,
-     335,   336,   337,   338,   339,   340,   341,   342,   343,   344,
-     348,   349,   350,   351,   352,   353,   354,   355,   356,   357,
-     358,   359,   360,   361,   362,   363,   364,   365,   366,   367,
-     368,   369,   370,   371,   372,   373,   374,   378,   379,   383,
-     387,   395,   400,   407,   414,   418,   419,   420,   424,   425,
-     429,   430,   435,   436,   437,   441,   442,   443,   444,   448,
-     449,   450,   456,   457,   458,   459,   460,   461,   462,   463,
-     464,   470,   475,   483,   487,   494,   498,   502,   506,   510,
-     511,   512,   513,   514,   515,   516,   517,   518,   519,   520,
-     521,   522,   525,   526,   530,   531,   538,   539,   544,   545,
-     546,   547,   548,   549,   550,   551,   552,   553,   555,   556,
-     557,   558,   562
+       0,   207,   207,   211,   212,   216,   221,   222,   226,   227,
+     228,   229,   232,   233,   234,   235,   236,   237,   238,   239,
+     240,   241,   242,   243,   247,   251,   252,   255,   259,   263,
+     265,   269,   277,   278,   282,   283,   284,   288,   289,   298,
+     302,   317,   318,   322,   323,   328,   329,   333,   334,   335,
+     336,   337,   338,   339,   340,   341,   342,   343,   344,   345,
+     349,   350,   351,   352,   353,   354,   355,   356,   357,   358,
+     359,   360,   361,   362,   363,   364,   365,   366,   367,   368,
+     369,   370,   371,   372,   373,   374,   375,   379,   380,   384,
+     388,   396,   401,   408,   415,   419,   420,   421,   425,   426,
+     430,   431,   436,   437,   438,   442,   443,   444,   445,   449,
+     450,   451,   457,   458,   459,   460,   461,   462,   463,   464,
+     465,   471,   476,   484,   488,   495,   499,   503,   507,   511,
+     512,   513,   514,   515,   516,   517,   518,   519,   520,   521,
+     522,   523,   526,   527,   531,   532,   533,   540,   541,   546,
+     547,   548,   549,   550,   551,   552,   553,   554,   555,   557,
+     558,   559,   560,   564
   };
 
   void
@@ -2599,9 +2601,9 @@ namespace Language {
 
 #line 15 "parser.y"
 } // Language
-#line 2603 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
+#line 2605 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.cpp"
 
-#line 565 "parser.y"
+#line 567 "parser.y"
 
 
 
@@ -2611,5 +2613,10 @@ static int yylex( Language::Parser::semantic_type *yylval,Language::location* lo
 }
 void Language::Parser::error( const Language::location& location,const std::string &err_message )
 {
-    printf("error parsed %s(%s)at %d.%d-%d.%d: %s\n",loc.end.filename->c_str(), err_message.c_str(),loc.begin.line, loc.begin.column, loc.end.line, loc.end.column,cur_yytext.c_str());   
+
+    char format_str[128] = { 0 };
+	snprintf(format_str, sizeof(format_str) - 1, "error parsed %s(%s)at %d.%d-%d.%d: %s\n",loc.end.filename->c_str(), err_message.c_str(),loc.begin.line, loc.begin.column, loc.end.line, loc.end.column,cur_yytext.c_str());
+    
+    err=std::string(format_str);
+    printf("%s",format_str);   
 }

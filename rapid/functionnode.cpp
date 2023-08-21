@@ -2,7 +2,7 @@
 #include "symboltable.h"
 #include "errors.h"
 
-extern int lineNumber;
+
 
 namespace Language
 {

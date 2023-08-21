@@ -2,7 +2,7 @@
 #include "operatornode.h"
 #include "errors.h"
 
-extern int lineNumber;
+
 
 namespace Language
 {
@@ -22,7 +22,7 @@ namespace Language
             }
            else if ((_operator != token::EQ) && (_operator != token::NE))
             {
-                std::cout << NO_STRINGS_PLEASE << "(line: " << lineNumber << ")" << std::endl;
+                //std::cout << NO_STRINGS_PLEASE << "(line: " << lineNumber << ")" << std::endl;
                 //exit(EXIT_FAILURE);
             }
         }

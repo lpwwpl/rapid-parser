@@ -22,8 +22,7 @@ namespace Language {
 
     private:
         SymbolTable();
-        static std::unique_ptr<SymbolTable> _instance;
-        static std::once_flag _onceFlag;
+        //static std::once_flag _onceFlag;
 
         Language::FunctionNode* _entrypoint;
         std::stack<ActivationRecord*> _activationRecordStack;
@@ -47,7 +46,7 @@ namespace Language {
         }
         Language::FunctionNode* Function(QString* name);
         Language::ModuleNode* Module(QString* name);
-
+        void ClearAll();
         bool DefineFunction(QString* name, Language::FunctionNode* node);
         bool DefineStructTypes(QString* ,Language::StructDescNode*);
         bool DefineModules(QString* name, Language::ModuleNode* node);

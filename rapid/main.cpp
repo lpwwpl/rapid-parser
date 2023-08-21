@@ -17,60 +17,21 @@
 ===========================================================================*/
 
 
-
-#include <QApplication>
-
-
 #include <QMap>
 #include <iostream>
 #include <iostream>
 #include <vector>
 #include <string>
 #include "translator.hpp"
-#include <QApplication>
-#include <QMessageBox>
-#include <QSplashScreen>
 //#include "WndMain.h"
 //#include "Exceptions.h"
 
-
-#include <QGraphicsScene>
-#include <QGraphicsEllipseItem>
-#include <QGraphicsView>
+#include <symboltable.h>
 #include <QCommandLineParser>
 
 #include "qfile.h"
-#include "simplecrypt.h"
-#include <qprocess.h>
 
 #include <QDateTime>
-QString GetWMICInfo(QString cmd)
-{
-    // cmd指令
-    QProcess Cmd;
-    Cmd.start(cmd);
-    Cmd.waitForFinished();
-
-    // 获取输出结果
-    QString result = QString::fromLocal8Bit(Cmd.readAllStandardOutput());
-
-    // 拆分指令字符串
-    QStringList list = cmd.split(QString::fromLocal8Bit(" "));
-
-    // 指令字符串的最后一个单词提取出来作匹配，匹配成功则在result中删除
-    // 如：wmic cpu get processorid，那么list.last()就是processorid
-    // Qt::CaseInsensitive表示无视大小写，Qt::CaseSensitive表示对大小写敏感
-    result = result.remove(list.last(), Qt::CaseInsensitive);
-
-    // 删除输出结果中的回车和换行
-    result = result.replace(QString::fromLocal8Bit("\r"), QString::fromLocal8Bit(""));
-    result = result.replace(QString::fromLocal8Bit("\n"), QString::fromLocal8Bit(""));
-
-    // 去除空格操作
-    result = result.simplified();
-
-    return result;
-}
 
 int main(int argc, /*const*/ char** argv)
 {
@@ -132,10 +93,12 @@ int main(int argc, /*const*/ char** argv)
 
     //QApplication app(argc, argv);
     //parser.process(app);
-    QString src = "D:/txt.txt";//parser.value(srcOption);
+     QString src = "D:/txt.txt";//parser.value(srcOption);
      Language::Translator translator;
-     return(translator.parse(src));
-
+     QString err;
+     int ret = (translator.parse(src, err));
+     std::map<QString, Language::ModuleNode*> modules = SymbolTable::Instance().Modules();
+     return ret;
      //Language::Translator translator;
      //return(translator.parse(argc, argv));
      /*

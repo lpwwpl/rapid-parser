@@ -8,18 +8,18 @@
 #include <mutex>
 using namespace Language;
 
-extern int lineNumber;
 
-std::unique_ptr<SymbolTable> SymbolTable::_instance = nullptr;
-std::once_flag SymbolTable::_onceFlag;
+
+//std::once_flag SymbolTable::_onceFlag;
 
 
 SymbolTable::SymbolTable()
     : _entrypoint(nullptr)
 {
-    DefineTypes("NUM");
-    DefineTypes("BOOL");
-    DefineTypes("STRING");
+    //DefineTypes("int");
+    //DefineTypes("boolean");
+    //DefineTypes("string");
+    //DefineTypes("double");
     DefineTypes("ROBTARGET");
     DefineTypes("JOINTTARGET");
     DefineTypes("WOBJDATA");
@@ -32,11 +32,9 @@ SymbolTable::SymbolTable()
 
 SymbolTable & SymbolTable::Instance()
 {
-    std::call_once(_onceFlag,
-            [] {
-                _instance.reset(new SymbolTable);
-        });
-        return *_instance.get();
+    static SymbolTable singleton;
+
+    return singleton;
 }
 Language::ModuleNode* SymbolTable::Module(QString* name)
 {
@@ -299,3 +297,33 @@ QString SymbolTable::getVarType(VariableRecord& vr)
     return ret;
 }
 
+void SymbolTable::ClearAll()
+{
+    if (_entrypoint) {
+        delete _entrypoint;
+        _entrypoint = NULL;
+    }
+    while (!_activationRecordStack.empty()) {
+        _activationRecordStack.pop();
+    }
+    while (!_activationRecordStack.empty()) {
+        _activationRecordStack.pop();
+    }
+    while (!_argumentStack.empty()) {
+        _argumentStack.pop();
+    }
+    for (std::map<QString, Language::ModuleNode*>::iterator it = _modules.begin(); it != _modules.end(); it++)
+    {
+        delete it->second;
+        it->second = NULL;
+    }
+    _modules.clear();
+
+    for (std::map<QString, Language::FunctionNode*>::iterator it = _functions.begin(); it != _functions.end(); it++)
+    {
+        delete it->second;
+        it->second = NULL;
+    }
+    _functions.clear();
+    _variables.clear();
+}

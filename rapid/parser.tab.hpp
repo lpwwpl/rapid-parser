@@ -272,7 +272,7 @@ namespace Language {
     /// Symbol semantic values.
     union value_type
     {
-#line 123 "parser.y"
+#line 124 "parser.y"
 
    QString *sval;
    double dval;
@@ -1162,7 +1162,7 @@ namespace Language {
     /// Constants.
     enum
     {
-      yylast_ = 1316,     ///< Last index in yytable_.
+      yylast_ = 1274,     ///< Last index in yytable_.
       yynnts_ = 46,  ///< Number of nonterminal symbols.
       yyfinal_ = 6 ///< Termination state number.
     };

@@ -2,8 +2,8 @@
 #include "symboltable.h"
 #include "errors.h"
 
-extern int lineNumber;
-extern int eState;
+
+
 namespace Language
 {
     ModifierNode::ModifierNode(ASTNode* left, ASTNode* right) :ASTNode(), _left(left), _right(right)

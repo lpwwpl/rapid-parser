@@ -1,7 +1,7 @@
 #ifndef Visitor_h__
 #define Visitor_h__
 
-
+#include "PreCompiled.h"
 
 namespace Language {
 
@@ -57,7 +57,7 @@ namespace Language {
 	class NumberLiteralNode;
 	class ParamWithModifierNode;
 
-	class Visitor
+	class RobotAbbExport Visitor
 	{
 	public:
 		virtual void VisitAccset(AccSetNode* expr) = 0;

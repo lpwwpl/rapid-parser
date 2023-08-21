@@ -2,8 +2,8 @@
 #include "symboltable.h"
 #include "errors.h"
 
-extern int lineNumber;
-extern int eState;
+
+
 namespace Language
 {
     ToolDataNode::ToolDataNode(QString* name) :ASTNode(), _name(*name)

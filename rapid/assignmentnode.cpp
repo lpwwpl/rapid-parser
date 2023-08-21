@@ -4,8 +4,8 @@
 #include "listnode.h"
 #include "arrayindex.h"
 #include "structindexnode.h"
-extern int lineNumber;
-extern int eState;
+
+
 namespace Language
 {
 

@@ -14,7 +14,7 @@ class RobotAbbExport Translator
 public:
    Translator();
    int parse(const int argc, char **argv);
-   int parse(const QString&);
+   int parse(const QString&,QString& err);
 private:
    void PrepareCommandLineArguments(const int argc, char **argv);
 };

@@ -1,15 +1,15 @@
 #ifndef VisitorPyPrint_h__
 #define VisitorPyPrint_h__
-
+#include "PreCompiled.h"
 #include "Visitor.h"
 #include <QString>
 namespace Language {
 
-	class VisitorPyPrint : public Visitor
+	class RobotAbbExport VisitorPyPrint : public Visitor
 	{
 	public:
 		int indent{ 0 };
-		QString str = "";
+		QString str = QString::fromLatin1("");
 	public:
 		//VisitorPyPrint(Context* context)
 		//{

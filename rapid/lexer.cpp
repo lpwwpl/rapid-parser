@@ -431,8 +431,8 @@ int yyFlexLexer::yylex()
 /* %% [3.0] code to copy yytext_ptr to yytext[] goes here, if %array \ */\
 	(yy_c_buf_p) = yy_cp;
 /* %% [4.0] data tables for the DFA and the user's section 1 definitions go here */
-#define YY_NUM_RULES 131
-#define YY_END_OF_BUFFER 132
+#define YY_NUM_RULES 132
+#define YY_END_OF_BUFFER 133
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -443,54 +443,54 @@ struct yy_trans_info
 static const flex_int16_t yy_accept[443] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    2,    2,  132,  131,   55,  129,    5,  120,
-      128,    6,  116,  117,  124,  121,  115,  122,  106,  123,
-       17,  125,  109,  126,  108,  127,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  113,  131,  114,  118,  119,
-        4,   15,    7,  131,   16,    8,  131,    3,    2,   55,
-      129,   17,   17,   17,    0,  107,  112,  111,  110,  130,
-      130,  130,  130,  130,  130,  130,  130,   44,  130,  130,
-      130,  130,  130,  130,   35,  130,  130,  130,  130,  130,
+        0,    0,    2,    2,  133,  132,   56,  130,    5,  121,
+      129,    6,  117,  118,  125,  122,  116,  123,  107,  124,
+       17,  126,  110,  127,  109,  128,  131,  131,  131,  131,
+      131,  131,  131,  131,  131,  131,  131,  131,  131,  131,
+      131,  131,  131,  131,  131,  114,  132,  115,  119,  120,
+        4,   15,    7,  132,   16,    8,  132,    3,    2,   56,
+      130,   18,   18,   17,    0,  108,  113,  112,  111,  131,
+      131,  131,  131,  131,  131,  131,  131,   45,  131,  131,
+      131,  131,  131,  131,   36,  131,  131,  131,  131,  131,
 
-      130,  130,   53,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,   60,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,    0,    0,    0,    0,    0,
-        0,    0,   25,   24,    0,   23,   15,   14,   12,    9,
+      131,  131,   54,  131,  131,  131,  131,  131,  131,  131,
+      131,  131,  131,  131,   61,  131,  131,  131,  131,  131,
+      131,  131,  131,  131,  131,    0,    0,    0,    0,    0,
+        0,    0,   26,   25,    0,   24,   15,   14,   12,    9,
        11,   10,   16,   13,    3,    2,    0,    0,    0,   17,
-      130,  130,   52,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,   59,  130,  130,  130,  130,  130,   54,  130,
-       34,  130,   80,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,   89,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,   82,  130,  130,  130,  130,  130,
+      131,  131,   53,  131,  131,  131,  131,  131,  131,  131,
+      131,  131,   60,  131,  131,  131,  131,  131,   55,  131,
+       35,  131,   81,  131,  131,  131,  131,  131,  131,  131,
+      131,  131,  131,   90,  131,  131,  131,  131,  131,  131,
+      131,  131,  131,  131,   83,  131,  131,  131,  131,  131,
 
-      130,  130,    0,   33,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,   17,    0,   17,  130,  130,   67,   66,
-       79,   50,  130,  130,  130,   38,  130,  130,  130,  130,
-      130,  130,  130,  130,   61,   99,  130,  130,  130,  130,
-      130,   87,  130,   98,   72,   48,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,   92,  130,   91,   46,
-       19,   40,  130,  130,   56,  130,   20,  130,  130,  130,
-      130,  130,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,  130,  130,  130,  130,   85,  130,  130,  130,  130,
-      130,   41,  130,  130,  130,  130,  130,   57,  130,  101,
+      131,  131,    0,   34,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,   18,    0,   18,  131,  131,   68,   67,
+       80,   51,  131,  131,  131,   39,  131,  131,  131,  131,
+      131,  131,  131,  131,   62,  100,  131,  131,  131,  131,
+      131,   88,  131,   99,   73,   49,  131,  131,  131,  131,
+      131,  131,  131,  131,  131,  131,   93,  131,   92,   47,
+       20,   41,  131,  131,   57,  131,   21,  131,  131,  131,
+      131,  131,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,  131,  131,  131,  131,   86,  131,  131,  131,  131,
+      131,   42,  131,  131,  131,  131,  131,   58,  131,  102,
 
-      130,  130,  130,   70,   69,  130,  130,  130,  130,   90,
-       58,  130,  130,  130,   95,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,   43,  130,  130,   32,    0,    0,
-        0,    0,    0,    0,   27,   21,   93,  130,  130,  130,
-      130,  130,   39,   62,  130,  130,  130,  130,  130,  130,
-        1,  130,   73,  130,   18,  130,  103,  130,   42,  130,
-      130,  130,   81,  130,  130,   94,   96,  130,  130,  130,
-      130,  130,   31,    0,    0,    0,    0,    0,   63,   68,
-      130,  130,   51,  100,  130,   49,  130,   47,  130,  130,
-      130,  105,  102,  130,  130,  130,  130,   86,  130,  130,
+      131,  131,  131,   71,   70,  131,  131,  131,  131,   91,
+       59,  131,  131,  131,   96,  131,  131,  131,  131,  131,
+      131,  131,  131,  131,   44,  131,  131,   33,    0,    0,
+        0,    0,    0,    0,   28,   22,   94,  131,  131,  131,
+      131,  131,   40,   63,  131,  131,  131,  131,  131,  131,
+        1,  131,   74,  131,   19,  131,  104,  131,   43,  131,
+      131,  131,   82,  131,  131,   95,   97,  131,  131,  131,
+      131,  131,   32,    0,    0,    0,    0,    0,   64,   69,
+      131,  131,   52,  101,  131,   50,  131,   48,  131,  131,
+      131,  106,  103,  131,  131,  131,  131,   87,  131,  131,
 
-      130,  130,  130,    0,    0,    0,    0,    0,  130,  130,
-      130,  130,   45,  130,   64,  130,   37,  130,   75,   88,
-      130,   36,   78,   77,   29,   26,   28,    0,    0,   65,
-       71,   74,  104,  130,   83,   76,   97,   22,   30,  130,
-       84,    0
+      131,  131,  131,    0,    0,    0,    0,    0,  131,  131,
+      131,  131,   46,  131,   65,  131,   38,  131,   76,   89,
+      131,   37,   79,   78,   30,   27,   29,    0,    0,   66,
+       72,   75,  105,  131,   84,   77,   98,   23,   31,  131,
+       85,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -881,32 +881,33 @@ static const flex_int16_t yy_chk[1027] =
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[132] =
+static const flex_int32_t yy_rule_can_match_eol[133] =
     {   0,
 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,     };
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,     };
 
-static const flex_int16_t yy_rule_linenum[131] =
+static const flex_int16_t yy_rule_linenum[132] =
     {   0,
       173,  174,  175,  210,  229,  230,  232,  236,  241,  242,
-      243,  244,  245,  247,  249,  250,  257,  266,  267,  268,
-      270,  271,  272,  273,  274,  275,  276,  277,  278,  279,
-      280,  281,  282,  284,  285,  286,  287,  288,  289,  290,
-      291,  292,  293,  294,  295,  296,  297,  298,  299,  300,
-      301,  302,  303,  304,  305,  306,  307,  308,  309,  310,
-      311,  312,  315,  316,  317,  318,  319,  320,  321,  322,
-      323,  327,  328,  329,  330,  331,  332,  333,  334,  335,
-      336,  337,  338,  339,  340,  341,  342,  344,  345,  346,
-      347,  348,  351,  352,  353,  354,  355,  356,  357,  358,
+      243,  244,  245,  247,  249,  250,  256,  261,  270,  271,
+      272,  274,  275,  276,  277,  278,  279,  280,  281,  282,
+      283,  284,  285,  286,  288,  289,  290,  291,  292,  293,
+      294,  295,  296,  297,  298,  299,  300,  301,  302,  303,
+      304,  305,  306,  307,  308,  309,  310,  311,  312,  313,
+      314,  315,  316,  319,  320,  321,  322,  323,  324,  325,
+      326,  327,  331,  332,  333,  334,  335,  336,  337,  338,
+      339,  340,  341,  342,  343,  344,  345,  346,  348,  349,
+      350,  351,  352,  355,  356,  357,  358,  359,  360,  361,
 
-      359,  360,  361,  362,  363,  367,  368,  369,  370,  371,
-      372,  373,  374,  375,  376,  377,  378,  379,  380,  382,
-      383,  384,  385,  386,  387,  388,  389,  390,  391,  393
+      362,  363,  364,  365,  366,  367,  371,  372,  373,  374,
+      375,  376,  377,  378,  379,  380,  381,  382,  383,  384,
+      386,  387,  388,  389,  390,  391,  392,  393,  394,  395,
+      397
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -970,9 +971,9 @@ int yyerror(char const * s )
     return 1;
 }
 
-#line 973 "D:\\source\\repos\\rapid\\\\rapid\\lexer.cpp"
+#line 974 "D:\\source\\repos\\rapid\\\\rapid\\lexer.cpp"
  
-#line 975 "D:\\source\\repos\\rapid\\\\rapid\\lexer.cpp"
+#line 976 "D:\\source\\repos\\rapid\\\\rapid\\lexer.cpp"
 
 #define INITIAL 0
 #define indent 1
@@ -1177,7 +1178,7 @@ YY_DECL
             }
 
             
-#line 1180 "D:\\source\\repos\\rapid\\\\rapid\\lexer.cpp"
+#line 1181 "D:\\source\\repos\\rapid\\\\rapid\\lexer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1245,12 +1246,12 @@ do_action:	/* This label is used only to access EOF actions. */
 			{
 			if ( yy_act == 0 )
 				std::cerr << "--scanner backing up\n";
-			else if ( yy_act < 131 )
+			else if ( yy_act < 132 )
 				std::cerr << "--accepting rule at line " << yy_rule_linenum[yy_act] <<
 				         "(\"" << yytext << "\")\n";
-			else if ( yy_act == 131 )
-				std::cerr << "--accepting default rule (\"" << yytext << "\")\n";
 			else if ( yy_act == 132 )
+				std::cerr << "--accepting default rule (\"" << yytext << "\")\n";
+			else if ( yy_act == 133 )
 				std::cerr << "--(end of buffer or a NUL)\n";
 			else
 				std::cerr << "--EOF (start condition " << YY_START << ")\n";
@@ -1414,589 +1415,598 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 257 "lexer.l"
+#line 256 "lexer.l"
+{
+                                                        yylval->ival = atoi(yytext);
+                                                        cur_yytext=yytext;
+                                                        return token::LNumber;
+                                                }
+	YY_BREAK
+case 18:
+YY_RULE_SETUP
+#line 261 "lexer.l"
 {
                                                         yylval->dval = atof(yytext);
                                                         cur_yytext=yytext;
                                                         return token::Number;
                                                 }
 	YY_BREAK
-case 18:
-YY_RULE_SETUP
-#line 266 "lexer.l"
-{ return token::NumberType; }
-	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 267 "lexer.l"
-{ return token::TextType; }
+#line 270 "lexer.l"
+{ return token::NumberType; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 268 "lexer.l"
-{ return token::VoidType; }
+#line 271 "lexer.l"
+{ return token::TextType; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 270 "lexer.l"
-{ return token::WOBJ_P; }
+#line 272 "lexer.l"
+{ return token::VoidType; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 271 "lexer.l"
-{ return token::SEAM_NAME; }
+#line 274 "lexer.l"
+{ return token::WOBJ_P; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 272 "lexer.l"
-{ return token::ZONE_P; }
+#line 275 "lexer.l"
+{ return token::SEAM_NAME; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 273 "lexer.l"
-{ return token::VEL_P; }
+#line 276 "lexer.l"
+{ return token::ZONE_P; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 274 "lexer.l"
-{ return token::TCP_P; }
+#line 277 "lexer.l"
+{ return token::VEL_P; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 275 "lexer.l"
-{ return token::NOEOFFS; }
+#line 278 "lexer.l"
+{ return token::TCP_P; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 276 "lexer.l"
-{ return token::TOOL_P; }
+#line 279 "lexer.l"
+{ return token::NOEOFFS; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 277 "lexer.l"
-{ return token::PLEN; }
+#line 280 "lexer.l"
+{ return token::TOOL_P; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 278 "lexer.l"
-{ return token::MAXTIME; }
+#line 281 "lexer.l"
+{ return token::PLEN; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 279 "lexer.l"
-{ return token::TIMEFLAG; }
+#line 282 "lexer.l"
+{ return token::MAXTIME; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 280 "lexer.l"
-{ return token::INPOS; }
+#line 283 "lexer.l"
+{ return token::TIMEFLAG; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 281 "lexer.l"
-{ return token::CONC; }
+#line 284 "lexer.l"
+{ return token::INPOS; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 282 "lexer.l"
-{ return token::ID_P; }
+#line 285 "lexer.l"
+{ return token::CONC; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 284 "lexer.l"
-{ return token::NOT; }
+#line 286 "lexer.l"
+{ return token::ID_P; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 285 "lexer.l"
-{ return token::IF; }
+#line 288 "lexer.l"
+{ return token::NOT; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 286 "lexer.l"
-{return token::WELDDATA;}
+#line 289 "lexer.l"
+{ return token::IF; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 287 "lexer.l"
-{return token::SEAMDATA;}
+#line 290 "lexer.l"
+{return token::WELDDATA;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 288 "lexer.l"
-{ return token::ELSE; }
+#line 291 "lexer.l"
+{return token::SEAMDATA;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 289 "lexer.l"
-{ return token::ELSEIF; }
+#line 292 "lexer.l"
+{ return token::ELSE; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 290 "lexer.l"
-{ return token::THEN; }
+#line 293 "lexer.l"
+{ return token::ELSEIF; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 291 "lexer.l"
-{ return token::ENDIF; }
+#line 294 "lexer.l"
+{ return token::THEN; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 292 "lexer.l"
-{ return token::RETURN; }
+#line 295 "lexer.l"
+{ return token::ENDIF; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 293 "lexer.l"
-{return token::WHILE;}
+#line 296 "lexer.l"
+{ return token::RETURN; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 294 "lexer.l"
-{return token::DO;}   
+#line 297 "lexer.l"
+{return token::WHILE;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 295 "lexer.l"
-{return token::ENDWHILE;}
+#line 298 "lexer.l"
+{return token::DO;}   
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 296 "lexer.l"
-{return token::TEST;}   	
+#line 299 "lexer.l"
+{return token::ENDWHILE;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 297 "lexer.l"
-{return token::ENDTEST;}   	
+#line 300 "lexer.l"
+{return token::TEST;}   	
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 298 "lexer.l"
-{return token::PROC;}  
+#line 301 "lexer.l"
+{return token::ENDTEST;}   	
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 299 "lexer.l"
-{return token::ENDPROC;}
+#line 302 "lexer.l"
+{return token::PROC;}  
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 300 "lexer.l"
-{return token::CASE;}
+#line 303 "lexer.l"
+{return token::ENDPROC;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 301 "lexer.l"
-{return token::DEFAULT;}
+#line 304 "lexer.l"
+{return token::CASE;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 302 "lexer.l"
-{return token::AND;}
+#line 305 "lexer.l"
+{return token::DEFAULT;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 303 "lexer.l"
-{return token::OR;}
+#line 306 "lexer.l"
+{return token::AND;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 304 "lexer.l"
-{ return token::MOD;}
+#line 307 "lexer.l"
+{return token::OR;}
 	YY_BREAK
 case 55:
-/* rule 55 can match eol */
 YY_RULE_SETUP
-#line 305 "lexer.l"
-{}
+#line 308 "lexer.l"
+{ return token::MOD;}
 	YY_BREAK
 case 56:
+/* rule 56 can match eol */
 YY_RULE_SETUP
-#line 306 "lexer.l"
-{return token::FTRUE;}
+#line 309 "lexer.l"
+{}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 307 "lexer.l"
-{return token::FFALSE;}
+#line 310 "lexer.l"
+{return token::FTRUE;}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 308 "lexer.l"
-{return token::RETRY;}
+#line 311 "lexer.l"
+{return token::FFALSE;}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 309 "lexer.l"
-{return token::FOR;}
+#line 312 "lexer.l"
+{return token::RETRY;}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 310 "lexer.l"
-{return token::TO;}
+#line 313 "lexer.l"
+{return token::FOR;}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 311 "lexer.l"
-{return token::FROM;}
+#line 314 "lexer.l"
+{return token::TO;}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 312 "lexer.l"
-{return token::ENDFOR;}   
+#line 315 "lexer.l"
+{return token::FROM;}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 315 "lexer.l"
-{return token::ACTUNIT;}
+#line 316 "lexer.l"
+{return token::ENDFOR;}   
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 316 "lexer.l"
-{return token::MOVEABSJ;}
+#line 319 "lexer.l"
+{return token::ACTUNIT;}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 317 "lexer.l"
-{return token::ARCLSTART;}
+#line 320 "lexer.l"
+{return token::MOVEABSJ;}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 318 "lexer.l"
-{return token::ARCL;}
+#line 321 "lexer.l"
+{return token::ARCLSTART;}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 319 "lexer.l"
-{return token::ARCC;}
+#line 322 "lexer.l"
+{return token::ARCL;}
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 320 "lexer.l"
-{return token::ARCEND;}
+#line 323 "lexer.l"
+{return token::ARCC;}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 321 "lexer.l"
-{return token::MOVEL;}
+#line 324 "lexer.l"
+{return token::ARCEND;}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 322 "lexer.l"
-{return token::MOVEJ;}
+#line 325 "lexer.l"
+{return token::MOVEL;}
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 323 "lexer.l"
-{return token::DEACTUNIT;}
+#line 326 "lexer.l"
+{return token::MOVEJ;}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
 #line 327 "lexer.l"
-{return token::PERS;}
+{return token::DEACTUNIT;}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 328 "lexer.l"
-{return token::MODULE;}
+#line 331 "lexer.l"
+{return token::PERS;}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 329 "lexer.l"
-{return token::ENDMODULE;}
+#line 332 "lexer.l"
+{return token::MODULE;}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 330 "lexer.l"
-{return token::TOOLDATA;}
+#line 333 "lexer.l"
+{return token::ENDMODULE;}
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 331 "lexer.l"
-{return token::SPEEDDATA;}
+#line 334 "lexer.l"
+{return token::TOOLDATA;}
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 332 "lexer.l"
-{return token::ZONEDATA;}
+#line 335 "lexer.l"
+{return token::SPEEDDATA;}
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 333 "lexer.l"
-{return token::WOBJDATA;}
+#line 336 "lexer.l"
+{return token::ZONEDATA;}
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 334 "lexer.l"
-{return token::BOOL;}
+#line 337 "lexer.l"
+{return token::WOBJDATA;}
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 335 "lexer.l"
-{return token::NUM;}
+#line 338 "lexer.l"
+{return token::BOOL;}
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 336 "lexer.l"
-{return token::STRING;}
+#line 339 "lexer.l"
+{return token::NUM;}
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 337 "lexer.l"
-{return token::VAR;}
+#line 340 "lexer.l"
+{return token::STRING;}
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 338 "lexer.l"
-{return token::ROBTARGET;}
+#line 341 "lexer.l"
+{return token::VAR;}
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 339 "lexer.l"
-{return token::JOINTTARGET;}
+#line 342 "lexer.l"
+{return token::ROBTARGET;}
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 340 "lexer.l"
-{return token::CONST_L;}
+#line 343 "lexer.l"
+{return token::JOINTTARGET;}
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 341 "lexer.l"
-{return token::TPWRITE;}
+#line 344 "lexer.l"
+{return token::CONST_L;}
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 342 "lexer.l"
-{return token::FNULL;}
+#line 345 "lexer.l"
+{return token::TPWRITE;}
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 344 "lexer.l"
-{return token::WAITTIME;}
+#line 346 "lexer.l"
+{return token::FNULL;}
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 345 "lexer.l"
-{return token::SET;}
+#line 348 "lexer.l"
+{return token::WAITTIME;}
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 346 "lexer.l"
-{return token::RESET;}
+#line 349 "lexer.l"
+{return token::SET;}
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 347 "lexer.l"
-{return token::TASK;}
+#line 350 "lexer.l"
+{return token::RESET;}
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 348 "lexer.l"
-{return token::STEP;}
+#line 351 "lexer.l"
+{return token::TASK;}
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 351 "lexer.l"
-{return token::ACCSET;}
+#line 352 "lexer.l"
+{return token::STEP;}
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 352 "lexer.l"
-{return token::VELSET;}
+#line 355 "lexer.l"
+{return token::ACCSET;}
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 353 "lexer.l"
-{return token::SETDO;}
+#line 356 "lexer.l"
+{return token::VELSET;}
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 354 "lexer.l"
-{return token::WAITDI;}
+#line 357 "lexer.l"
+{return token::SETDO;}
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
-#line 355 "lexer.l"
-{return token::WAITUNTIL;}
+#line 358 "lexer.l"
+{return token::WAITDI;}
 	YY_BREAK
 case 98:
 YY_RULE_SETUP
-#line 356 "lexer.l"
-{return token::OFFS;}
+#line 359 "lexer.l"
+{return token::WAITUNTIL;}
 	YY_BREAK
 case 99:
 YY_RULE_SETUP
-#line 357 "lexer.l"
-{return token::FUNC;}
+#line 360 "lexer.l"
+{return token::OFFS;}
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
-#line 358 "lexer.l"
-{ return token::ENDFUNC; }
+#line 361 "lexer.l"
+{return token::FUNC;}
 	YY_BREAK
 case 101:
 YY_RULE_SETUP
-#line 359 "lexer.l"
-{return token::INOUT;}
+#line 362 "lexer.l"
+{ return token::ENDFUNC; }
 	YY_BREAK
 case 102:
 YY_RULE_SETUP
-#line 360 "lexer.l"
-{return token::RELTOOl;}
+#line 363 "lexer.l"
+{return token::INOUT;}
 	YY_BREAK
 case 103:
 YY_RULE_SETUP
-#line 361 "lexer.l"
-{return token::RECORD;}
+#line 364 "lexer.l"
+{return token::RELTOOl;}
 	YY_BREAK
 case 104:
 YY_RULE_SETUP
-#line 362 "lexer.l"
-{return token::ENDRECORD;}
+#line 365 "lexer.l"
+{return token::RECORD;}
 	YY_BREAK
 case 105:
 YY_RULE_SETUP
-#line 363 "lexer.l"
-{return token::PULSEDO;}
+#line 366 "lexer.l"
+{return token::ENDRECORD;}
 	YY_BREAK
 case 106:
 YY_RULE_SETUP
 #line 367 "lexer.l"
-{return token::DOT;}
+{return token::PULSEDO;}
 	YY_BREAK
 case 107:
 YY_RULE_SETUP
-#line 368 "lexer.l"
-{return token::ASS;}
+#line 371 "lexer.l"
+{return token::DOT;}
 	YY_BREAK
 case 108:
 YY_RULE_SETUP
-#line 369 "lexer.l"
-{return token::EQ;}
+#line 372 "lexer.l"
+{return token::ASS;}
 	YY_BREAK
 case 109:
 YY_RULE_SETUP
-#line 370 "lexer.l"
-{ return token::SEMICOLON; }
+#line 373 "lexer.l"
+{return token::EQ;}
 	YY_BREAK
 case 110:
 YY_RULE_SETUP
-#line 371 "lexer.l"
-{ return token::GE; }
+#line 374 "lexer.l"
+{ return token::SEMICOLON; }
 	YY_BREAK
 case 111:
 YY_RULE_SETUP
-#line 372 "lexer.l"
-{ return token::NE; }
+#line 375 "lexer.l"
+{ return token::GE; }
 	YY_BREAK
 case 112:
 YY_RULE_SETUP
-#line 373 "lexer.l"
-{ return token::LE; }
+#line 376 "lexer.l"
+{ return token::NE; }
 	YY_BREAK
 case 113:
 YY_RULE_SETUP
-#line 374 "lexer.l"
-{ return token::LR; }
+#line 377 "lexer.l"
+{ return token::LE; }
 	YY_BREAK
 case 114:
 YY_RULE_SETUP
-#line 375 "lexer.l"
-{ return token::RR; }
+#line 378 "lexer.l"
+{ return token::LR; }
 	YY_BREAK
 case 115:
 YY_RULE_SETUP
-#line 376 "lexer.l"
-{ return token::COMMA; }
+#line 379 "lexer.l"
+{ return token::RR; }
 	YY_BREAK
 case 116:
 YY_RULE_SETUP
-#line 377 "lexer.l"
-{ return token::LC; }
+#line 380 "lexer.l"
+{ return token::COMMA; }
 	YY_BREAK
 case 117:
 YY_RULE_SETUP
-#line 378 "lexer.l"
-{ return token::RC; }
+#line 381 "lexer.l"
+{ return token::LC; }
 	YY_BREAK
 case 118:
 YY_RULE_SETUP
-#line 379 "lexer.l"
-{ return token::LBRACE; }
+#line 382 "lexer.l"
+{ return token::RC; }
 	YY_BREAK
 case 119:
 YY_RULE_SETUP
-#line 380 "lexer.l"
-{ return token::RBRACE; }
+#line 383 "lexer.l"
+{ return token::LBRACE; }
 	YY_BREAK
 case 120:
 YY_RULE_SETUP
-#line 382 "lexer.l"
-{return token::JIN;}
+#line 384 "lexer.l"
+{ return token::RBRACE; }
 	YY_BREAK
 case 121:
 YY_RULE_SETUP
-#line 383 "lexer.l"
-{ return token::ADD; }
+#line 386 "lexer.l"
+{return token::JIN;}
 	YY_BREAK
 case 122:
 YY_RULE_SETUP
-#line 384 "lexer.l"
-{ return token::SUB; }
+#line 387 "lexer.l"
+{ return token::ADD; }
 	YY_BREAK
 case 123:
 YY_RULE_SETUP
-#line 385 "lexer.l"
-{ return token::DIVIDE; }
+#line 388 "lexer.l"
+{ return token::SUB; }
 	YY_BREAK
 case 124:
 YY_RULE_SETUP
-#line 386 "lexer.l"
-{ return token::MUL; }
+#line 389 "lexer.l"
+{ return token::DIVIDE; }
 	YY_BREAK
 case 125:
 YY_RULE_SETUP
-#line 387 "lexer.l"
-{ return token::COLON; }  
+#line 390 "lexer.l"
+{ return token::MUL; }
 	YY_BREAK
 case 126:
 YY_RULE_SETUP
-#line 388 "lexer.l"
-{return token::LT;}
+#line 391 "lexer.l"
+{ return token::COLON; }  
 	YY_BREAK
 case 127:
 YY_RULE_SETUP
-#line 389 "lexer.l"
-{return token::GT;}
+#line 392 "lexer.l"
+{return token::LT;}
 	YY_BREAK
 case 128:
 YY_RULE_SETUP
-#line 390 "lexer.l"
-{return token::DOLAR;}
+#line 393 "lexer.l"
+{return token::GT;}
 	YY_BREAK
 case 129:
 YY_RULE_SETUP
-#line 391 "lexer.l"
-/* comments one line til nl */
+#line 394 "lexer.l"
+{return token::DOLAR;}
 	YY_BREAK
 case 130:
 YY_RULE_SETUP
-#line 393 "lexer.l"
+#line 395 "lexer.l"
+/* comments one line til nl */
+	YY_BREAK
+case 131:
+YY_RULE_SETUP
+#line 397 "lexer.l"
 {
                                                         yylval->sval = new QString( yytext );
                                                         cur_yytext=yytext;
                                                         return( token::Identifier );
                                              }
 	YY_BREAK
-case 131:
+case 132:
 YY_RULE_SETUP
-#line 403 "lexer.l"
+#line 407 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 1999 "D:\\source\\repos\\rapid\\\\rapid\\lexer.cpp"
+#line 2009 "D:\\source\\repos\\rapid\\\\rapid\\lexer.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -3120,7 +3130,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 403 "lexer.l"
+#line 407 "lexer.l"
 
 
 

@@ -6,7 +6,7 @@ namespace Language
 {
 
 
-    enum class enum_v_type
+    enum RobotAbbExport enum_v_type
     {
         Not_found = 0,
         expression,
@@ -18,6 +18,18 @@ namespace Language
         string,
         boolean,
         identifier,
+
+
+        ROBTARGET,
+        JOINTTARGET,
+        WOBJDATA,
+        ZONEDATA,
+        SEAMDATA,
+        TOOLDATA,
+        SPEEDDATA,
+        WELDDATA,
+        MOVEL,
+        MOVEJ,
     };
 
     typedef RobotAbbExport struct VR
