@@ -1,11 +1,9 @@
 #ifndef __LEXER_HPP__
 #define __LEXER_HPP__
 
-#if ! defined(yyFlexLexerOnce)
 #undef yyFlexLexer
 #define yyFlexLexer D_yyFlexLexer
 #include <FlexLexer.h>
-#endif
 
 //#if ! defined(yyFlexLexerOnce)
 //#include <FlexLexer.h>
