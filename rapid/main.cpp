@@ -97,7 +97,7 @@ int main(int argc, /*const*/ char** argv)
      Language::Translator translator;
      QString err;
      int ret = (translator.parse(src, err));
-     std::map<QString, Language::ModuleNode*> modules = SymbolTable::Instance().Modules();
+     std::map<QString, Language::ModuleNode*> modules = Language::SymbolTable::Instance().Modules();
      return ret;
      //Language::Translator translator;
      //return(translator.parse(argc, argv));

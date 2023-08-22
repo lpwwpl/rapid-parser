@@ -13,7 +13,7 @@
 #include "parser.tab.hpp"
 #include "variablerecord.h"
 
-typedef Language::Parser::token token;
+typedef Language::Parser::token L_token;
 #define SPACE " "
 #define INTENT "    "
 

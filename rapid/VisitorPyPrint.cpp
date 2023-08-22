@@ -672,116 +672,116 @@ void VisitorPyPrint::VisitOpera(OperatorNode* expr)
 {
     switch (expr->_operator)
     {
-    case token::ASS:
+    case L_token::ASS:
     {
         expr->_op1->Accept(*this);
         str += " = ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::LC:
+    case L_token::LC:
     {
         str += "(";
         expr->_op1->Accept(*this);
         str += ")";
     }
-    case token::UMINUS:
+    case L_token::UMINUS:
     {
         str += "-";
         expr->_op1->Accept(*this);
     }
     break;
-    case token::ADD:
+    case L_token::ADD:
     {
         expr->_op1->Accept(*this);
         str += " + ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::SUB:
+    case L_token::SUB:
     {
         expr->_op1->Accept(*this);
         str += " - ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::MUL:
+    case L_token::MUL:
     {
         expr->_op1->Accept(*this);
         str += " * ";
         expr->_op2->Accept(*this);
     }
     break;
-    //case token::DIV: 
+    //case L_token::DIV: 
     //{
     //    QString temp = QString("%1 / %2").arg(_op1->toString()).arg(_op2->toString());
     //    str = temp;
     //}
     //    break;
-    case token::LT:
+    case L_token::LT:
     {
         expr->_op1->Accept(*this);
         str += " < ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::GT:
+    case L_token::GT:
     {
         expr->_op1->Accept(*this);
         str += " > ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::GE:
+    case L_token::GE:
     {
         expr->_op1->Accept(*this);
         str += " >= ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::LE:
+    case L_token::LE:
     {
         expr->_op1->Accept(*this);
         str += " <= ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::NE:
+    case L_token::NE:
     {
         expr->_op1->Accept(*this);
         str += " != ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::EQ:
+    case L_token::EQ:
     {
         expr->_op1->Accept(*this);
         str += " == ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::AND:
+    case L_token::AND:
     {
         expr->_op1->Accept(*this);
         str += " and ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::OR:
+    case L_token::OR:
     {
         expr->_op1->Accept(*this);
         str += " or ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::MOD:
+    case L_token::MOD:
     {
         expr->_op1->Accept(*this);
         str += " % ";
         expr->_op2->Accept(*this);
     }
     break;
-    case token::NOT:
+    case L_token::NOT:
     {
         str += "not";
         expr->_op1->Accept(*this);

@@ -1,6 +1,8 @@
 #include "activationrecord.h"
 #include "dimnumnode.h"
 
+using namespace Language;
+
 ActivationRecord::ActivationRecord()
 {
     //_variables

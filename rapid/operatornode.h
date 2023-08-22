@@ -8,7 +8,7 @@ namespace Language
     class RobotAbbExport OperatorNode: public ASTNode
     {
     public:
-        OperatorNode(token::yytokentype type, ASTNode * op1, ASTNode * op2 = nullptr);
+        OperatorNode(L_token::yytokentype type, ASTNode * op1, ASTNode * op2 = nullptr);
         QString toRaw(uint level = 0) override;
         QVariant Execute() override;
         void Accept(Visitor& v) override { v.VisitOpera(this); }

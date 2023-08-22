@@ -6,21 +6,21 @@
 
 namespace Language
 {
-    OperatorNode::OperatorNode(token::yytokentype type, ASTNode * op1, ASTNode * op2)
+    OperatorNode::OperatorNode(L_token::yytokentype type, ASTNode * op1, ASTNode * op2)
         : _op1(op1),
         _op2(op2),
         _operator(type)
     {
         if (nullptr == op2)
             return;
-        //token::TextType
+        //L_token::TextType
         if ((_op1->getTypeName() == "string") || (_op2->getTypeName() == "string"))
         {
-           if (_operator == token::ADD)
+           if (_operator == L_token::ADD)
             {
                  _type = enum_v_type::string;
             }
-           else if ((_operator != token::EQ) && (_operator != token::NE))
+           else if ((_operator != L_token::EQ) && (_operator != L_token::NE))
             {
                 //std::cout << NO_STRINGS_PLEASE << "(line: " << lineNumber << ")" << std::endl;
                 //exit(EXIT_FAILURE);
@@ -34,21 +34,21 @@ namespace Language
     {
         switch(_operator)
         {
-            case token::ASS: return _op1->Execute() = _op2->Execute(); break;
-            case token::NOT: return !(_op1->Execute().toBool()); break;
-            case token::LC:return _op1->Execute().toDouble(); break;
-            case token::UMINUS: return -_op1->Execute().toDouble(); break;
-            case token::ADD: 
+            case L_token::ASS: return _op1->Execute() = _op2->Execute(); break;
+            case L_token::NOT: return !(_op1->Execute().toBool()); break;
+            case L_token::LC:return _op1->Execute().toDouble(); break;
+            case L_token::UMINUS: return -_op1->Execute().toDouble(); break;
+            case L_token::ADD: 
             {
-                //if ((_op1->Type() == token::TextType) || (_op1->Type() == token::TextType))
+                //if ((_op1->Type() == L_token::TextType) || (_op1->Type() == L_token::TextType))
                 //    return QString("%1%2").arg(_op1->Execute().toString()).arg(_op2->Execute().toString());
                 return _op1->Execute().toDouble() + _op2->Execute().toDouble(); 
             } 
             break;
-            case token::SUB: return _op1->Execute().toDouble() - _op2->Execute().toDouble(); break;
-            case token::MUL: return _op1->Execute().toDouble() * _op2->Execute().toDouble(); break;
-            //case token::DIV: return _op1->Execute().toDouble() / _op2->Execute().toDouble(); break;
-            case token::LT: 
+            case L_token::SUB: return _op1->Execute().toDouble() - _op2->Execute().toDouble(); break;
+            case L_token::MUL: return _op1->Execute().toDouble() * _op2->Execute().toDouble(); break;
+            //case L_token::DIV: return _op1->Execute().toDouble() / _op2->Execute().toDouble(); break;
+            case L_token::LT: 
             {
              
                 {
@@ -56,14 +56,14 @@ namespace Language
                 }
                 break;
             }
-            case token::GT: return _op1->Execute().toDouble() > _op2->Execute().toDouble();break;
-            case token::GE: return _op1->Execute().toDouble() >= _op2->Execute().toDouble();break;
-            case token::LE: return _op1->Execute().toDouble() <= _op2->Execute().toDouble();break;
-            case token::NE: return _op1->Execute() != _op2->Execute();break;
-            case token::EQ: return _op1->Execute() == _op2->Execute(); break;
-            case token::AND:  return _op1->Execute().toBool() && _op2->Execute().toBool();break;
-            case token::OR:  return _op1->Execute().toBool()|| _op2->Execute().toBool(); break;
-            case token::MOD: return _op1->Execute().toInt(); break;
+            case L_token::GT: return _op1->Execute().toDouble() > _op2->Execute().toDouble();break;
+            case L_token::GE: return _op1->Execute().toDouble() >= _op2->Execute().toDouble();break;
+            case L_token::LE: return _op1->Execute().toDouble() <= _op2->Execute().toDouble();break;
+            case L_token::NE: return _op1->Execute() != _op2->Execute();break;
+            case L_token::EQ: return _op1->Execute() == _op2->Execute(); break;
+            case L_token::AND:  return _op1->Execute().toBool() && _op2->Execute().toBool();break;
+            case L_token::OR:  return _op1->Execute().toBool()|| _op2->Execute().toBool(); break;
+            case L_token::MOD: return _op1->Execute().toInt(); break;
             default: 
                 std::cerr << "Damn ! Looks like we forgot to implement something..." << std::endl;
                 exit(EXIT_FAILURE);
@@ -78,55 +78,55 @@ namespace Language
         QString str = "";
         switch (_operator)
         {
-        case token::ASS:
+        case L_token::ASS:
         {
             QString temp = QString("%1 := %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
             break;
-        case token::NOT:
+        case L_token::NOT:
         {
             QString temp = QString("NOT %1").arg(_op1->toRaw());
             str = temp;
         }
             break;
-        case token::LC:
+        case L_token::LC:
         {
             QString temp = QString("(%1)").arg(_op1->toRaw());
             str = temp;
         }
         break;
-        case token::UMINUS:
+        case L_token::UMINUS:
         {
             QString temp = QString("%1%2").arg("-").arg(_op1->toRaw());
             str = temp;
         }
         break;
-        case token::ADD:
+        case L_token::ADD:
         {
             QString temp = QString("%1 + %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
         break;
-        case token::SUB:
+        case L_token::SUB:
         {
             QString temp = QString("%1 - %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
         break;
-        case token::MUL:
+        case L_token::MUL:
         {
             QString temp = QString("%1 * %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
         break;
-        //case token::DIV: 
+        //case L_token::DIV: 
         //{
         //    QString temp = QString("%1 / %2").arg(_op1->toRaw()).arg(_op2->toRaw());
         //    str = temp;
         //}
         //    break;
-        case token::LT:
+        case L_token::LT:
         {
 
             {
@@ -136,49 +136,49 @@ namespace Language
 
         }
         break;
-        case token::GT:
+        case L_token::GT:
         {
             QString temp = QString("%1 > %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
         break;
-        case token::GE:
+        case L_token::GE:
         {
             QString temp = QString("%1 >= %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
         break;
-        case token::LE:
+        case L_token::LE:
         {
             QString temp = QString("%1 <= %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
         break;
-        case token::NE:
+        case L_token::NE:
         {
             QString temp = QString("%1 != %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
         break;
-        case token::EQ:
+        case L_token::EQ:
         {
             QString temp = QString("%1 = %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
         break;
-        case token::AND:
+        case L_token::AND:
         {
             QString temp = QString("%1 and %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
         break;
-        case token::OR:
+        case L_token::OR:
         {
             QString temp = QString("%1 or %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
         }
         break;
-        case token::MOD:
+        case L_token::MOD:
         {
             QString temp = QString("%1 % %2").arg(_op1->toRaw()).arg(_op2->toRaw());
             str = temp;
