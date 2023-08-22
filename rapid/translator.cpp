@@ -84,6 +84,7 @@ int Translator::parse(const QString& codestr, QString& err_qst)
     std::cout << str.toStdString() << std::endl;
     std::cout << "------RunTime Info:------" << std::endl;
     int expectedArgumentCount = SymbolTable::Instance().EntryPoint()->Arguments()->size();
+    //SymbolTable::Instance().ClearAll();
     ////SymbolTable::Instance().PushCommandLineArguments(0,NULL);
     ////SymbolTable::Instance().EntryPoint()->Execute().toInt();
     //QFile file("D:/_testlpw.txt");

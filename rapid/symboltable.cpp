@@ -312,18 +312,19 @@ void SymbolTable::ClearAll()
     while (!_argumentStack.empty()) {
         _argumentStack.pop();
     }
-    for (std::map<QString, Language::ModuleNode*>::iterator it = _modules.begin(); it != _modules.end(); it++)
+    for (std::map<QString, Language::ModuleNode*>::iterator it = _modules.begin(); it != _modules.end(); ++it)
     {
+        if(it->second)
         delete it->second;
-        it->second = NULL;
+     
     }
     _modules.clear();
 
-    for (std::map<QString, Language::FunctionNode*>::iterator it = _functions.begin(); it != _functions.end(); it++)
-    {
-        delete it->second;
-        it->second = NULL;
-    }
+    //for (std::map<QString, Language::FunctionNode*>::iterator it = _functions.begin(); it != _functions.end();++it)
+    //{
+    //    if(it->second)
+    //    delete it->second;
+    //}
     _functions.clear();
     _variables.clear();
 }
