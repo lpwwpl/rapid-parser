@@ -12,7 +12,7 @@
 #include <QFileInfo>
 #include <QDir>
 
-#include "VisitorPyPrint.h"
+#include "VisitorLiPrint.h"
 
 extern std::stack<std::string> fileNames;
 extern std::vector<std::string> libPaths;
@@ -67,7 +67,7 @@ int Translator::parse(const QString& codestr, QString& err_qst)
     std::map<QString, Language::ModuleNode*> modules = SymbolTable::Instance().Modules();
     int count = modules.size();
     QString str = "";
-    VisitorPyPrint visitor;
+    VisitorLiPrint visitor;
     //for (auto elem : modules)
     //{
     //    Language::ModuleNode* module = elem.second;

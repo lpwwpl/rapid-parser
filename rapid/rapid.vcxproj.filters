@@ -227,6 +227,9 @@
     <ClCompile Include="VisitorPyPrint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VisitorLiPrint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assignmentnode.h">
@@ -449,6 +452,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VisitorPyPrint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VisitorLiPrint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -23,7 +23,7 @@
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -157,6 +157,7 @@
     <ClCompile Include="twait.cpp" />
     <ClCompile Include="variable.cpp" />
     <ClCompile Include="velset.cpp" />
+    <ClCompile Include="VisitorLiPrint.cpp" />
     <ClCompile Include="VisitorPyPrint.cpp" />
     <ClCompile Include="VisitorTypeCheck.cpp" />
     <ClCompile Include="waitdinode.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="variablerecord.h" />
     <ClInclude Include="velset.h" />
     <ClInclude Include="Visitor.h" />
+    <ClInclude Include="VisitorLiPrint.h" />
     <ClInclude Include="VisitorPyPrint.h" />
     <ClInclude Include="VisitorTypeCheck.h" />
     <ClInclude Include="waitdinode.h" />
