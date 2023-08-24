@@ -2,14 +2,24 @@
 
 #include "symboltable.h"
 
+
 namespace Language
 {
+
     ParameterNode::ParameterNode(ASTNode* inout, IdentifierNode* type, IdentifierNode* param, ASTNode* initializer):
         _INOUT(inout),
         _type(type),
         _param(param),
         _initializer(initializer)
     {
+        //ModuleNode* module = dynamic_cast<ModuleNode*>(ast_scope);
+        //if (module)
+        //{
+        //    isGlobal = true;
+        //}
+        //else
+        //    isGlobal = false;
+
         if (nullptr == initializer)
         {
 
@@ -18,6 +28,8 @@ namespace Language
             if ("STRING" == type->getVariablenTypeName())
                 _initializer = new StringLiteralNode(new QString());
         }
+        //VariableRecord vr = SymbolTable::Instance().GetVariableValue(param->_name);
+        //if(vr.var_type=="")
         SymbolTable::Instance().DefineVariable(&param->_name, type->getType(),type->getVariablenTypeName());
     }
 

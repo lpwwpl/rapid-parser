@@ -2,9 +2,16 @@
 #include "VisitorLiPrint.h"
 using namespace Language;
 
+#include "symboltable.h"
 #include "ast.h"
 
 #define INTENT "    "
+
+
+VisitorLiPrint::VisitorLiPrint()
+{
+    cur_cheo = NULL;
+}
 
 void VisitorLiPrint::VisitAccset(AccSetNode* expr)
 {
@@ -120,6 +127,15 @@ void VisitorLiPrint::VisitArcl(ArcLNode* expr)
 }
 void VisitorLiPrint::VisitIdentifier(IdentifierNode* expr)
 {
+    VariableRecord vr=
+    SymbolTable::Instance().GetVariableValue(expr->_name);
+
+    ModuleNode* module = dynamic_cast<ModuleNode*>(cur_cheo);
+    if (vr._scope == eModule && !module)
+    {
+        str.append("self.");
+    }
+
     str.append(expr->_name);
 }
 void VisitorLiPrint::VisitArclStart(ArcLStartNode* expr)
@@ -468,7 +484,9 @@ void VisitorLiPrint::VisitSet(SetNode* expr)
     str.append("Set");
     //str.append(_name);
     str.append("(");
+    str.append("\"");
     expr->_expression->Accept(*this);
+    str.append("\"");
     str.append(")");
 }
 void VisitorLiPrint::VisitSetDo(SetDoNode* expr)
@@ -479,7 +497,9 @@ void VisitorLiPrint::VisitSetDo(SetDoNode* expr)
     }
     str.append("SetDo");
     str.append("(");
+    str.append("\"");
     expr->_name->Accept(*this);
+    str.append("\"");
     str.append(",");
     expr->_expression->Accept(*this);
     str.append(")");
@@ -564,7 +584,10 @@ void VisitorLiPrint::VisitSwitch(SWitchNode* expr)
 }
 void VisitorLiPrint::VisitStructindex(StructIndexNode* expr)
 {
-    str.append(expr->_name);
+    expr->_left->Accept(*this);
+    str.append(".");
+    expr->_right->Accept(*this);
+    //str.append(expr->_name);
 }
 
 void VisitorLiPrint::VisitTpwrite(TpWriteNode* expr)
@@ -588,7 +611,9 @@ void VisitorLiPrint::VisitWaitDI(WaitDiNode* expr)
     }
     str.append("self.vc.");
     str.append("WaitDI(");
+    str.append("\"");
     str.append(expr->_name);
+    str.append("\"");
     str.append(",");
     expr->_expression->Accept(*this);
     str.append(")");
@@ -611,7 +636,28 @@ void VisitorLiPrint::VisitWaittime(WaitTimeNode* expr)
         for (int i = 0; i < count; i++)
         {
             auto node = nodes->at(i);
-            node->Accept(*this);
+            ListNode<ASTNode>* p_nodes = dynamic_cast<ListNode<ASTNode>*>(node);
+            if (p_nodes)
+            {
+                int p_count = p_nodes->size();
+                for (int j = 0; j < p_count; j++)
+                {
+                    auto p_node = p_nodes->at(j);
+                    p_node->Accept(*this);
+                    if (j == (p_count - 1))
+                        ;
+                    else
+                        str.append(",");
+
+                }
+            }
+            else
+            {
+            
+                node->Accept(*this);
+         
+            }
+            
             if (i == (count - 1))
                 ;
             else
@@ -630,7 +676,27 @@ void VisitorLiPrint::VisitWaitutil(WaitUntilNode* expr)
     str.append("WaitUntil");
     //str.append(_name);
     str.append("(");
-    expr->_expression->Accept(*this);
+
+
+    OperatorNode* oper = dynamic_cast<OperatorNode*>(expr->_expression);
+    if (oper)
+    {
+        switch (oper->_operator)
+        {
+        case L_token::EQ:
+        {
+            str.append("\"");
+            oper->_op1->Accept(*this);
+            str.append("\"");
+            str += " ,";
+            oper->_op2->Accept(*this);
+        }
+        break;
+        default:
+            break;
+        }
+    }
+    //expr->_expression->Accept(*this);
     str.append(")");
 }
 
@@ -696,6 +762,12 @@ void VisitorLiPrint::VisitParamNode(ParameterNode* expr)
     //str += s_type->getName();
     //str += " ";
     IdentifierNode* s_param = (IdentifierNode*)(expr->_param);
+    VariableRecord vr =
+        SymbolTable::Instance().GetVariableValue(expr->_name);
+    if (vr._scope == eModule)
+    {
+        str.append("self.");
+    }
     //str += "\"";
     str += s_param->getName();
     //str += "\"";
@@ -877,7 +949,7 @@ void VisitorLiPrint::VisitMoveL(MoveLNode* expr)
         str.append(INTENT);
     }
     str.append("self.vc.");
-    str.append("movel");
+    str.append("MoveL");
     str.append("(");
     for (auto statement : *(expr->_arguments))
     {
@@ -900,7 +972,7 @@ void VisitorLiPrint::VisitMoveAbsJ(MoveABSJNode* expr)
         str.append(INTENT);
     }
     str.append("self.vc.");
-    str.append("moveabsj");
+    str.append("MoveAbsj");
     str.append("(");
     for (auto statement : *(expr->_arguments))
     {
@@ -922,7 +994,7 @@ void VisitorLiPrint::VisitModule(ModuleNode* expr)
     str += expr->_name;
     str += "():";
     str += "\n";
-
+    cur_cheo = expr;
     indent++;
 
     for (auto statement : *(expr->_body))
@@ -948,16 +1020,20 @@ void VisitorLiPrint::VisitReset(ReSetNode* expr)
     str.append("Reset");
     //str.append(_name);
     str.append("(");
+    str.append("\"");
     expr->_expression->Accept(*this);
+    str.append("\"");
     str.append(")");
 }
 void VisitorLiPrint::VisitModifier(ModifierNode* expr)
 {
+    str.append("\"");
     expr->_left->Accept(*this);
     if (expr->_right)
     {
         expr->_right->Accept(*this);
     }
+    str.append("\"");
 }
 
 void VisitorLiPrint::VisitFunc(FunctionNode* expr)
@@ -968,7 +1044,7 @@ void VisitorLiPrint::VisitFunc(FunctionNode* expr)
     }
     //str += QString::fromLatin1("@allow_goto");
     //str += QString::fromLatin1("\n");
-
+    cur_cheo = expr;
     str += QString::fromLatin1("def");
     str += QString::fromLatin1(SPACE);
     str += expr->_name;

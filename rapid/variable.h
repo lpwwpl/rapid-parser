@@ -41,7 +41,8 @@ namespace Language
         ASTNode* _expression{ nullptr };
         QString _name;
         location _location;
-        
+     
+        scope_var scope;
     };
 }
 

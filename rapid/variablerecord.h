@@ -1,7 +1,7 @@
 #ifndef VARIABLERECORD_H
 #define VARIABLERECORD_H
 #include "PreCompiled.h"
-
+#include <QVariant>
 namespace Language
 {
 
@@ -31,7 +31,11 @@ namespace Language
         MOVEL,
         MOVEJ,
     };
-
+    enum scope_var
+    {
+        eFunc = 0,
+        eModule
+    };
     typedef RobotAbbExport struct VR
     {
         QVariant value;
@@ -39,6 +43,8 @@ namespace Language
         QString var_type;
         //variableType
         enum_v_type type;
+        scope_var _scope;
+        //bool isGlobal;
 
     } VariableRecord;
 }

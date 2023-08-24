@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <fstream>
 #include "lexer.hpp"
+#include "variablerecord.h"
 typedef Language::Parser::token token;
 #define yyterminate() return( token::END )
 #define YY_NO_UNISTD_H // For msvc
@@ -29,7 +30,7 @@ std::stack<int> curr_indents;
 int first_time = 1 ;
 
 int parsing_error = 0;
-
+scope_var _scope = eModule;
 std::stack<std::string> fileNames;
 std::stack<int> lineNo;
 std::vector<std::string> libPaths;
@@ -328,7 +329,7 @@ import              BEGIN(incl);
 
 
 {PERS}                      {return token::PERS;}
-{MODULE}                      {return token::MODULE;}
+{MODULE}                      {_scope=eModule;return token::MODULE;}
 {ENDMODULE}                      {return token::ENDMODULE;}
 {TOOLDATA}                      {return token::TOOLDATA;}
 {SPEEDDATA}                      {return token::SPEEDDATA;}
@@ -357,7 +358,7 @@ import              BEGIN(incl);
 {WAITDI}          {return token::WAITDI;}
 {WAITUNTIL}          {return token::WAITUNTIL;}
 {OFFS}          {return token::OFFS;}
-{FUNC}          {return token::FUNC;}
+{FUNC}          {_scope=eFunc;return token::FUNC;}
 {ENDFUNC}						{ return token::ENDFUNC; }
 {INOUT}          {return token::INOUT;}
 {RELTOOl}          {return token::RELTOOl;}

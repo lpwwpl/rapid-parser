@@ -20,6 +20,8 @@ namespace Language
         IdentifierNode* _type;
         ASTNode* _INOUT;
         ASTNode * _initializer;
+
+        //bool isGlobal;
     };
 }
 

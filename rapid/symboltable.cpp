@@ -207,6 +207,7 @@ void SymbolTable::DeclareVariable(QString name)
 
 VariableRecord SymbolTable::GetVariableValue(QString name)
 {
+
     return _variables[name];
 }
 
@@ -220,7 +221,7 @@ QString SymbolTable::VariableType(QString name)
     return getVarType(vr);
 }
 
-bool SymbolTable::DefineVariable(QString * name, enum_v_type type, QString var_type)
+bool SymbolTable::DefineVariable(QString * name, enum_v_type type, QString var_type,scope_var scope)
 {
     if (_variables.count(*name) != 0)
     {
@@ -230,6 +231,7 @@ bool SymbolTable::DefineVariable(QString * name, enum_v_type type, QString var_t
     VariableRecord r;
     r.type = type;
     r.var_type = var_type;
+    r._scope = scope;
     _variables[*name] = r;
 
     return true;

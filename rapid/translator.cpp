@@ -13,7 +13,7 @@
 #include <QDir>
 
 #include "VisitorLiPrint.h"
-
+#include "VisitorPyPrint.h"
 extern std::stack<std::string> fileNames;
 extern std::vector<std::string> libPaths;
 

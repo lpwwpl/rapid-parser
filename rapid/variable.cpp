@@ -4,11 +4,23 @@
 #include "arrayindex.h"
 
 
+
+extern Language::scope_var _scope;
+
 namespace Language
 {
+
     VariableNode::VariableNode(int e_scope, IdentifierNode* e_type, ASTNode* src, ASTNode* expression, location& loc) :ASTNode(), _e_scope(e_scope), _e_type(e_type), _src(src), _expression(expression), _location(loc)
     {
-
+        if (_scope == Language::scope_var::eModule)
+        {
+            scope = eModule;
+        }
+        else
+        {
+            scope = eFunc;
+        }
+            
         StructIndexNode* structIndex = dynamic_cast<StructIndexNode*>(_src);
         ArrayIndexNode* array = dynamic_cast<ArrayIndexNode*>(_src);
         IdentifierNode* iden = dynamic_cast<IdentifierNode*>(_src);
@@ -34,7 +46,7 @@ namespace Language
         if (typeExpected == "")
         {
             ///
-            SymbolTable::Instance().DefineVariable(&_name, enum_v_type::variable, typeActual);
+            SymbolTable::Instance().DefineVariable(&_name, enum_v_type::variable, typeActual, scope);
         }
 
         if (typeActual != typeExpected)
@@ -48,7 +60,15 @@ namespace Language
     }
 
     VariableNode::VariableNode(int e_scope, IdentifierNode* e_type, ASTNode* expression, location& loc) :ASTNode(), _e_scope(e_scope), _e_type(e_type), _src(expression), _expression(nullptr), _location(loc)
-    {       
+    {    
+        if (_scope == Language::scope_var::eModule)
+        {
+            scope = eModule;
+        }
+        else
+        {
+            scope = eFunc;
+        }
         StructIndexNode* structIndex = dynamic_cast<StructIndexNode*>(_src);
         ArrayIndexNode* array = dynamic_cast<ArrayIndexNode*>(_src);
         IdentifierNode* iden = dynamic_cast<IdentifierNode*>(_src);
@@ -66,11 +86,12 @@ namespace Language
         {
             _name = iden->_name;
         }
+        //QString typeActual = _expression->getTypeName();
         QString typeExpected = SymbolTable::Instance().VariableType(_name);
 
         if (typeExpected == "")
         {
-            
+            //SymbolTable::Instance().DefineVariable(&_name, enum_v_type::variable, typeActual, isGlobal);
             //std::cerr << UNDEFINED_VARIABLE << " var:"  << _name.toStdString() << std::endl;
             return;
         }
@@ -80,7 +101,6 @@ namespace Language
 
     QVariant VariableNode::Execute()
     {
-
         return SymbolTable::Instance().GetActivationRecord()->GetVariableValue(_name);
     }
     QString VariableNode::toRaw(uint level)

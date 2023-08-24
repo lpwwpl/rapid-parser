@@ -52,7 +52,7 @@ namespace Language {
         bool DefineModules(QString* name, Language::ModuleNode* node);
         bool DefineTypes(QString name);
         QString VariableType(QString name);
-        bool DefineVariable(QString* name,enum_v_type type, QString v_type);
+        bool DefineVariable(QString* name, enum_v_type type, QString v_type, scope_var scope = eFunc);
         void ClearVariables();
 
         Language::FunctionNode* EntryPoint();

@@ -3,18 +3,18 @@
 #include "PreCompiled.h"
 #include "Visitor.h"
 #include <QString>
+
 namespace Language {
 
+	class ASTNode;
 	class RobotAbbExport VisitorLiPrint : public Visitor
 	{
 	public:
 		int indent{ 0 };
 		QString str = QString::fromLatin1("");
+		Language::ASTNode* cur_cheo;
 	public:
-		//VisitorPyPrint(Context* context)
-		//{
-		//	m_context = context;
-		//}
+		VisitorLiPrint();
 		void VisitAccset(AccSetNode* expr);
 		void VisitActUnit(ActUnitNode* expr);
 		void VisitCase(CaseNode* expr);

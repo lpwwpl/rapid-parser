@@ -88,7 +88,7 @@
     #include "translator.hpp"
     #include "ast.h"
     #include <stack>
-    
+    #include "astnode.h"
     static int yylex(Language::Parser::semantic_type *yylval, Language::location* loc,Language::Lexer  &lexer);
 
     std::string err;
