@@ -128,7 +128,7 @@ void VisitorLiPrint::VisitArcl(ArcLNode* expr)
 void VisitorLiPrint::VisitIdentifier(IdentifierNode* expr)
 {
     VariableRecord vr=
-    SymbolTable::Instance().GetVariableValue(expr->_name);
+    SymbolTable::Instance().GetVariableValue(expr->_name.toLower());
 
     ModuleNode* module = dynamic_cast<ModuleNode*>(cur_cheo);
     if (vr._scope == eModule && !module)
@@ -303,6 +303,11 @@ void VisitorLiPrint::VisitFuncCall(FunctionCallNode* expr)
         str.append(INTENT);
     }
     str.append("self.");
+    QString func_name = *expr->_name;
+    if (func_name.toLower() == "incr")
+    {
+        str.append("vc.");
+    }
     str.append(expr->_name);
     str.append("(");
     int expr_count = expr->_expressionList->size();
@@ -468,6 +473,7 @@ void VisitorLiPrint::VisitRelTool(RelToolNode* expr)
     {
         str.append(INTENT);
     }
+    str.append("self.vc.");
     str.append("RelTool");
     //str.append(_name);
     str.append("(");
@@ -495,6 +501,7 @@ void VisitorLiPrint::VisitSetDo(SetDoNode* expr)
     {
         str.append(INTENT);
     }
+    str.append("self.vc.");
     str.append("SetDo");
     str.append("(");
     str.append("\"");
@@ -639,6 +646,7 @@ void VisitorLiPrint::VisitWaittime(WaitTimeNode* expr)
             ListNode<ASTNode>* p_nodes = dynamic_cast<ListNode<ASTNode>*>(node);
             if (p_nodes)
             {
+                str.append("\"");
                 int p_count = p_nodes->size();
                 for (int j = 0; j < p_count; j++)
                 {
@@ -650,6 +658,7 @@ void VisitorLiPrint::VisitWaittime(WaitTimeNode* expr)
                         str.append(",");
 
                 }
+                str.append("\"");
             }
             else
             {
@@ -710,7 +719,52 @@ void VisitorLiPrint::VisitPulseDO(PulseDONode* expr)
     str.append("PulseDo ");
     //str.append(_name);
     str.append("(");
-    expr->_expression->Accept(*this);
+    ListNode<ASTNode>* nodes = dynamic_cast<ListNode<ASTNode>*>(expr->_expression);
+    if (nodes)
+    {
+        int count = nodes->size();
+        for (int i = 0; i < count; i++)
+        {
+            auto node = nodes->at(i);
+            ListNode<ASTNode>* p_nodes = dynamic_cast<ListNode<ASTNode>*>(node);
+            if (p_nodes)
+            {
+                str.append("\"");
+                int p_count = p_nodes->size();
+                for (int j = 0; j < p_count; j++)
+                {
+                    auto p_node = p_nodes->at(j);
+                    int curIndent = indent;
+                    indent = 0;
+                    p_node->Accept(*this);
+                    indent = curIndent;
+                    if (j == (p_count - 1))
+                        ;
+                    else
+                        str.append(",");
+
+                }
+                str.append("\"");
+            }
+            else
+            {
+                str.append("\"");
+                node->Accept(*this);
+                str.append("\"");
+            }
+
+
+            if (i == (count - 1))
+                ;
+            else
+                str.append(",");
+        }
+    }
+    else
+    {
+        expr->_expression->Accept(*this);
+    }
+
     str.append(")");
 }
 void VisitorLiPrint::VisitStatementList(StatementListNode* expr)
@@ -928,12 +982,18 @@ void VisitorLiPrint::VisitMoveJ(MoveJNode* expr)
     str.append("self.vc.");
     str.append("MoveJ");
     str.append("(");
+    int i = 0;
     for (auto statement : *(expr->_arguments))
     {
 
         if (!statement)continue;
         //statement->Execute();
+        if (i == 1 || i == 2)
+        {
+            str.append("self.vc.");
+        }
         statement->Accept(*this);
+        i++;
         str.append(",");
     }
     if (str.endsWith(","))
@@ -951,12 +1011,17 @@ void VisitorLiPrint::VisitMoveL(MoveLNode* expr)
     str.append("self.vc.");
     str.append("MoveL");
     str.append("(");
+    int i = 0;
     for (auto statement : *(expr->_arguments))
     {
-
         if (!statement)continue;
         //statement->Execute();
+        if (i == 1 || i == 2)
+        {
+            str.append("self.vc.");
+        }
         statement->Accept(*this);
+        i++;
         str.append(",");
     }
     if (str.endsWith(","))
@@ -1091,11 +1156,12 @@ void VisitorLiPrint::VisitVelset(VelSetNode* expr)
 
 void VisitorLiPrint::VisitParamWithModifier(ParamWithModifierNode* expr)
 {
-    str.append("\"");
+    
     expr->_var_expr->Accept(*this);
+    str.append(",");
     int curIndent = indent;
     indent = 0;
-
+    str.append("\"");
     for (auto stm : *expr->_dimRawType)
     {
         stm->Accept(*this);

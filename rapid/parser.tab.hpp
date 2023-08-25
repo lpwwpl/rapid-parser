@@ -649,8 +649,9 @@ namespace Language {
         S_op_expr = 170,                         // op_expr
         S_inst_expr = 171,                       // inst_expr
         S_inst_expr_list = 172,                  // inst_expr_list
-        S_expression = 173,                      // expression
-        S_paramWithMod_stm = 174                 // paramWithMod_stm
+        S_basic_expr = 173,                      // basic_expr
+        S_expression = 174,                      // expression
+        S_paramWithMod_stm = 175                 // paramWithMod_stm
       };
     };
 
@@ -1162,8 +1163,8 @@ namespace Language {
     /// Constants.
     enum
     {
-      yylast_ = 1274,     ///< Last index in yytable_.
-      yynnts_ = 46,  ///< Number of nonterminal symbols.
+      yylast_ = 1317,     ///< Last index in yytable_.
+      yynnts_ = 47,  ///< Number of nonterminal symbols.
       yyfinal_ = 6 ///< Termination state number.
     };
 
@@ -1176,7 +1177,7 @@ namespace Language {
 
 #line 15 "parser.y"
 } // Language
-#line 1180 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.hpp"
+#line 1181 "D:\\source\\repos\\rapid\\\\rapid\\parser.tab.hpp"
 
 
 

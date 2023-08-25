@@ -30,7 +30,7 @@ namespace Language
         }
         //VariableRecord vr = SymbolTable::Instance().GetVariableValue(param->_name);
         //if(vr.var_type=="")
-        SymbolTable::Instance().DefineVariable(&param->_name, type->getType(),type->getVariablenTypeName());
+        SymbolTable::Instance().DefineVariable(&param->_name.toLower(), type->getType(),type->getVariablenTypeName());
     }
 
     ParameterNode::ParameterNode(IdentifierNode* type, IdentifierNode* param, ASTNode * initializer)
@@ -46,7 +46,7 @@ namespace Language
             if ("STRING" == type->getTypeName())
                 _initializer = new StringLiteralNode(new QString());
         }
-        SymbolTable::Instance().DefineVariable(&param->_name, type->getType(), type->getVariablenTypeName());
+        SymbolTable::Instance().DefineVariable(&param->_name.toLower(), type->getType(), type->getVariablenTypeName());
     }
 
     QVariant ParameterNode::Execute()

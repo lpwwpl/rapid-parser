@@ -46,7 +46,7 @@ namespace Language
         if (typeExpected == "")
         {
             ///
-            SymbolTable::Instance().DefineVariable(&_name, enum_v_type::variable, typeActual, scope);
+            SymbolTable::Instance().DefineVariable(&_name.toLower(), enum_v_type::variable, typeActual, scope);
         }
 
         if (typeActual != typeExpected)

@@ -174,7 +174,7 @@
 
 //struct_index splash_func_call_parameter
 %type<pNode>  ACTUNIT MOVEABSJ ARCLSTART ARCL ARCC ARCEND MOVEL MOVEJ DEACTUNIT  switch_case_define Record_declare  var_decl  array_index  var_assignment inst_modifer 
-%type<pNode>  program  expression assignment statement if while_loop return for  switch    declaration   function_call    var_expression  struct_index
+%type<pNode>  program  expression assignment statement if while_loop return for  switch    declaration   function_call    var_expression  struct_index basic_expr
 %type<idenNode> Type
 %type<pNode>  offs_expr  reltool_expr  op_expr inst_expr 
 //inst_expr_ass
@@ -529,11 +529,15 @@ op_expr:
 
  inst_expr:
   inst_modifer {$$ = $1;}
- | inst_modifer  ASS  String { StringLiteralNode* str = new StringLiteralNode($3);$$ = new AssignmentNode($1,str);} 
-  | inst_modifer  ASS var_expression 
- {
+  | inst_modifer  ASS basic_expr 
+  {
         $$ = new AssignmentNode($1, $3);
- }
+   }
+ //| inst_modifer  ASS  String { StringLiteralNode* str = new StringLiteralNode($3);$$ = new AssignmentNode($1,str);} 
+ // | inst_modifer  ASS var_expression 
+ //{
+ //       $$ = new AssignmentNode($1, $3);
+// }
  ;
 
 inst_expr_list:
@@ -541,7 +545,8 @@ inst_expr_list:
   | inst_expr_list inst_expr { $1->push_back($2);   }
   ;
 
-expression:
+
+basic_expr:
  //RAPID_NAN { $$ = new StringLiteralNode(true,&QString::fromLatin1("9E+09"));}
  String { $$ = new StringLiteralNode($1);}
  | FNULL { $$ = new NullNode();}
@@ -550,14 +555,18 @@ expression:
  | FTRUE {$$ = new Boolean(1);}
  | FFALSE {$$ = new Boolean(0);}
  | var_expression {$$ = $1;}
- | op_expr {$$ = $1;}
+
  | offs_expr{$$ = $1;}
  | reltool_expr { $$ = $1;}
+  | Identifier LC func_call_parameter_list RC  { $$ = new FunctionCallNode($1, $3);}
+ |  LR dim_num_stm RR {$$ = $2;}
+ ;
 
+expression:
+    basic_expr {$$=$1;}
  | paramWithMod_stm {$$=$1;}
  | inst_expr_list {$$=$1;}
- | Identifier LC func_call_parameter_list RC  { $$ = new FunctionCallNode($1, $3);}
- |  LR dim_num_stm RR {$$ = $2;}
+ |  op_expr {$$ = $1;}
  ;
 
  paramWithMod_stm:

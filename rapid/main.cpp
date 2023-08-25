@@ -93,7 +93,7 @@ int main(int argc, /*const*/ char** argv)
 
     //QApplication app(argc, argv);
     //parser.process(app);
-     QString src = "D:/txt.txt";//parser.value(srcOption);
+     QString src = "C:\\Users\\86135\\Desktop\\mainmodule1.py";//parser.value(srcOption);
      Language::Translator translator;
      QString err;
      int ret = (translator.parse(src, err));
